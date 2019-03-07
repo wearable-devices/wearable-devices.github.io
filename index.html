@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;java&quot;,&quot;csharp&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,7 +212,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="java">java</a>
-              <a href="#" data-language-name="csharp">csharp</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -353,7 +352,7 @@ Initialization is exposed via the auto connect function.</p>
 </code></pre>
 <aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra app. Currently we make available an Android app, with more platform applications available soon. </aside>
 <h2 id='air-mouse'>Air Mouse</h2>
-<p>Functionality for exposing an air mouse based on IMU quaternions. The Mudra air mouse projects raw quatension values onto a 2d plane, which can be used to move a cursor.  </p>
+<p>Functionality for exposing an air mouse based on IMU quaternions. The Mudra air mouse projects raw quaternion values onto a 2d plane, which can be used to move a cursor.  </p>
 <pre class="highlight java tab-java"><code><span class="kt">int</span> <span class="n">mScreenWidth</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">;</span> <span class="c1">// Size of screen in pixels</span>
 <span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="n">OnAirMousePositionChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
 <span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
@@ -366,13 +365,6 @@ Initialization is exposed via the auto connect function.</p>
             <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">+=</span> <span class="n">floats</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">*</span> <span class="n">mScreenHeight</span> <span class="o">*</span> <span class="n">VSPEED</span><span class="o">;</span>
             <span class="kt">float</span> <span class="n">airMousePosX</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosX</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenWidth</span><span class="o">);</span>
             <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosY</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">);</span>
-
-            <span class="n">runOnUiThread</span><span class="o">(</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
-                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                    <span class="n">mFab</span><span class="o">.</span><span class="na">setX</span><span class="o">(</span><span class="n">mAirMousePosX</span><span class="o">);</span>
-                    <span class="n">mFab</span><span class="o">.</span><span class="na">setY</span><span class="o">(</span><span class="n">mAirMousePosY</span><span class="o">);</span>
-                <span class="o">}</span>
-            <span class="o">}));</span>
         <span class="o">}</span>
     <span class="o">};</span>
 </code></pre><h2 id='orientation'>Orientation</h2>
@@ -400,7 +392,7 @@ Initialization is exposed via the auto connect function.</p>
 <span class="o">};</span>
 
 </code></pre><h2 id='device-status'>Device Status</h2>
-<p>Functionality for exposing if the Muddra device is connected.</p>
+<p>Functionality for exposing if the Mudra device is connected.</p>
 <pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="n">onDeviceStatusChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
 <span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 
@@ -420,8 +412,8 @@ Initialization is exposed via the auto connect function.</p>
 <span class="o">};</span>
 </code></pre><h2 id='battery-level'>Battery Level</h2>
 <p>Functionality for exposing battery status.</p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">onBatteryLevelChanged</span><span class="o">(</span><span class="n">onBatteryLevelChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">Mudra</span><span class="o">.</span><span class="na">onBatteryLevelChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable </span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="n">onBatteryLevelChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable </span>
 
 <span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span> <span class="n">onBatteryLevelChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
@@ -465,7 +457,6 @@ Initialization is exposed via the auto connect function.</p>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="java">java</a>
-                <a href="#" data-language-name="csharp">csharp</a>
           </div>
       </div>
     </div>
