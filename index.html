@@ -233,6 +233,9 @@
             <a href="#api-functions" class="toc-h1 toc-link" data-title="API functions">API functions</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#access-the-api" class="toc-h2 toc-link" data-title="Access the API">Access the API</a>
+                  </li>
+                  <li>
                     <a href="#initialization-and-connection" class="toc-h2 toc-link" data-title="Initialization and Connection">Initialization and Connection</a>
                   </li>
                   <li>
@@ -307,7 +310,18 @@
 <aside class="success">
 Remember — Your Mudra device should always be connected. Check your host device to verify.
 </aside>
-<h1 id='api-functions'>API functions</h1><h2 id='initialization-and-connection'>Initialization and Connection</h2>
+<h1 id='api-functions'>API functions</h1><h2 id='access-the-api'>Access the API</h2>
+<p>to access the API you must first generate access token.<br>
+Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials<br>
+Authorize Jitpack to connect to Github<br>
+Scroll down and select Private Repositories<br>
+ <img src="images/private_repo.png" alt="alt text" />
+Scroll up, and click on the Authorize button
+ <img src="images/authorize.png" alt="alt text" />
+Copy the access token you just received to your Android project gradle.properties file as following:                                                                                                        </p>
+
+<p>authToken= &quot;&lt;&quot;your Jitpack Token&quot;&gt;&quot;</p>
+<h2 id='initialization-and-connection'>Initialization and Connection</h2>
 <p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
 
 <p>Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code.
