@@ -311,24 +311,43 @@
 Remember — Your Mudra device should always be connected. Check your host device to verify.
 </aside>
 <h1 id='api-functions'>API functions</h1><h2 id='access-the-api'>Access the API</h2>
-<p>to access the API you must first generate access token.<br>
-Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials<br>
-Authorize Jitpack to connect to Github<br>
-Scroll down and select Private Repositories<br>
- <img src="images/private_repo.png" alt="alt text" />
-Scroll up, and click on the Authorize button
- <img src="images/authorize.png" alt="alt text" />
-Copy the access token you just received to your Android project gradle.properties file as following:                                                                                                        </p>
+<ul>
+<li>To access the API you must first generate an access token.<br></li>
+<li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials.<br></li>
+<li>Authorize Jitpack in order to connect to Github.<br></li>
+<li>Tap your username on the top left corner of the screen.</li>
+<li>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:<br></li>
+</ul>
+<pre class="highlight gradle tab-gradle"><code><span class="c1">// gradle.properties</span>
+<span class="n">authToken</span><span class="o">=</span><span class="s1">'&lt;Your Jitpack Token&gt;'</span>
+</code></pre>
+<ul>
+<li>Add the repository to your project <strong>build.gradle</strong> file:</li>
+</ul>
+<pre class="highlight gradle tab-gradle"><code><span class="c1">// project build.gradle</span>
+<span class="k">allprojects</span> <span class="o">{</span>
+    <span class="k">repositories</span> <span class="o">{</span>
 
-<p>authToken= &quot;&lt;&quot;your Jitpack Token&quot;&gt;&quot;</p>
-<h2 id='initialization-and-connection'>Initialization and Connection</h2>
+        <span class="n">google</span><span class="o">()</span>
+        <span class="n">jcenter</span><span class="o">()</span>
+        <span class="n">maven</span> <span class="o">{</span>
+                <span class="n">url</span> <span class="s1">'https://jitpack.io'</span>
+                <span class="n">credentials</span> <span class="o">{</span> <span class="n">username</span> <span class="n">authToken</span> <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<ul>
+<li>Add the following implementation to your app <strong>build.gradle</strong> file:</li>
+</ul>
+<pre class="highlight gradle tab-gradle"><code><span class="c1">// app build.gradle</span>
+<span class="n">implementation</span> <span class="s1">'com.github.wearable-devices:MudraAndroidSDK:+'</span>
+</code></pre><h2 id='initialization-and-connection'>Initialization and Connection</h2>
 <p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
 
 <p>Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code.
 Initialization is exposed via the auto connect function.</p>
-<pre class="highlight java tab-java"><code><span class="c1">// Add this to your build.gradle </span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="o">+</span><span class="err">'</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually</span>
+<pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually</span>
 <span class="kn">import</span> <span class="nn">MudraAndroidSDK.Mudra</span><span class="o">;</span>
 <span class="n">Mudra</span> <span class="n">mudra</span> <span class="o">=</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">autoConnectPaired</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
 </code></pre><h2 id='fingertip-pressure'>Fingertip Pressure</h2>
