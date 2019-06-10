@@ -315,7 +315,7 @@
 <aside class="success">
 Remember — Your Mudra device should always be connected. Check your host device to verify.
 </aside>
-<h1 id='api-functions'>API functions</h1><h2 id='access-the-api'>Access the API</h2>
+<h1 id='api-functions'>API functions</h1><h2 id='access-the-api'>Access the API</h2><h3 id='android'>Android</h3>
 <ul>
 <li>To access the API you must first generate an access token.<br></li>
 <li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials.<br></li>
@@ -327,7 +327,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="n">authToken</span><span class="o">=</span><span class="err">'</span><span class="o">&lt;</span><span class="n">Your</span> <span class="n">Jitpack</span> <span class="n">Token</span><span class="o">&gt;</span><span class="err">'</span>
 </code></pre>
 <ul>
-<li>Add the repository to your project <strong>build.gradle</strong> file (Android) or <strong>main project file</strong> (Windows):</li>
+<li>Add the repository to your project <strong>build.gradle</strong> file (Android):</li>
 </ul>
 <pre class="highlight java tab-java"><code><span class="c1">// project build.gradle</span>
 <span class="n">allprojects</span> <span class="o">{</span>
@@ -343,7 +343,13 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="o">}</span>
 </code></pre><pre class="highlight java tab-java"><code><span class="c1">// Add the following implementation to your app **build.gradle** file:</span>
 <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="o">+</span><span class="err">'</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// Note the path which needs to be included in the c++ include directories
+</code></pre><h3 id='windows-2'>Windows</h3>
+<ul>
+<li>To access the API you must first unpack all Wearable Devices installation files into your project</li>
+<li>TBD - installer instructions</li>
+<li>Add the following code to your <strong>main.cpp</strong> (or any other project file):</li>
+</ul>
+<pre class="highlight cpp tab-cpp"><code><span class="c1">// Note the path which needs to be included in the c++ include directories
 </span><span class="cp">#include "YOUR_DEPLOY_PATH/Environment.h"
 #include "YOUR_DEPLOY_PATH/MudraDevice.h"
 </span></code></pre><h2 id='initialization-and-connection'>Initialization and Connection</h2>
@@ -359,6 +365,7 @@ Initialization is exposed via the auto connect function.</p>
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">// Insert additional callbacks for additional functionality
+</span>    <span class="c1">// IMPORTANT - Always add the connect function below to your initialization
 </span>    <span class="n">mudra</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
 <span class="p">}</span>
 
