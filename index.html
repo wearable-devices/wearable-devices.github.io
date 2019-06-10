@@ -344,9 +344,8 @@ Remember — Your Mudra device should always be connected. Check your host devic
 </code></pre><pre class="highlight java tab-java"><code><span class="c1">// Add the following implementation to your app **build.gradle** file:</span>
 <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="o">+</span><span class="err">'</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// Note the path which needs to be included in the c++ include directories
-</span><span class="cp">#include "pch.h"
-#include "../../SDK.Windows/Environment.h"
-#include "../../SDK.Windows/MudraDevice.h"
+</span><span class="cp">#include "YOUR_DEPLOY_PATH/Environment.h"
+#include "YOUR_DEPLOY_PATH/MudraDevice.h"
 </span></code></pre><h2 id='initialization-and-connection'>Initialization and Connection</h2>
 <p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
 
@@ -382,10 +381,14 @@ Initialization is exposed via the auto connect function.</p>
         <span class="c1">// Do something with v (this value is between 0 and 1) </span>
     <span class="o">}</span>
 <span class="o">};</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnProportionalReady</span><span class="p">(</span><span class="kt">float</span> <span class="n">proportional</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Proportionalfound = "</span> <span class="o">&lt;&lt;</span> <span class="n">proportional</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnProportionalReady</span><span class="p">(</span><span class="n">OnProportionalReady</span><span class="p">);</span>
-    <span class="n">mudra</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
 <p>Functionality for predicting three gesture types: thumb, index and tap. Please check out the Mudra app for more info and example usage.</p>
@@ -408,10 +411,14 @@ Initialization is exposed via the auto connect function.</p>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">};</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnGestureReady</span><span class="p">(</span><span class="n">GestureType</span> <span class="n">gestureType</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Gesturefound = "</span> <span class="o">&lt;&lt;</span> <span class="n">Environment</span><span class="o">::</span><span class="n">ToString</span><span class="p">(</span><span class="n">gestureType</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnGestureReady</span><span class="p">(</span><span class="n">OnGestureReady</span><span class="p">);</span>
-    <span class="n">mudra</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
 <aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra app. Currently we make available an Android app, with more platform applications available soon. </aside>
@@ -442,6 +449,15 @@ Initialization is exposed via the auto connect function.</p>
         <span class="c1">// Do something with data (quaternion, 4 values) </span>
     <span class="o">}</span>
 <span class="o">};</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnImuQuaternionPackageReady</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received Imu Quaternion data"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre><h2 id='raw-data'>Raw Data</h2>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee.  </p>
 <pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setLicense</span><span class="o">(</span><span class="n">Feature</span><span class="o">.</span><span class="na">RawData</span><span class="o">,</span> <span class="n">LICENSE</span><span class="o">);</span> <span class="c1">// private license </span>
@@ -454,10 +470,19 @@ Initialization is exposed via the auto connect function.</p>
         <span class="c1">// Packet data (3 sensors with 18 samples each - [0...17, 18...35, 36...53])</span>
     <span class="o">}</span>
 <span class="o">};</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnImuAccNormPackageReady</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received Imu Norm data"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">OnSncPackageReady</span><span class="p">(</span><span class="k">const</span> <span class="n">SncPackageData</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received SNC data"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
-    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><h2 id='device-status'>Device Status</h2>
