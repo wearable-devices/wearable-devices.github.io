@@ -327,7 +327,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="n">authToken</span><span class="o">=</span><span class="err">'</span><span class="o">&lt;</span><span class="n">Your</span> <span class="n">Jitpack</span> <span class="n">Token</span><span class="o">&gt;</span><span class="err">'</span>
 </code></pre>
 <ul>
-<li>Add the repository to your project <strong>build.gradle</strong> file (Android):</li>
+<li>Add the repository to your project <strong>build.gradle</strong> file:</li>
 </ul>
 <pre class="highlight java tab-java"><code><span class="c1">// project build.gradle</span>
 <span class="n">allprojects</span> <span class="o">{</span>
@@ -345,9 +345,25 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="o">+</span><span class="err">'</span>
 </code></pre><h3 id='windows-2'>Windows</h3>
 <ul>
-<li>To access the API you must first unpack all Wearable Devices installation files into your project</li>
-<li>TBD - installer instructions</li>
-<li>Add the following code to your <strong>main.cpp</strong> (or any other project file):</li>
+<li>Run Setup.msi
+
+<ul>
+<li>Choose installation path</li>
+</ul></li>
+<li>Edit Environment variables
+
+<ul>
+<li>Add new environment variable named “Mudra” with value as the installation path</li>
+<li>Add the installation path to the “Path” System variable</li>
+<li>Restart your PC for the paths to take effect</li>
+</ul></li>
+<li>Set your calibration
+
+<ul>
+<li>Follow the onboarding instructions in the Android Mudra Inspire application</li>
+<li>Copy the calibration file from <STORAGE_ROOT> into your project (this is the last calibration file created by the app)</li>
+<li>Note-Use mudra.SetCalibration method, future updates will feature an online method with no file needed</li>
+</ul></li>
 </ul>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// Note the path which needs to be included in the c++ include directories
 </span><span class="cp">#include "YOUR_DEPLOY_PATH/Environment.h"
@@ -373,6 +389,7 @@ Initialization is exposed via the auto connect function.</p>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">mudra</span><span class="p">.</span><span class="n">Scan</span><span class="p">(</span><span class="n">OnDeviceDiscovered</span><span class="p">);</span>
+    <span class="n">mudra</span><span class="p">.</span><span class="n">SetCalibration</span><span class="p">(</span><span class="s">"&lt;YOUR_PROJECT_PATH&gt;</span><span class="se">\\</span><span class="s">Calibration.txt"</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">mudra</span><span class="p">.</span><span class="n">GetDevices</span><span class="p">();</span>
 
     <span class="c1">// Do something here (set infinite loop here if you woould like to only listen to callbacks)
@@ -549,6 +566,14 @@ Initialization is exposed via the auto connect function.</p>
 <tr>
 <td>Mudra pressure values fluctuate</td>
 <td>Please make sure your device is in contact with your skin (no need to be tight)</td>
+</tr>
+<tr>
+<td><em>Windows</em> - Multiple scan attemts with no connections established</td>
+<td>Please remove and re-insert dongle into usb port</td>
+</tr>
+<tr>
+<td><em>Windows</em> - No dongle found</td>
+<td>Make sure you are using the correct dongle and it is properly inserted in the USB port</td>
 </tr>
 </tbody></table>
 
