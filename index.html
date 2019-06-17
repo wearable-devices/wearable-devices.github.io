@@ -310,17 +310,17 @@
 <h3 id='android-ios'>Android\iOS</h3>
 <p>Bluetooth should be turned on, if it is off then the Mudra Inspire application will prompt the user to turn it on.</p>
 <h3 id='windows'>Windows</h3>
-<p>Insert a dedicated Bluetooth Receiver into the USB slot. We recommend using the following model: <a href='https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D'>nRF52840 Dongle</a>. Run <em>Setup.msi</em> file for installation on your PC, see instructions below. </p>
+<p>Insert a dedicated Bluetooth Receiver into the USB slot. Please use the following model: <a href='https://www.nordicsemi.com/?sc_itemid=%7BCDCCA013-FE4C-4655-B20C-1557AB6568C9%7D'>nRF52840 Dongle</a>. See instructions below for installation and usage. </p>
 
 <aside class="success">
 Remember — Your Mudra device should always be connected. Check your host device to verify.
 </aside>
 <h1 id='api-functions'>API functions</h1><h2 id='access-the-api'>Access the API</h2><h3 id='android'>Android</h3>
 <ul>
-<li>To access the API you must first generate an access token.<br></li>
-<li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials.<br></li>
-<li>Authorize Jitpack in order to connect to Github.<br></li>
-<li>Tap your username on the top left corner of the screen.</li>
+<li>To access the API you must first generate an access token<br></li>
+<li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials<br></li>
+<li>Authorize Jitpack in order to connect to Github<br></li>
+<li>Tap your username on the top left corner of the screen</li>
 <li>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:<br></li>
 </ul>
 <pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
@@ -345,7 +345,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="o">+</span><span class="err">'</span>
 </code></pre><h3 id='windows-2'>Windows</h3>
 <ul>
-<li>Run Setup.msi
+<li>To access the API run Setup.msi
 
 <ul>
 <li>Choose installation path</li>
@@ -357,32 +357,43 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <li>Add the installation path to the “Path” System variable</li>
 <li>Restart your PC for the paths to take effect</li>
 </ul></li>
+<li>Project properties
+
+<ul>
+<li>Under C/C++ / General / Additional Include Directories add $(Mudra)\Include\</li>
+<li>Under Linker / General / Additional Library Directories add $(Mudra)\Lib\</li>
+<li>Under Linker / Input add MudraSDK.lib</li>
+</ul></li>
 <li>Set your calibration
 
 <ul>
 <li>Follow the onboarding instructions in the Android Mudra Inspire application</li>
-<li>Copy the calibration file from <STORAGE_ROOT> into your project (this is the last calibration file created by the app)</li>
+<li>Copy the calibration file from ANDROID_STORAGE_ROOT path into your project (this is the last calibration file created by the app)</li>
 <li>Note-Use mudra.SetCalibration method, future updates will feature an online method with no file needed</li>
 </ul></li>
 </ul>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// Header files
 </span><span class="cp">#include "Environment.h"
 #include "MudraDevice.h"
-</span></code></pre><h2 id='initialization-and-connection'>Initialization and Connection</h2>
+</span></code></pre><h2 id='initialization-and-connection'>Initialization and Connection</h2><h3 id='android-2'>Android</h3>
 <p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
 
 <p>Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code.
 Initialization is exposed via the auto connect function.</p>
-<pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually</span>
+<h3 id='windows-3'>Windows</h3>
+<p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device.   </p>
+<pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually.</span>
 <span class="kn">import</span> <span class="nn">MudraAndroidSDK.Mudra</span><span class="o">;</span>
 <span class="n">Mudra</span> <span class="n">mudra</span> <span class="o">=</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">autoConnectPaired</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Environment</span> <span class="n">mudra</span><span class="p">;</span>
 
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="c1">// Insert additional callbacks for additional functionality
-</span>    <span class="c1">// IMPORTANT - Always add the connect function below to your initialization
-</span>    <span class="n">mudra</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+    <span class="c1">// Insert all your device's callbacks here. 
+</span>
+    <span class="c1">// You can connect your device on discovery like presented here, or save your device and connect it later. 
+</span>
+    <span class="n">mudra</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
 <span class="p">}</span>
 
 
@@ -390,9 +401,8 @@ Initialization is exposed via the auto connect function.</p>
 <span class="p">{</span>
     <span class="n">mudra</span><span class="p">.</span><span class="n">Scan</span><span class="p">(</span><span class="n">OnDeviceDiscovered</span><span class="p">);</span>
     <span class="n">mudra</span><span class="p">.</span><span class="n">SetCalibration</span><span class="p">(</span><span class="s">"&lt;YOUR_PROJECT_PATH&gt;</span><span class="se">\\</span><span class="s">Calibration.txt"</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">mudra</span><span class="p">.</span><span class="n">GetDevices</span><span class="p">();</span>
 
-    <span class="c1">// Do something here (set infinite loop here if you woould like to only listen to callbacks)
+    <span class="c1">// Do something here (set infinite loop here if you woould like to only listen to callbacks).
 </span><span class="p">}</span>
 </code></pre><h2 id='fingertip-pressure'>Fingertip Pressure</h2>
 <p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
@@ -462,6 +472,15 @@ Initialization is exposed via the auto connect function.</p>
             <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosY</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">};</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnAirMousePositionChanged</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">position</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">X="</span> <span class="o">&lt;&lt;</span> <span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" ,Y="</span> <span class="o">&lt;&lt;</span> <span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnAirMousePositionChanged</span><span class="p">(</span><span class="n">OnAirMousePositionChanged</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre><h2 id='orientation'>Orientation</h2>
 <p>Functionality for exposing IMU based quaternion values. These values represent the orientation of your hand in a quaternion representation.</p>
 <pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="n">OnImuQuaternionReady</span><span class="o">);</span> <span class="c1">// Enable </span>
