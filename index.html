@@ -327,9 +327,9 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="n">authToken</span><span class="o">=</span><span class="err">'</span><span class="o">&lt;</span><span class="n">Your</span> <span class="n">Jitpack</span> <span class="n">Token</span><span class="o">&gt;</span><span class="err">'</span>
 </code></pre>
 <ul>
-<li>Add the repository to your project <strong>build.gradle</strong> file:</li>
+<li>Add the repository to your project build.gradle file:</li>
 </ul>
-<pre class="highlight java tab-java"><code><span class="c1">// project build.gradle</span>
+<pre class="highlight java tab-java"><code><span class="c1">// Project build.gradle</span>
 <span class="n">allprojects</span> <span class="o">{</span>
     <span class="n">repositories</span> <span class="o">{</span>
 
@@ -341,8 +341,22 @@ Remember — Your Mudra device should always be connected. Check your host devic
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="c1">// Add the following implementation to your app **build.gradle** file:</span>
+
+<span class="c1">// Java 8 support</span>
+<span class="n">compileOptions</span> <span class="o">{</span>
+    <span class="n">sourceCompatibility</span> <span class="mf">1.8</span>
+    <span class="n">targetCompatibility</span> <span class="mf">1.8</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="c1">// App build.gradle file:</span>
 <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="o">+</span><span class="err">'</span>
+
+<span class="c1">// Bluetooth support</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">ble:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">1</span><span class="err">'</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v18</span><span class="o">:</span><span class="nl">scanner:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+
+<span class="c1">// Android manifest file:</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.READ_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
 </code></pre><h3 id='windows-2'>Windows</h3>
 <ul>
 <li>To access the API run Setup.msi
@@ -381,29 +395,49 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <p>Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code.
 Initialization is exposed via the auto connect function.</p>
 <h3 id='windows-3'>Windows</h3>
-<p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device.   </p>
+<p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device. Once the a Mudra device is discovered, the OnDeviceDiscovered() callback will be called. 
+It is possible to check the name of the new discovered device and filter it if it is not you device. Please note that you need to declare on which hand the device is worn, see SetHand().<br>
+When you would like to terminate the connection, please call Close().</p>
+<h3 id='logging'>Logging</h3>
+<p>It is possible to set the logging severity by the following levels: Debug, Info, Warning and Error.
+You can set the logging severity using the SetLoggingSevirity(). It is also possible to use your own function for logging using the SetOnLoggingMessageCallback() function.</p>
 <pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually.</span>
 <span class="kn">import</span> <span class="nn">MudraAndroidSDK.Mudra</span><span class="o">;</span>
 <span class="n">Mudra</span> <span class="n">mudra</span> <span class="o">=</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">autoConnectPaired</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Environment</span> <span class="n">mudra</span><span class="p">;</span>
 
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
-<span class="p">{</span>
+<span class="p">{</span>   
+    <span class="k">if</span> <span class="p">(</span><span class="n">device</span><span class="o">-&gt;</span><span class="n">GetName</span><span class="p">()</span> <span class="o">!=</span> <span class="s">"MY_DEVICE_NAME"</span><span class="p">)</span>
+                <span class="k">return</span><span class="p">;</span>
+
     <span class="c1">// Insert all your device's callbacks here. 
 </span>
     <span class="c1">// You can connect your device on discovery like presented here, or save your device and connect it later. 
-</span>
+</span>    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetHand</span><span class="p">(</span><span class="n">HandType</span><span class="o">::</span><span class="n">Left</span><span class="p">);</span>
     <span class="n">mudra</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
 <span class="p">}</span>
 
+<span class="kt">void</span> <span class="nf">OnLoggingMessageCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Do something with msg
+</span><span class="p">}</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">mudra</span><span class="p">.</span><span class="n">Scan</span><span class="p">(</span><span class="n">OnDeviceDiscovered</span><span class="p">);</span>
+    <span class="c1">// Logging
+</span>    <span class="n">mudra</span><span class="p">.</span><span class="n">SetLoggingSevirity</span><span class="p">(</span><span class="n">Logger</span><span class="o">::</span><span class="n">Severity</span><span class="o">::</span><span class="n">Debug</span><span class="p">);</span>
+    <span class="n">mudra</span><span class="p">.</span><span class="n">SetOnLoggingMessageCallback</span><span class="p">(</span><span class="n">OnLoggingMessageCallback</span><span class="p">);</span>
+
+    <span class="c1">// Connection
+</span>    <span class="n">mudra</span><span class="p">.</span><span class="n">Scan</span><span class="p">(</span><span class="n">OnDeviceDiscovered</span><span class="p">);</span>
     <span class="n">mudra</span><span class="p">.</span><span class="n">SetCalibration</span><span class="p">(</span><span class="s">"&lt;YOUR_PROJECT_PATH&gt;</span><span class="se">\\</span><span class="s">Calibration.txt"</span><span class="p">);</span>
 
     <span class="c1">// Do something here (set infinite loop here if you woould like to only listen to callbacks).
-</span><span class="p">}</span>
+</span>
+    <span class="c1">// Close connection
+</span>    <span class="n">mudra</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre><h2 id='fingertip-pressure'>Fingertip Pressure</h2>
 <p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
 <pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="n">onProportionalReady</span><span class="o">);</span> <span class="c1">// Enable </span>
@@ -567,31 +601,38 @@ Initialization is exposed via the auto connect function.</p>
 <table><thead>
 <tr>
 <th>Problem</th>
+<th>OS</th>
 <th>Solution</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Mudra does not connect to Android host</td>
+<td>Mudra does not connect to host device</td>
+<td>Android</td>
 <td>Check your Bluetooth version, we recommend 4.2 and above.</td>
 </tr>
 <tr>
-<td></td>
-<td>Check if your device flashes red, if so recharge (LED will flash blue)</td>
+<td>Mudra does not connect to host device</td>
+<td>All</td>
+<td>Check if your device&#39;s LED flashes red, if so recharge (LED will flash blue)</td>
 </tr>
 <tr>
 <td>Mudra gestures are not correctly recognize</td>
+<td>All</td>
 <td>Please try again our on-boarding app. Try to follow the instruction and perform another calibration.</td>
 </tr>
 <tr>
 <td>Mudra pressure values fluctuate</td>
+<td>All</td>
 <td>Please make sure your device is in contact with your skin (no need to be tight)</td>
 </tr>
 <tr>
-<td><em>Windows</em> - Multiple scan attemts with no connections established</td>
+<td>Multiple scan attemts with no connections established</td>
+<td>Windows</td>
 <td>Please remove and re-insert dongle into usb port</td>
 </tr>
 <tr>
-<td><em>Windows</em> - No dongle found</td>
+<td>No dongle found</td>
+<td>Windows</td>
 <td>Make sure you are using the correct dongle and it is properly inserted in the USB port</td>
 </tr>
 </tbody></table>
