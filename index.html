@@ -383,7 +383,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 
 <ul>
 <li>Follow the onboarding instructions in the Android Mudra Inspire application</li>
-<li>Copy the calibration file from ANDROID_STORAGE_ROOT path into your project (this is the last calibration file created by the app)</li>
+<li>Copy the calibration file from ANDROID_STORAGE_ROOT\Users(left,right) path into your project (note this file is user and hand dependent)</li>
 <li>Note-Use mudra.SetCalibration method, future updates will feature an online method with no file needed</li>
 </ul></li>
 </ul>
@@ -475,15 +475,15 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">}</span>
 </code></pre><h2 id='fingertip-pressure'>Fingertip Pressure</h2>
 <p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
-<pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="n">onProportionalReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
-
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnProportionalReady</span> <span class="n">onFingertipPressureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">onFingertipPressureReady</span><span class="o">()</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">onFingertipPressureReady</span> <span class="n">onFingertipPressureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">onFingertipPressureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// Do something with v (this value is between 0 and 1) </span>
     <span class="o">}</span>
 <span class="o">};</span>
+
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="n">onFingertipPressureReady</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnProportionalReady</span><span class="p">(</span><span class="kt">float</span> <span class="n">proportional</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Proportionalfound = "</span> <span class="o">&lt;&lt;</span> <span class="n">proportional</span><span class="p">;</span>
@@ -504,10 +504,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">}</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
 <p>Functionality for predicting three gesture types: thumb, index and tap. Please check out the Mudra app for more info and example usage.</p>
-<pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="n">OnGestureReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
-
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">Mudra</span><span class="o">.</span><span class="na">GestureType</span> <span class="n">gestureType</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">switch</span> <span class="o">(</span><span class="n">gestureType</span><span class="o">)</span> <span class="o">{</span>
@@ -523,6 +520,9 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">};</span>
+
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="n">onGestureReady</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnGestureReady</span><span class="p">(</span><span class="n">GestureType</span> <span class="n">gestureType</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Gesturefound = "</span> <span class="o">&lt;&lt;</span> <span class="n">MudraEnvironment</span><span class="o">::</span><span class="n">ToString</span><span class="p">(</span><span class="n">gestureType</span><span class="p">);</span>
@@ -546,10 +546,8 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <h2 id='air-mouse'>Air Mouse</h2>
 <p>Functionality for exposing an air mouse based on IMU quaternions. The Mudra air mouse projects raw quaternion values onto a 2d plane, which can be used to move a cursor.  </p>
 <pre class="highlight java tab-java"><code><span class="kt">int</span> <span class="n">mScreenWidth</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">;</span> <span class="c1">// Size of screen in pixels</span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="n">OnAirMousePositionChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnAirMousePositionChanged</span> <span class="n">OnAirMousePositionChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnAirMousePositionChanged</span><span class="o">()</span> <span class="o">{</span>
+<span class="n">Mudra</span><span class="o">.</span><span class="na">OnAirMousePositionChanged</span> <span class="n">onAirMousePositionChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnAirMousePositionChanged</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
 
@@ -558,7 +556,10 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
             <span class="kt">float</span> <span class="n">airMousePosX</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosX</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenWidth</span><span class="o">);</span>
             <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosY</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">};</span>
+<span class="o">};</span>
+
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="n">onAirMousePositionChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnAirMousePositionChanged</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">position</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">X="</span> <span class="o">&lt;&lt;</span> <span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" ,Y="</span> <span class="o">&lt;&lt;</span> <span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
@@ -579,15 +580,15 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">}</span>
 </code></pre><h2 id='orientation'>Orientation</h2>
 <p>Functionality for exposing IMU based quaternion values. These values represent the orientation of your hand in a quaternion representation.</p>
-<pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="n">OnImuQuaternionReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
-
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span> <span class="n">onImuQuaternionReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span> <span class="n">onImuQuaternionReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// Do something with data (quaternion, 4 values) </span>
     <span class="o">}</span>
 <span class="o">};</span>
+
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="n">onImuQuaternionReady</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnImuQuaternionPackageReady</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received Imu Quaternion data"</span><span class="p">;</span>
@@ -611,16 +612,16 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">}</span>
 </code></pre><h2 id='raw-data'>Raw Data</h2>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee.  </p>
-<pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setLicense</span><span class="o">(</span><span class="n">Feature</span><span class="o">.</span><span class="na">RawData</span><span class="o">,</span> <span class="n">LICENSE</span><span class="o">);</span> <span class="c1">// private license </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="n">OnSncReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
-
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span> <span class="n">onSncReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span> <span class="n">onSncReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// Packet data (3 sensors with 18 samples each - [0...17, 18...35, 36...53])</span>
     <span class="o">}</span>
 <span class="o">};</span>
+
+<span class="n">mudra</span><span class="o">.</span><span class="na">setLicense</span><span class="o">(</span><span class="n">Feature</span><span class="o">.</span><span class="na">RawData</span><span class="o">,</span> <span class="n">LICENSE</span><span class="o">);</span> <span class="c1">// private license </span>
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="n">onSncReady</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnImuAccNormPackageReady</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received Imu Norm data"</span><span class="p">;</span>
@@ -661,10 +662,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">}</span>
 </code></pre><h2 id='device-status'>Device Status</h2>
 <p>Functionality for exposing if the Mudra device is connected.</p>
-<pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="n">onDeviceStatusChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
-
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span> <span class="n">onDeviceStatusChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span><span class="o">()</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span> <span class="n">onDeviceStatusChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">if</span><span class="o">(</span><span class="n">status</span><span class="o">)</span>
@@ -678,12 +676,12 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
             <span class="o">}</span>
         <span class="o">}</span>
 <span class="o">};</span>
+
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="n">onDeviceStatusChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><h2 id='battery-level'>Battery Level</h2>
 <p>Functionality for exposing battery status.</p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="n">onBatteryLevelChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable </span>
-
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span> <span class="n">onBatteryLevelChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span><span class="o">()</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span> <span class="n">onBatteryLevelChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">runOnUiThread</span><span class="o">(</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
@@ -693,7 +691,11 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
                 <span class="o">}</span>
             <span class="o">}));</span>
         <span class="o">}</span>
-    <span class="o">};</span>
+<span class="o">};</span>
+
+<span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="n">onBatteryLevelChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
+<span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable </span>
+
 </code></pre><h1 id='troubleshooting'>Troubleshooting</h1>
 <table><thead>
 <tr>
