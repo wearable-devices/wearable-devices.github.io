@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;java&quot;,&quot;cpp&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;,&quot;cpp&quot;,&quot;csharp&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -213,6 +213,7 @@
         <div class="lang-selector">
               <a href="#" data-language-name="java">java</a>
               <a href="#" data-language-name="cpp">cpp</a>
+              <a href="#" data-language-name="csharp">csharp</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -277,7 +278,7 @@
         <h1 id='getting-started'>Getting Started</h1><h2 id='welcome'>Welcome</h2>
 <p>Welcome to the Mudra SDK! Use this documentation to create your own unique experiences based on the <strong>Mudra Inspire &trade;</strong> device and Mudra API. This page is where you can get all the information you need to develop your unique experience.</p>
 
-<p>Our API includes language bindings for <em>Java (Android)</em>, <em>C# (Unity)</em> and <em>c++ (Windows)</em> with <em>Swift</em> for iOS and <em>C#</em> for Windows coming soon. In order to use Mudra in your application, all you need is to register a callback. First, follow the methods below and use auto-connect to instantiate Mudra. Use the methods that begin with <em>set</em> to register the callback you need. Afterwards, create the callback function in your code as detailed below. </p>
+<p>Our API includes language bindings for <em>Java (Android)</em>, <em>C# (Windows, Unity)</em> and <em>c++ (Windows)</em> with <em>Swift</em> for iOS coming soon. In order to use Mudra in your application, all you need is to register a callback. First, follow the methods below and use auto-connect to instantiate Mudra. Use the methods that begin with <em>set</em> to register the callback you need. Afterwards, create the callback function in your code as detailed below. </p>
 <h2 id='device-modes'>Device Modes</h2>
 <table><thead>
 <tr>
@@ -387,7 +388,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 </ul></li>
 </ul>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// Header files
-</span><span class="cp">#include "Environment.h"
+</span><span class="cp">#include "MudraEnvironment.h"
 #include "MudraDevice.h"
 </span></code></pre><h2 id='initialization-and-connection'>Initialization and Connection</h2><h3 id='android-2'>Android</h3>
 <p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
@@ -397,14 +398,14 @@ Initialization is exposed via the auto connect function.</p>
 <h3 id='windows-3'>Windows</h3>
 <p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device. Once the a Mudra device is discovered, the OnDeviceDiscovered() callback will be called. 
 It is possible to check the name of the new discovered device and filter it if it is not you device. Please note that you need to declare on which hand the device is worn, see SetHand().<br>
-When you would like to terminate the connection, please call Close().</p>
+When you would like to terminate the connection, please call Close(). Please note that for c++ sdk usage, _WINDOWS define should be included in the c\c++ preprocessor properties.</p>
 <h3 id='logging'>Logging</h3>
 <p>It is possible to set the logging severity by the following levels: Debug, Info, Warning and Error.
-You can set the logging severity using the SetLoggingSevirity(). It is also possible to use your own function for logging using the SetOnLoggingMessageCallback() function.</p>
+You can set the logging severity using the SetLoggingSeverity(). It is also possible to use your own function for logging using the SetOnLoggingMessageCallback() function.</p>
 <pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually.</span>
 <span class="kn">import</span> <span class="nn">MudraAndroidSDK.Mudra</span><span class="o">;</span>
 <span class="n">Mudra</span> <span class="n">mudra</span> <span class="o">=</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">autoConnectPaired</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">Environment</span> <span class="n">mudra</span><span class="p">;</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">MudraEnvironment</span> <span class="n">mudra</span><span class="p">;</span>
 
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>   
@@ -426,7 +427,7 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="c1">// Logging
-</span>    <span class="n">mudra</span><span class="p">.</span><span class="n">SetLoggingSevirity</span><span class="p">(</span><span class="n">Logger</span><span class="o">::</span><span class="n">Severity</span><span class="o">::</span><span class="n">Debug</span><span class="p">);</span>
+</span>    <span class="n">mudra</span><span class="p">.</span><span class="n">SetLoggingSeverity</span><span class="p">(</span><span class="n">Logger</span><span class="o">::</span><span class="n">Severity</span><span class="o">::</span><span class="n">Debug</span><span class="p">);</span>
     <span class="n">mudra</span><span class="p">.</span><span class="n">SetOnLoggingMessageCallback</span><span class="p">(</span><span class="n">OnLoggingMessageCallback</span><span class="p">);</span>
 
     <span class="c1">// Connection
@@ -437,6 +438,40 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
 </span>
     <span class="c1">// Close connection
 </span>    <span class="n">mudra</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">Mudra.SDK.Windows.DotNetFramework</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnMudraDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>   
+    <span class="k">if</span> <span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="nf">Name</span><span class="p">()</span> <span class="p">!=</span> <span class="s">"MY_DEVICE_NAME"</span><span class="p">)</span>
+                <span class="k">return</span><span class="p">;</span>
+
+    <span class="c1">// Insert all your device's callbacks here. </span>
+
+    <span class="c1">// You can connect your device on discovery like presented here, or save your device and connect it later. </span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetHand</span><span class="p">(</span><span class="n">HandType</span><span class="p">.</span><span class="n">Left</span><span class="p">);</span>
+    <span class="n">MudraEnvironment</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnLoggingMessageCallback</span><span class="p">(</span><span class="kt">string</span> <span class="p">&amp;</span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Do something with msg</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Logging</span>
+    <span class="n">MudraEnvironment</span><span class="p">.</span><span class="nf">SetLoggingSeverity</span><span class="p">(</span><span class="n">Logger</span><span class="p">::</span><span class="n">Severity</span><span class="p">::</span><span class="n">Debug</span><span class="p">);</span>
+    <span class="n">MudraEnvironment</span><span class="p">.</span><span class="nf">SetOnLoggingMessageCallback</span><span class="p">(</span><span class="n">OnLoggingMessageCallback</span><span class="p">);</span>
+
+    <span class="c1">// Connection</span>
+    <span class="n">MudraEnvironment</span><span class="p">.</span><span class="nf">Scan</span><span class="p">(</span><span class="n">OnMudraDeviceDiscovered</span><span class="p">);</span>
+    <span class="n">MudraEnvironment</span><span class="p">.</span><span class="nf">SetCalibration</span><span class="p">(</span><span class="n">HandType</span><span class="p">.</span><span class="n">Left</span><span class="p">,</span> <span class="s">"&lt;YOUR_PROJECT_PATH&gt;\\Calibration.txt"</span><span class="p">);</span>
+
+    <span class="c1">// Do something here (set infinite loop here if you woould like to only listen to callbacks).</span>
+
+    <span class="c1">// Close connection</span>
+    <span class="n">MudraEnvironment</span><span class="p">.</span><span class="nf">Close</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre><h2 id='fingertip-pressure'>Fingertip Pressure</h2>
 <p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
@@ -457,6 +492,15 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnProportionalReady</span><span class="p">(</span><span class="n">OnProportionalReady</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnProportionalReady</span><span class="p">(</span><span class="kt">float</span> <span class="n">proportional</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\nProportionalfound = {0}"</span><span class="p">,</span> <span class="n">proportional</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetOnProportionalReady</span><span class="p">(</span><span class="n">OnProportionalReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
 <p>Functionality for predicting three gesture types: thumb, index and tap. Please check out the Mudra app for more info and example usage.</p>
@@ -481,12 +525,21 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
 <span class="o">};</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnGestureReady</span><span class="p">(</span><span class="n">GestureType</span> <span class="n">gestureType</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Gesturefound = "</span> <span class="o">&lt;&lt;</span> <span class="n">Environment</span><span class="o">::</span><span class="n">ToString</span><span class="p">(</span><span class="n">gestureType</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Gesturefound = "</span> <span class="o">&lt;&lt;</span> <span class="n">MudraEnvironment</span><span class="o">::</span><span class="n">ToString</span><span class="p">(</span><span class="n">gestureType</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnGestureReady</span><span class="p">(</span><span class="n">OnGestureReady</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnGestureReady</span><span class="p">(</span><span class="n">GestureType</span> <span class="n">gesture</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnGestureReady = {0}"</span><span class="p">,</span> <span class="n">gesture</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetOnGestureReady</span><span class="p">(</span><span class="n">OnGestureReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
 <aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra app. Currently we make available an Android app, with more platform applications available soon. </aside>
@@ -515,6 +568,15 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnAirMousePositionChanged</span><span class="p">(</span><span class="n">OnAirMousePositionChanged</span><span class="p">);</span>
 <span class="p">}</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnAirMousePositionChanged</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnAirMousePositionChanged = {0}, {1}"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetOnAirMousePositionChanged</span><span class="p">(</span><span class="n">OnAirMousePositionChanged</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre><h2 id='orientation'>Orientation</h2>
 <p>Functionality for exposing IMU based quaternion values. These values represent the orientation of your hand in a quaternion representation.</p>
 <pre class="highlight java tab-java"><code><span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="n">OnImuQuaternionReady</span><span class="o">);</span> <span class="c1">// Enable </span>
@@ -534,6 +596,18 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnImuQuaternionPackageReady</span><span class="p">(</span><span class="kt">float</span><span class="p">[]</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">&lt;</span><span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span> 
+        <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnImuQuaternionPackageReady = {0}"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><span class="n">MudraDevice</span><span class="p">&gt;</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>   
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><h2 id='raw-data'>Raw Data</h2>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee.  </p>
@@ -561,6 +635,29 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
 <span class="p">{</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnImuAccNormPackageReady</span><span class="p">(</span><span class="kt">float</span><span class="p">[]</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">&lt;</span><span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span> 
+        <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnImuAccNormPackageReady = {0}"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnSncPackageReady</span><span class="p">(</span><span class="kt">int</span> <span class="n">snc</span><span class="p">,</span> <span class="kt">float</span><span class="p">[]</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnSncPackageReady snc = {0}"</span><span class="p">,</span> <span class="n">snc</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">&lt;</span><span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span> 
+        <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnSncPackageReady = {0}"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><h2 id='device-status'>Device Status</h2>
 <p>Functionality for exposing if the Mudra device is connected.</p>
@@ -644,6 +741,7 @@ You can set the logging severity using the SetLoggingSevirity(). It is also poss
           <div class="lang-selector">
                 <a href="#" data-language-name="java">java</a>
                 <a href="#" data-language-name="cpp">cpp</a>
+                <a href="#" data-language-name="csharp">csharp</a>
           </div>
       </div>
     </div>
