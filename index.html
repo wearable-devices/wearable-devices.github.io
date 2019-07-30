@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;java&quot;,&quot;cpp&quot;,&quot;csharp&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;,&quot;cpp&quot;,&quot;csharp&quot;,&quot;fsharp&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -214,6 +214,7 @@
               <a href="#" data-language-name="java">Java</a>
               <a href="#" data-language-name="cpp">c++</a>
               <a href="#" data-language-name="csharp">c#</a>
+              <a href="#" data-language-name="fsharp">Unity</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -275,7 +276,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='getting-started'>Getting Started</h1><h2 id='welcome'>Welcome</h2>
+        <h1 id='getting-started'>Getting Started</h1><pre class="highlight java tab-java"><code><span class="c1">//Please scroll below for code examples</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//Please scroll below for code examples
+</span></code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">//Please scroll below for code examples</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="c1">//Please scroll below for code examples
+</span></code></pre><h2 id='welcome'>Welcome</h2>
 <p>Welcome to the Mudra SDK! Use this documentation to create your own unique experiences based on the <strong>Mudra Inspire &trade;</strong> device and Mudra API. This page is where you can get all the information you need to develop your unique experience.</p>
 
 <p>Our API includes language bindings for <em>Java (Android)</em>, <em>C# (Windows, Unity)</em> and <em>c++ (Windows)</em> with <em>Swift</em> for iOS coming soon. In order to use Mudra in your application, all you need is to register a callback. First, follow the methods below and use auto-connect to instantiate Mudra. Use the methods that begin with <em>set</em> to register the callback you need. Afterwards, create the callback function in your code as detailed below. </p>
@@ -360,7 +365,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
 </code></pre><h3 id='windows-2'>Windows</h3>
 <ul>
-<li>To access the API run Setup.msi
+<li>To access the API run <a href='https://github.com/wearable-devices/MudraAndroidReference'>Setup.msi</a>
 
 <ul>
 <li>Choose installation path</li>
@@ -387,6 +392,9 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <li>Note-Use mudra.SetCalibration method, future updates will feature an online method with no file needed</li>
 </ul></li>
 </ul>
+<h3 id='unity'>Unity</h3>
+<p>When developing for Unity over Windows, please see installation instructions for Windows above. In addition, download our <a href='https://github.com/wearable-devices/MudraAndroidReference'>Unity package</a>. Simply drag and drop this package into the Unity editor. The package includes a plugin for interfacing with Mudra directly from c#, using Mono and an example scene.
+Please make sure you are using the latest version of Unity and that the dongle is plugged in to your PC.</p>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// Header files
 </span><span class="cp">#include "MudraEnvironment.h"
 #include "MudraDevice.h"
@@ -473,6 +481,38 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
     <span class="c1">// Close connection</span>
     <span class="n">MudraEnvironment</span><span class="p">.</span><span class="nf">Close</span><span class="p">();</span>
 <span class="p">}</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="err">﻿</span><span class="n">using</span> <span class="nc">UnityEngine</span><span class="p">;</span>
+<span class="n">using</span> <span class="nn">Mudra</span><span class="p">.</span><span class="nc">Unity</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">TestMudraUnityPlugin</span> <span class="p">:</span> <span class="nc">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">bool</span> <span class="n">my_checkbox</span> <span class="p">=</span> <span class="bp">true</span><span class="p">;</span>
+
+    <span class="c1">// Instantiate Mudra plugin
+</span>    <span class="k">void</span> <span class="nc">Start</span><span class="bp">()</span>
+    <span class="p">{</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">Init</span><span class="p">(</span><span class="s2">"&lt;YOUR_PROJECT_PATH&gt;</span><span class="se">\\</span><span class="s2">Calibration.txt"</span><span class="o">);</span>
+        <span class="p">}</span>
+        <span class="n">catch</span> <span class="p">(</span><span class="nn">System</span><span class="p">.</span><span class="nc">Exception</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">print</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="nc">ToString</span><span class="bp">()</span><span class="o">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Clears information which was already accessed!
+</span>    <span class="k">private</span> <span class="k">void</span> <span class="nc">LateUpdate</span><span class="bp">()</span>
+    <span class="p">{</span>
+        <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">ClearFrame</span><span class="bp">()</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Closes plugin after play\stop in Unity editor! 
+</span>    <span class="k">private</span> <span class="k">void</span> <span class="nc">OnApplicationQuit</span><span class="bp">()</span>
+    <span class="p">{</span>
+        <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">Close</span><span class="bp">()</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h2 id='fingertip-pressure'>Fingertip Pressure</h2>
 <p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">onFingertipPressureReady</span> <span class="n">onFingertipPressureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">onFingertipPressureReady</span><span class="o">()</span> <span class="o">{</span>
@@ -501,6 +541,20 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">device</span><span class="p">.</span><span class="nf">SetOnProportionalReady</span><span class="p">(</span><span class="n">OnProportionalReady</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span><span class="p">?</span> <span class="n">fingerTipPressure</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">fingerTipPressure</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">print</span><span class="o">($</span><span class="s2">"FingerTipPressure {fingerTipPressure}"</span><span class="o">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
 <p>Functionality for predicting three gesture types: thumb, index and tap. Please check out the Mudra app for more info and example usage.</p>
@@ -541,6 +595,19 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">{</span>
     <span class="n">device</span><span class="p">.</span><span class="nf">SetOnGestureReady</span><span class="p">(</span><span class="n">OnGestureReady</span><span class="p">);</span>
 <span class="p">}</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateGesture</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="nc">GestureType</span><span class="p">?</span> <span class="n">gesture</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastGesture</span><span class="bp">()</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">gesture</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">print</span><span class="o">($</span><span class="s2">"Gesture {gesture.ToString()}"</span><span class="o">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="nc">UpdateGesture</span><span class="bp">()</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre>
 <aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra app. Currently we make available an Android app, with more platform applications available soon. </aside>
 <h2 id='air-mouse'>Air Mouse</h2>
@@ -578,6 +645,19 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">{</span>
     <span class="n">device</span><span class="p">.</span><span class="nf">SetOnAirMousePositionChanged</span><span class="p">(</span><span class="n">OnAirMousePositionChanged</span><span class="p">);</span>
 <span class="p">}</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateAirMousePositionChange</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span><span class="bp">[]</span> <span class="n">delta</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastAirMousePositionChange</span><span class="bp">()</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">delta</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">print</span><span class="o">($</span><span class="s2">"AirMouse position change {delta[0]}, {delta[1]}"</span><span class="o">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="nc">UpdateAirMousePositionChange</span><span class="bp">()</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre><h2 id='orientation'>Orientation</h2>
 <p>Functionality for exposing IMU based quaternion values. These values represent the orientation of your hand in a quaternion representation.</p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span> <span class="n">onImuQuaternionReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
@@ -609,6 +689,25 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><span class="n">MudraDevice</span><span class="p">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>   
     <span class="n">device</span><span class="p">.</span><span class="nf">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateImuQuaternion</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span><span class="bp">[]</span> <span class="n">data</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastImuQuaternionPackage</span><span class="bp">()</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">string</span> <span class="n">s1</span> <span class="p">=</span> <span class="s2">""</span><span class="p">;</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">d</span> <span class="k">in</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">s1</span> <span class="p">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">print</span><span class="o">($</span><span class="s2">"Imu Quaternion {s1}"</span><span class="o">);</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="nc">UpdateImuQuaternion</span><span class="bp">()</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre><h2 id='raw-data'>Raw Data</h2>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee.  </p>
@@ -659,6 +758,46 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">{</span>
     <span class="n">device</span><span class="p">.</span><span class="nf">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
     <span class="n">device</span><span class="p">.</span><span class="nf">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateImuAccNorm</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span><span class="bp">[]</span> <span class="n">data</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastImuAccNormPackage</span><span class="bp">()</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">string</span> <span class="n">s</span> <span class="p">=</span> <span class="s2">""</span><span class="p">;</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">d</span> <span class="k">in</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">s</span> <span class="p">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">print</span><span class="o">($</span><span class="s2">"Imu Acc Norm {s}"</span><span class="o">);</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateSnc</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++)</span>
+    <span class="p">{</span>
+        <span class="kt">float</span><span class="bp">[]</span> <span class="n">data</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastSncPackage</span><span class="p">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+        <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">string</span> <span class="n">s1</span> <span class="p">=</span> <span class="s2">""</span><span class="p">;</span>
+        <span class="n">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">d</span> <span class="k">in</span> <span class="n">data</span><span class="p">)</span>
+        <span class="p">{</span>
+        <span class="n">s1</span> <span class="p">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">print</span><span class="o">($</span><span class="s2">"Snc {i} data {s1}"</span><span class="o">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="nc">UpdateImuAccNorm</span><span class="bp">()</span><span class="p">;</span>
+    <span class="nc">UpdateSnc</span><span class="bp">()</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre><h2 id='device-status'>Device Status</h2>
 <p>Functionality for exposing if the Mudra device is connected.</p>
@@ -744,6 +883,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
                 <a href="#" data-language-name="java">Java</a>
                 <a href="#" data-language-name="cpp">c++</a>
                 <a href="#" data-language-name="csharp">c#</a>
+                <a href="#" data-language-name="fsharp">Unity</a>
           </div>
       </div>
     </div>
