@@ -365,7 +365,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
 </code></pre><h3 id='windows-2'>Windows</h3>
 <ul>
-<li>To access the API run <a href='https://github.com/wearable-devices/MudraAndroidReference'>Setup.msi</a>
+<li>To access the API run <a href='https://github.com/wearable-devices/MudraAndroidSDK/releases/download/v1.3.0/MudraSetup.msi'>Setup.msi</a>
 
 <ul>
 <li>Choose installation path</li>
@@ -393,7 +393,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 </ul></li>
 </ul>
 <h3 id='unity'>Unity</h3>
-<p>When developing for Unity over Windows, please see installation instructions for Windows above. In addition, download our <a href='https://github.com/wearable-devices/MudraAndroidReference'>Unity package</a>. Simply drag and drop this package into the Unity editor. The package includes a plugin for interfacing with Mudra directly from c#, using Mono and an example scene.
+<p>When developing for Unity over Windows, please see installation instructions for Windows above. In addition, download our <a href='https://github.com/wearable-devices/MudraAndroidSDK/releases/download/v1.3.0/MudraUnityPlugin.unitypackage'>Unity package</a>. Simply drag and drop this package into the Unity editor. The package includes a plugin for interfacing with Mudra directly from c#, using Mono, and an example scene.
 Please make sure you are using the latest version of Unity and that the dongle is plugged in to your PC.</p>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// Header files
 </span><span class="cp">#include "MudraEnvironment.h"
@@ -486,8 +486,6 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 
 <span class="k">public</span> <span class="k">class</span> <span class="nc">TestMudraUnityPlugin</span> <span class="p">:</span> <span class="nc">MonoBehaviour</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="kt">bool</span> <span class="n">my_checkbox</span> <span class="p">=</span> <span class="bp">true</span><span class="p">;</span>
-
     <span class="c1">// Instantiate Mudra plugin
 </span>    <span class="k">void</span> <span class="nc">Start</span><span class="bp">()</span>
     <span class="p">{</span>
@@ -555,7 +553,8 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
 <span class="p">{</span>
     <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="c1">//...
+</span><span class="p">}</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
 <p>Functionality for predicting three gesture types: thumb, index and tap. Please check out the Mudra app for more info and example usage.</p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
@@ -607,7 +606,8 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
 <span class="p">{</span>
     <span class="nc">UpdateGesture</span><span class="bp">()</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="c1">//...
+</span><span class="p">}</span>
 </code></pre>
 <aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra app. Currently we make available an Android app, with more platform applications available soon. </aside>
 <h2 id='air-mouse'>Air Mouse</h2>
@@ -657,7 +657,8 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
 <span class="p">{</span>
     <span class="nc">UpdateAirMousePositionChange</span><span class="bp">()</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="c1">//...
+</span><span class="p">}</span>
 </code></pre><h2 id='orientation'>Orientation</h2>
 <p>Functionality for exposing IMU based quaternion values. These values represent the orientation of your hand in a quaternion representation.</p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span> <span class="n">onImuQuaternionReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
@@ -708,7 +709,8 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
 <span class="p">{</span>
     <span class="nc">UpdateImuQuaternion</span><span class="bp">()</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="c1">//...
+</span><span class="p">}</span>
 </code></pre><h2 id='raw-data'>Raw Data</h2>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee.  </p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span> <span class="n">onSncReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
@@ -798,7 +800,8 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">{</span>
     <span class="nc">UpdateImuAccNorm</span><span class="bp">()</span><span class="p">;</span>
     <span class="nc">UpdateSnc</span><span class="bp">()</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="c1">//...
+</span><span class="p">}</span>
 </code></pre><h2 id='device-status'>Device Status</h2>
 <p>Functionality for exposing if the Mudra device is connected.</p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span> <span class="n">onDeviceStatusChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span><span class="o">()</span> <span class="o">{</span>
