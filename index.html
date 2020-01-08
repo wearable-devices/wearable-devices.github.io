@@ -380,14 +380,15 @@ Remember — Your Mudra device should always be connected. Check your host devic
 </ul>
 <h4 id='c-usage'>C++ Usage</h4>
 <ul>
-<li>Project properties
+<li><p>Project properties</p>
 
 <ul>
 <li>Under C/C++ / General / Additional Include Directories add $(Mudra)\Include\</li>
 <li>Under Linker / General / Additional Library Directories add $(Mudra)\Lib\</li>
 <li>Under Linker / Input add MudraSDK.lib</li>
+<li> _WINDOWS define should be included in the c\c++ preprocessor properties</li>
 </ul></li>
-<li>Set your calibration
+<li><p>Set your calibration</p>
 
 <ul>
 <li>Follow the onboarding instructions in the Android Mudra Inspire application</li>
@@ -417,7 +418,7 @@ Go to the Hierarchy pane in your mudra editor, press create and select a Mudra m
 <p>Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code.
 Initialization is exposed via the auto connect function.</p>
 <h3 id='windows-3'>Windows</h3>
-<p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device. Once a Mudra device is discovered, the OnDeviceDiscovered() callback will be called. It is possible to check the name of the new discovered device and filter it if it is not your device. Please note that you need to declare on which hand the device is worn, see SetHand(). Please note that for c++ sdk usage, _WINDOWS define should be included in the c\c++ preprocessor properties.</p>
+<p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device. Once a Mudra device is discovered, the OnDeviceDiscovered() callback will be called. It is possible to check the name of the new discovered device and filter it if it is not your device. Please note that you need to declare on which hand the device is worn, see SetHand().</p>
 <h3 id='logging'>Logging</h3>
 <p>It is possible to set the logging severity by the following levels: Debug, Info, Warning and Error.
 You can set the logging severity using the SetLoggingSeverity(). It is also possible to use your own function for logging using the SetOnLoggingMessageCallback() function.</p>
@@ -671,7 +672,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
+    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnImuQuaternionPackageReady</span><span class="p">(</span><span class="kt">float</span><span class="p">[]</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
@@ -683,7 +684,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 
 <span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">shared_ptr</span><span class="p">&lt;</span><span class="n">MudraDevice</span><span class="p">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>   
-    <span class="n">device</span><span class="p">.</span><span class="nf">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetImuQuaternionPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateImuQuaternion</span><span class="bp">()</span>
 <span class="p">{</span>
@@ -729,7 +730,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 
 <span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
+    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
     <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnImuAccNormPackageReady</span><span class="p">(</span><span class="kt">float</span><span class="p">[]</span> <span class="n">data</span><span class="p">)</span>
@@ -752,7 +753,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 
 <span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">device</span><span class="p">.</span><span class="nf">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuQuaternionPackageReady</span><span class="p">);</span>
+    <span class="n">device</span><span class="p">.</span><span class="nf">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
     <span class="n">device</span><span class="p">.</span><span class="nf">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateImuAccNorm</span><span class="bp">()</span>
