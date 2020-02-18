@@ -707,17 +707,8 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
     <span class="c1">//...
 </span><span class="p">}</span>
 </code></pre><h2 id='raw-data'>Raw Data</h2>
-<p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).   </p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span> <span class="n">onSncReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Packet data (3 sensors with 18 samples each - [0...17, 18...35, 36...53])</span>
-    <span class="o">}</span>
-<span class="o">};</span>
-
-<span class="n">mudra</span><span class="o">.</span><span class="na">setLicense</span><span class="o">(</span><span class="n">Feature</span><span class="o">.</span><span class="na">RawData</span><span class="o">,</span> <span class="n">LICENSE</span><span class="o">);</span> <span class="c1">// private license </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="n">onSncReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
+<p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).  </p>
+<pre class="highlight java tab-java"><code><span class="c1">// Please contact support@getmudra.com for instructions</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnImuAccNormPackageReady</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received Imu Norm data"</span><span class="p">;</span>
