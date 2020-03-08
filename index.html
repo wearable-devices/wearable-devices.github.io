@@ -406,7 +406,7 @@ Go to the Hierarchy pane in your mudra editor, press create and select a Mudra m
 
 <p>(2) Using GUI on the MudraManager Unity object menu (no coding required). Using the MudraManager GUI, it is possible to enable\disable each of the features. For each feature, it is also possible to add callbacks. </p>
 
-<p><strong>IMPORTANT:</strong> Write the path of your calibration file in the GUI. Default file path is: &quot;C:\Program Files\Wearable Devices\Mudra\Calibration.txt&quot;.</p>
+<p><strong>IMPORTANT:</strong> Write the path of your calibration file in the GUI. Default file path is: &quot;C:\Program Files\Wearable Devices\Mudra\Calibration.txt&quot;. In the Unity &#39;Poject Settings&#39;, set &#39;Write Permission&#39; to &#39;External(SDCard)&#39; instead of the default &#39;Internal&#39; (in order to read the calibration txt file). </p>
 
 <p>*Please make sure you are using the latest version of Unity and that the dongle is plugged in to your PC.</p>
 <pre class="highlight cpp tab-cpp"><code><span class="c1">// Header files
@@ -790,6 +790,11 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <td>Missing dll error</td>
 <td>Windows\Unity</td>
 <td>Make sure installation created an environment variable path and unpacked the dlls inside. If not, try running Setup.msi as administrator</td>
+</tr>
+<tr>
+<td>Could not find com.github.wearable-devices:MudraAndroidSDK</td>
+<td>Windows\Unity</td>
+<td>Downgrade Unity to version 2019.2.X</td>
 </tr>
 </tbody></table>
 
