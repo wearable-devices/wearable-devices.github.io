@@ -709,86 +709,10 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 </code></pre><h2 id='raw-data'>Raw Data</h2>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).  </p>
 <pre class="highlight java tab-java"><code><span class="c1">// Please contact support@getmudra.com for instructions</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnImuAccNormPackageReady</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received Imu Norm data"</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">OnSncPackageReady</span><span class="p">(</span><span class="k">const</span> <span class="n">SncPackageData</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received SNC data"</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">MudraDevice</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
-    <span class="n">device</span><span class="o">-&gt;</span><span class="n">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre><pre class="highlight csharp tab-csharp"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">OnImuAccNormPackageReady</span><span class="p">(</span><span class="kt">float</span><span class="p">[]</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">&lt;</span><span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
-    <span class="p">{</span> 
-        <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnImuAccNormPackageReady = {0}"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="k">void</span> <span class="nf">OnSncPackageReady</span><span class="p">(</span><span class="kt">int</span> <span class="n">snc</span><span class="p">,</span> <span class="kt">float</span><span class="p">[]</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnSncPackageReady snc = {0}"</span><span class="p">,</span> <span class="n">snc</span><span class="p">);</span>
-
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="p">&lt;</span><span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
-    <span class="p">{</span> 
-        <span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"\OnSncPackageReady = {0}"</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="k">void</span> <span class="nf">OnDeviceDiscovered</span><span class="p">(</span><span class="n">MudraDevice</span> <span class="n">device</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">device</span><span class="p">.</span><span class="nf">SetImuAccNormPackageReady</span><span class="p">(</span><span class="n">OnImuAccNormPackageReady</span><span class="p">);</span>
-    <span class="n">device</span><span class="p">.</span><span class="nf">SetOnSncPackageReady</span><span class="p">(</span><span class="n">OnSncPackageReady</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateImuAccNorm</span><span class="bp">()</span>
-<span class="p">{</span>
-    <span class="kt">float</span><span class="bp">[]</span> <span class="n">data</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastImuAccNormPackage</span><span class="bp">()</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kt">string</span> <span class="n">s</span> <span class="p">=</span> <span class="s2">""</span><span class="p">;</span>
-    <span class="n">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">d</span> <span class="k">in</span> <span class="n">data</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">s</span> <span class="p">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">print</span><span class="o">($</span><span class="s2">"Imu Acc Norm {s}"</span><span class="o">);</span>
-<span class="p">}</span>
-
-<span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateSnc</span><span class="bp">()</span>
-<span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++)</span>
-    <span class="p">{</span>
-        <span class="kt">float</span><span class="bp">[]</span> <span class="n">data</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastSncPackage</span><span class="p">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span>
-        <span class="p">{</span>
-        <span class="k">continue</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="kt">string</span> <span class="n">s1</span> <span class="p">=</span> <span class="s2">""</span><span class="p">;</span>
-        <span class="n">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">d</span> <span class="k">in</span> <span class="n">data</span><span class="p">)</span>
-        <span class="p">{</span>
-        <span class="n">s1</span> <span class="p">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">print</span><span class="o">($</span><span class="s2">"Snc {i} data {s1}"</span><span class="o">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
-<span class="p">{</span>
-    <span class="nc">UpdateImuAccNorm</span><span class="bp">()</span><span class="p">;</span>
-    <span class="nc">UpdateSnc</span><span class="bp">()</span><span class="p">;</span>
-    <span class="c1">//...
-</span><span class="p">}</span>
-</code></pre><h2 id='device-status'>Device Status</h2>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// Please contact support@getmudra.com for instructions
+</span></code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">// Please contact support@getmudra.com for instructions</span>
+</code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="c1">// Please contact support@getmudra.com for instructions
+</span></code></pre><h2 id='device-status'>Device Status</h2>
 <p>Functionality for exposing if the Mudra device is connected.</p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span> <span class="n">onDeviceStatusChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
