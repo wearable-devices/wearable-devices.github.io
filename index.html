@@ -201,7 +201,7 @@
       <script src="javascripts/all-c5541673.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;java&quot;,&quot;cpp&quot;,&quot;csharp&quot;,&quot;fsharp&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;,&quot;cpp&quot;,&quot;csharp&quot;,&quot;fsharp&quot;,&quot;swift&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -215,6 +215,7 @@
               <a href="#" data-language-name="cpp">C++</a>
               <a href="#" data-language-name="csharp">C#</a>
               <a href="#" data-language-name="fsharp">Unity</a>
+              <a href="#" data-language-name="swift">Swift</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -280,10 +281,11 @@
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">//Please scroll below for code examples
 </span></code></pre><pre class="highlight csharp tab-csharp"><code><span class="c1">//Please scroll below for code examples</span>
 </code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="c1">//Please scroll below for code examples
-</span></code></pre><h2 id='welcome'>Welcome</h2>
+</span></code></pre><pre class="highlight swift tab-swift"><code><span class="c1">//Please scroll below for code examples</span>
+</code></pre><h2 id='welcome'>Welcome</h2>
 <p>Welcome to the Mudra SDK! Use this documentation to create your own unique experiences based on the <strong>Mudra Inspire &trade;</strong> device and Mudra API. This page is where you can get all the information you need to develop your unique experience.</p>
 
-<p>Our API includes language bindings for <em>Java (Android)</em>, <em>C# (Windows, Unity)</em> and <em>c++ (Windows)</em> with <em>Swift</em> for iOS coming soon. In order to use Mudra in your application, all you need is to register a callback. First, follow the methods below and use auto-connect to instantiate Mudra. Use the methods that begin with <em>set</em> to register the callback you need. Afterwards, create the callback function in your code as detailed below. </p>
+<p>Our API includes language bindings for <em>Java (Android)</em>, <em>C# (Windows, Unity)</em>, <em>c++ (Windows)</em> and <em>Swift (iOS)</em>. In order to use Mudra in your application, all you need is to register a callback. First, follow the methods below and use auto-connect to instantiate Mudra. Use the methods that begin with <em>set</em> to register the callback you need. Afterwards, create the callback function in your code as detailed below. </p>
 <h2 id='device-modes'>Device Modes</h2>
 <table><thead>
 <tr>
@@ -363,7 +365,22 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="c1">// Android manifest file:</span>
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.READ_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
-</code></pre><h3 id='windows-2'>Windows</h3><h4 id='installation'>Installation</h4>
+</code></pre><h3 id='ios'>iOS</h3>
+<ul>
+<li>Open a terminal </li>
+<li>Navigate to your project file folder (contains the .xcodeproj file IDs)</li>
+<li>Run &quot;pod init&quot;</li>
+<li>Open the generated podfile:
+
+<ul>
+<li>Uncomment use_frameworks!</li>
+<li>In order to utilize our latest pod run: &quot;pod &#39;Mudra&#39;, :git =&gt; &#39;https://github.com/LiavAdi/MudraPod.git&#39;&quot;</li>
+<li>In order to utilize a specific version run: &quot;pod &#39;Mudra&#39;, :git =&gt; &#39;https://github.com/LiavAdi/MudraPod.git&#39;, :tag =&gt; &#39;2.0.2&#39;&quot;</li>
+<li>Run: &quot;pod install&quot;</li>
+</ul></li>
+<li>Open xcworkspace</li>
+</ul>
+<h3 id='windows-2'>Windows</h3><h4 id='installation'>Installation</h4>
 <ul>
 <li>To access the API run MudraSetup.msi (please contact <a href="mailto:support@getmudra.com">support@getmudra.com</a> for access)
 
@@ -419,7 +436,86 @@ Go to the Hierarchy pane in your mudra editor, press create and select a Mudra m
 Initialization is exposed via the auto connect function.</p>
 <h3 id='windows-3'>Windows</h3>
 <p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device. Once a Mudra device is discovered, the OnDeviceDiscovered() callback will be called. It is possible to check the name of the new discovered device and filter it if it is not your device. Please note that you need to declare on which hand the device is worn, see SetHand().</p>
-<h3 id='logging'>Logging</h3>
+<h3 id='ios-2'>iOS</h3>
+<p>The iOS SDK supports developing both in Objective-C and Swift. The iOS API supports multiple Mudra devices.</p>
+
+<ul>
+<li>Import Mudra package</li>
+<li>Implement the MudraDelegate protocol described under the Swift tab</li>
+<li>Please observe the following instuctions:
+
+<ul>
+<li>Call &quot;Mudra.shared.scan()&quot;, this will start BLE scanning and search for Mudra devices (make sure the Mudra device is advertising)</li>
+<li>For every Mudra device that is discovered, the callback &quot;onMudraDeviceDiscovered&quot; is called. The peripheral can be added to a list</li>
+<li>Prior to initiating a connection, call &quot;Mudra.shared.createDevice&quot;. This will create a device out of a peripheral for handling gestures, pressure etc.</li>
+<li>Call &quot;Mudra.shared.connect&quot; in order to initiate device connection</li>
+<li>Once connection is completed,  &quot;onMudraDeviceConnected&quot; is called</li>
+<li>Place all your callbacks within this method. Note that all the callbacks are called on a different ble thread, so the GUI needs to be updated asynchronously (see code example in the Swift tab)</li>
+</ul></li>
+</ul>
+<pre class="highlight swift tab-swift"><code><span class="c1">// SDK Code</span>
+<span class="kd">@objc</span> <span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
+
+    <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onMudraDeviceDiscovered</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">)</span>    
+
+    <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
+
+    <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onMudraDeviceDisconnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
+
+    <span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">onScanFinished</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">// User Code</span>
+<span class="kd">import</span> <span class="kt">UIKit</span>
+<span class="kd">import</span> <span class="kt">Mudra</span>
+
+<span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">,</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">peripherals</span><span class="p">:</span> <span class="p">[</span><span class="kt">CBPeripheral</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+        <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="k">self</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">@IBAction</span> <span class="kd">func</span> <span class="kt">Scan</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">scan</span><span class="p">()</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onScanFinished</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onMudraDeviceDiscovered</span><span class="p">(</span><span class="n">_</span> <span class="nv">peripheral</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">//either save this peripheral for later use</span>
+    <span class="n">peripherals</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">peripheral</span><span class="p">)</span>
+
+
+    <span class="c1">//or connect it here</span>
+    <span class="k">let</span> <span class="nv">device</span> <span class="o">=</span> <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">createDevice</span><span class="p">(</span><span class="nv">peripheral</span><span class="p">:</span> 
+
+    <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nv">device</span><span class="p">:</span> <span class="n">device</span><span class="p">)</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// Add your callbacks here</span>
+
+        <span class="c1">// Note - Callbacks are called on a different ble thread, in order to update the GUI    </span>
+
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="c1">/// update the GUI here</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+</code></pre><h3 id='logging'>Logging</h3>
 <p>It is possible to set the logging severity by the following levels: Debug, Info, Warning and Error.
 You can set the logging severity using the SetLoggingSeverity(). It is also possible to use your own function for logging using the SetOnLoggingMessageCallback() function.</p>
 <pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually.</span>
@@ -550,6 +646,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
     <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
     <span class="c1">//...
 </span><span class="p">}</span>
+</code></pre><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span> <span class="p">{(</span><span class="n">proportional</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span> <span class="s">"OnProportionalReady </span><span class="se">\(</span><span class="n">proportional</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
 <p>Functionality for predicting three gesture types: thumb, index and tap. Please check out the Mudra app for more info and example usage.</p>
 <pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
@@ -603,6 +700,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
     <span class="nc">UpdateGesture</span><span class="bp">()</span><span class="p">;</span>
     <span class="c1">//...
 </span><span class="p">}</span>
+</code></pre><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnGestureReady</span> <span class="p">{</span> <span class="p">(</span><span class="n">gesture</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"OnGestureReady </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="nf">gesture2String</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">gesture</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
 </code></pre>
 <aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra app. Currently we make available an Android app, with more platform applications available soon. </aside>
 <h2 id='air-mouse'>Air Mouse</h2>
@@ -706,6 +804,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
     <span class="nc">UpdateImuQuaternion</span><span class="bp">()</span><span class="p">;</span>
     <span class="c1">//...
 </span><span class="p">}</span>
+</code></pre><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnImuQuaternionPackageReady</span> <span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"OnImuQuaternionPackageReady"</span><span class="p">)}</span>
 </code></pre><h2 id='raw-data'>Raw Data</h2>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).  </p>
 <pre class="highlight java tab-java"><code><span class="c1">// Please contact support@getmudra.com for instructions</span>
@@ -807,6 +906,7 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
                 <a href="#" data-language-name="cpp">C++</a>
                 <a href="#" data-language-name="csharp">C#</a>
                 <a href="#" data-language-name="fsharp">Unity</a>
+                <a href="#" data-language-name="swift">Swift</a>
           </div>
       </div>
     </div>
