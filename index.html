@@ -337,12 +337,12 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <ul>
 <li>Add the repository to your project build.gradle file:</li>
 </ul>
-<pre class="highlight java tab-java"><code><span class="c1">// Project build.gradle</span>
+<pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
+<span class="n">authToken</span><span class="o">=&lt;</span><span class="n">Your</span> <span class="n">Jitpack</span> <span class="n">Token</span><span class="o">&gt;</span>
+
+<span class="c1">// Project build.gradle</span>
 <span class="n">allprojects</span> <span class="o">{</span>
     <span class="n">repositories</span> <span class="o">{</span>
-
-        <span class="n">google</span><span class="o">()</span>
-        <span class="n">jcenter</span><span class="o">()</span>
         <span class="n">maven</span> <span class="o">{</span>
                 <span class="n">url</span> <span class="err">'</span><span class="nl">https:</span><span class="c1">//jitpack.io'</span>
                 <span class="n">credentials</span> <span class="o">{</span> <span class="n">username</span> <span class="n">authToken</span> <span class="o">}</span>
@@ -350,21 +350,30 @@ Remember — Your Mudra device should always be connected. Check your host devic
     <span class="o">}</span>
 <span class="o">}</span>
 
+<span class="c1">// Module build.gradle</span>
+<span class="n">android</span> <span class="o">{</span>
+  <span class="n">defaultConfig</span> <span class="o">{</span>
+ <span class="n">minSdkVersion</span> <span class="mi">23</span>
+  <span class="o">}</span>
+
 <span class="c1">// Java 8 support</span>
-<span class="n">compileOptions</span> <span class="o">{</span>
+  <span class="n">compileOptions</span> <span class="o">{</span>
     <span class="n">sourceCompatibility</span> <span class="mf">1.8</span>
     <span class="n">targetCompatibility</span> <span class="mf">1.8</span>
+  <span class="o">}</span>
 <span class="o">}</span>
-</code></pre><pre class="highlight java tab-java"><code><span class="c1">// App build.gradle file:</span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="o">+</span><span class="err">'</span>
 
+<span class="c1">// App build.gradle file:</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="n">v1</span><span class="o">.</span><span class="mf">5.0</span><span class="err">'</span>
+<span class="n">configurations</span> <span class="o">{</span> <span class="n">all</span><span class="o">*.</span><span class="na">exclude</span> <span class="nl">group:</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="err">'</span> <span class="o">}</span>
 <span class="c1">// Bluetooth support</span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">ble:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">1</span><span class="err">'</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">ble:</span><span class="mf">2.3</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
 <span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v18</span><span class="o">:</span><span class="nl">scanner:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
 
 <span class="c1">// Android manifest file:</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.READ_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH_ADMIN"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_FINE_LOCATION"</span> <span class="o">/&gt;</span>
 </code></pre><h3 id='ios'>iOS</h3>
 <ul>
 <li>Open a terminal </li>
@@ -430,10 +439,34 @@ Go to the Hierarchy pane in your mudra editor, press create and select a Mudra m
 </span><span class="cp">#include "MudraEnvironment.h"
 #include "MudraDevice.h"
 </span></code></pre><h2 id='initialization-and-connection'>Initialization and Connection</h2><h3 id='android-2'>Android</h3>
-<p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
+<p>The connection process has 2 steps: 
+<ol>
+<li> Scanning for the device we would like to connect. </li> 
+<li> Connection with the device and registration of the desired callbacks. </li>
+</ol></p>
 
-<p>Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code.
-Initialization is exposed via the auto connect function.</p>
+<p>The scan function receives a callback that triggers when a new device is found and receives a list of the mudraDevices found.</p>
+
+<p>To start the scan:
+<ol>
+<li> Request the needed permmissions: Mudra.getInstance().requestAccessPermissions(this). </li>
+<li> Start scanning: Mudra.getInstance().scan(callback)*callback should implement the OnDeviceDiscovered interface. </li>
+<li> The callback method receives the discovered mudraDevices. Note that this list is filtered to match only mudra devices.</li>
+</ol></p>
+
+<p>*Don’t forget to stop the scan using: Mudra.getInstance().stopScan()</p>
+
+<p>To connect to a device:
+<ol>
+<li> Scan for to the desired device.</li>
+<li> Use device.connectDevice(context);</li>
+</ol></p>
+
+<p>Following a successful connection, the address will be registered in the cloud (this requires online access).
+To retrieve previously connected devices use: Mudra.getInstance().getPairedDevices(context)
+Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code. Initialization is exposed via the getPairedDevices function.</p>
+
+<p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
 <h3 id='windows-3'>Windows</h3>
 <p>Please call the Scan() function (note the indication in the console window) and press the button on you Mudra device. Once a Mudra device is discovered, the OnDeviceDiscovered() callback will be called. It is possible to check the name of the new discovered device and filter it if it is not your device. Please note that you need to declare on which hand the device is worn, see SetHand().</p>
 <h3 id='ios-2'>iOS</h3>
@@ -537,8 +570,7 @@ Initialization is exposed via the auto connect function.</p>
     <span class="p">}</span>
 
 </code></pre><h3 id='logging'>Logging</h3>
-<p>It is possible to set the logging severity by the following levels: Debug, Info, Warning and Error.
-You can set the logging severity using the SetLoggingSeverity(). It is also possible to use your own function for logging using the SetOnLoggingMessageCallback() function.</p>
+<p>The logger has 4 different types of logging severity options: Debug, Info, Warning and Error. You can set the logging severity using the Mudra.setCoreLoggingSeverity().</p>
 <pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually.</span>
 <span class="kn">import</span> <span class="nn">MudraAndroidSDK.Mudra</span><span class="o">;</span>
 <span class="n">Mudra</span> <span class="n">mudra</span> <span class="o">=</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">autoConnectPaired</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
@@ -625,15 +657,14 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 <span class="p">}</span>
 </code></pre><h2 id='fingertip-pressure'>Fingertip Pressure</h2>
 <p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">onFingertipPressureReady</span> <span class="n">onFingertipPressureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">onFingertipPressureReady</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Do something with v (this value is between 0 and 1) </span>
+<pre class="highlight java tab-java"><code><span class="n">OnFingertipPressureReady</span> <span class="n">onFingertipPressureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnFingertipPressureReady</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>      
+        <span class="c1">// Do something with v (this value is between 0 and 1)</span>
     <span class="o">}</span>
 <span class="o">};</span>
-
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="n">onFingertipPressureReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="n">onFingertipPressureReady</span><span class="o">);</span> <span class="c1">//Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">//Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnProportionalReady</span><span class="p">(</span><span class="kt">float</span> <span class="n">proportional</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Proportionalfound = "</span> <span class="o">&lt;&lt;</span> <span class="n">proportional</span><span class="p">;</span>
@@ -670,25 +701,16 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 </code></pre><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span> <span class="p">{(</span><span class="n">proportional</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span> <span class="s">"OnProportionalReady </span><span class="se">\(</span><span class="n">proportional</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
 <p>Functionality for predicting six gesture types: thumb, index, tap, twist, double index and double middle tap. Please check out the Mudra app for more info and example usage.</p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">Mudra</span><span class="o">.</span><span class="na">GestureType</span> <span class="n">gestureType</span><span class="o">)</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">GestureType</span> <span class="n">gestureType</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">switch</span> <span class="o">(</span><span class="n">gestureType</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="nl">Tap:</span>
-            <span class="c1">// Do something here</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="k">case</span> <span class="nl">Index:</span>
-            <span class="c1">// Do something here</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="k">case</span> <span class="nl">Thumb:</span>
-            <span class="c1">// Do something here</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="o">}</span>
+            <span class="o">...</span>        
+        <span class="o">}</span>   
     <span class="o">}</span>
 <span class="o">};</span>
-
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="n">onGestureReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="n">onGestureReady</span><span class="o">);</span> <span class="c1">// Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnGestureReady</span><span class="p">(</span><span class="n">GestureType</span> <span class="n">gestureType</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Gesturefound = "</span> <span class="o">&lt;&lt;</span> <span class="n">MudraEnvironment</span><span class="o">::</span><span class="n">ToString</span><span class="p">(</span><span class="n">gestureType</span><span class="p">);</span>
@@ -723,24 +745,22 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 </span><span class="p">}</span>
 </code></pre><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnGestureReady</span> <span class="p">{</span> <span class="p">(</span><span class="n">gesture</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"OnGestureReady </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="nf">gesture2String</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">gesture</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
 </code></pre>
-<aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra app. Currently we make available an Android app, with more platform applications available soon. </aside>
+<aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra Inspire app.</aside>
 <h2 id='air-mouse'>Air Mouse</h2>
 <p>Functionality for exposing an air mouse based on IMU quaternions. The Mudra air mouse projects raw quaternion values onto a 2d plane, which can be used to move a cursor.  </p>
 <pre class="highlight java tab-java"><code><span class="kt">int</span> <span class="n">mScreenWidth</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">;</span> <span class="c1">// Size of screen in pixels</span>
 
-<span class="n">Mudra</span><span class="o">.</span><span class="na">OnAirMousePositionChanged</span> <span class="n">onAirMousePositionChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnAirMousePositionChanged</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
-
-            <span class="kt">float</span> <span class="n">airMousePosX</span> <span class="o">+=</span> <span class="n">floats</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="n">mScreenWidth</span> <span class="o">*</span> <span class="n">HSPEED</span><span class="o">;</span>
-            <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">+=</span> <span class="n">floats</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">*</span> <span class="n">mScreenHeight</span> <span class="o">*</span> <span class="n">VSPEED</span><span class="o">;</span>
-            <span class="kt">float</span> <span class="n">airMousePosX</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosX</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenWidth</span><span class="o">);</span>
-            <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosY</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">);</span>
-        <span class="o">}</span>
+<span class="n">OnAirMousePositionChanged</span> <span class="n">onAirMousePositionChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnAirMousePositionChanged</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">float</span> <span class="n">airMousePosX</span> <span class="o">+=</span> <span class="n">floats</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="n">mScreenWidth</span> <span class="o">*</span> <span class="n">HSPEED</span><span class="o">;</span>
+        <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">+=</span> <span class="n">floats</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">*</span> <span class="n">mScreenHeight</span> <span class="o">*</span> <span class="n">VSPEED</span><span class="o">;</span>
+        <span class="kt">float</span> <span class="n">airMousePosX</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosX</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenWidth</span><span class="o">);</span>
+        <span class="kt">float</span> <span class="n">airMousePosY</span> <span class="o">=</span> <span class="n">Clamp</span><span class="o">(</span><span class="n">mAirMousePosY</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">);</span>
+    <span class="o">}</span>
 <span class="o">};</span>
-
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="n">onAirMousePositionChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="n">onAirMousePositionChanged</span><span class="o">);</span> <span class="c1">// Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnAirMousePositionChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnAirMousePositionChanged</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">position</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">X="</span> <span class="o">&lt;&lt;</span> <span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" ,Y="</span> <span class="o">&lt;&lt;</span> <span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
@@ -775,15 +795,14 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 </span><span class="p">}</span>
 </code></pre><h2 id='orientation'>Orientation</h2>
 <p>Functionality for exposing IMU based quaternion values. These values represent the orientation of your hand in a quaternion representation.</p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span> <span class="n">onImuQuaternionReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
+<pre class="highlight java tab-java"><code><span class="n">OnImuQuaternionReady</span> <span class="n">onImuQuaternionReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Do something with data (quaternion, 4 values) </span>
+        <span class="c1">// Do something with data (quaternion, 4 values)</span>
     <span class="o">}</span>
 <span class="o">};</span>
-
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="n">onImuQuaternionReady</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="n">onImuQuaternionReady</span><span class="o">);</span> <span class="c1">// Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="nf">OnImuQuaternionPackageReady</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Received Imu Quaternion data"</span><span class="p">;</span>
@@ -834,40 +853,37 @@ You can set the logging severity using the SetLoggingSeverity(). It is also poss
 </code></pre><pre class="highlight fsharp tab-fsharp"><code><span class="c1">// Please contact support@getmudra.com for instructions
 </span></code></pre><h2 id='device-status'>Device Status</h2>
 <p>Functionality for exposing if the Mudra device is connected.</p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span> <span class="n">onDeviceStatusChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnDeviceStatusChanged</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span><span class="o">(</span><span class="n">status</span><span class="o">)</span>
-            <span class="o">{</span>
-                <span class="n">runOnUiThread</span><span class="o">(</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
-                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                        <span class="n">TextView</span> <span class="n">device_name</span><span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">txtDevicesNumber</span><span class="o">);</span>
-                        <span class="n">device_name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">mMudra</span><span class="o">.</span><span class="na">getBluetoothDevice</span><span class="o">().</span><span class="na">getAddress</span><span class="o">());</span>
-                    <span class="o">}</span>
-                <span class="o">}));</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-<span class="o">};</span>
-
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="n">onDeviceStatusChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">mudra</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
-</code></pre><h2 id='battery-level'>Battery Level</h2>
-<p>Functionality for exposing battery status.</p>
-<pre class="highlight java tab-java"><code><span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span> <span class="n">onBatteryLevelChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">OnBatteryLevelChanged</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+<pre class="highlight java tab-java"><code><span class="n">OnDeviceStatusChanged</span> <span class="n">onDeviceStatusChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnDeviceStatusChanged</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">status</span><span class="o">)</span>        
+        <span class="o">{</span>            
             <span class="n">runOnUiThread</span><span class="o">(</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
                 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                    <span class="n">TextView</span> <span class="n">txtBattery</span><span class="o">=</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">txtBatLevel</span><span class="o">);</span>
-                    <span class="n">txtBattery</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">mMudra</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+                    <span class="n">TextView</span> <span class="n">device_name</span><span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">txtDevicesNumber</span><span class="o">);</span>
+                    <span class="n">device_name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">mMudra</span><span class="o">.</span><span class="na">getBluetoothDevice</span><span class="o">().</span><span class="na">getAddress</span><span class="o">());</span>
                 <span class="o">}</span>
-            <span class="o">}));</span>
-        <span class="o">}</span>
+            <span class="o">}));</span>        
+        <span class="o">}</span>    
+    <span class="o">}</span>
 <span class="o">};</span>
-
-<span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="n">onBatteryLevelChanged</span><span class="o">);</span> <span class="c1">// Enable </span>
-<span class="n">Mudra</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable </span>
-
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="n">onDeviceStatusChanged</span><span class="o">);</span> <span class="c1">// Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnDeviceStatusChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
+</code></pre><h2 id='battery-level'>Battery Level</h2>
+<p>Functionality for exposing battery status.</p>
+<pre class="highlight java tab-java"><code><span class="n">OnBatteryLevelChanged</span> <span class="n">onBatteryLevelChanged</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnBatteryLevelChanged</span><span class="o">()</span> <span class="o">{</span>    
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">runOnUiThread</span><span class="o">(</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">TextView</span> <span class="n">txtBattery</span><span class="o">=</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">txtBatLevel</span><span class="o">);</span>
+                <span class="n">txtBattery</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">mMudra</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}));</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="n">onBatteryLevelChanged</span><span class="o">);</span> <span class="c1">// Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnBatteryLevelChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// Disable</span>
 </code></pre><h1 id='troubleshooting'>Troubleshooting</h1>
 <table><thead>
 <tr>
