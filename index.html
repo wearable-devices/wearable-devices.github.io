@@ -735,8 +735,11 @@ Please notice that the callbacks doesn’t have a reference to the view itself, 
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre><h2 id='calibration-finished'>Calibration finished</h2>
-<p>Functionality for exposing the calibration JSON when the calibration process has completed.
-* Please do not forget to exit the calibration: mudraDevice.exitCalibration();</p>
+<p>Functionality for exposing the calibration JSON when the calibration process has completed.</p>
+
+<ul>
+<li>Please do not forget to exit the calibration: mudraDevice.exitCalibration();</li>
+</ul>
 <pre class="highlight java tab-java"><code><span class="n">OnCalibrationFinished</span> <span class="n">onCalibrationFinished</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnCalibrationFinished</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>    
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">String</span> <span class="n">calibrationJson</span><span class="o">)</span> <span class="o">{</span>
