@@ -246,6 +246,12 @@
                     <a href="#fingertip-pressure" class="toc-h2 toc-link" data-title="Fingertip Pressure">Fingertip Pressure</a>
                   </li>
                   <li>
+                    <a href="#gesture-calibration" class="toc-h2 toc-link" data-title="Gesture Calibration">Gesture Calibration</a>
+                  </li>
+                  <li>
+                    <a href="#calibration-finished" class="toc-h2 toc-link" data-title="Calibration finished">Calibration finished</a>
+                  </li>
+                  <li>
                     <a href="#gesture-recognition" class="toc-h2 toc-link" data-title="Gesture Recognition">Gesture Recognition</a>
                   </li>
                   <li>
@@ -329,15 +335,11 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials<br></li>
 <li>Authorize Jitpack in order to connect to Github<br></li>
 <li>Tap your username on the top left corner of the screen</li>
-<li>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:<br></li>
+<li><p>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:                                                                                                </p></li>
+<li><p>Add the repository to your project build.gradle file:</p></li>
 </ul>
 <pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
-<span class="n">authToken</span><span class="o">=</span><span class="err">'</span><span class="o">&lt;</span><span class="n">Your</span> <span class="n">Jitpack</span> <span class="n">Token</span><span class="o">&gt;</span><span class="err">'</span>
-</code></pre>
-<ul>
-<li>Add the repository to your project build.gradle file:</li>
-</ul>
-<pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
+<span class="n">org</span><span class="o">.</span><span class="na">gradle</span><span class="o">.</span><span class="na">jvmargs</span><span class="o">=-</span><span class="n">Xmx2048m</span>
 <span class="n">authToken</span><span class="o">=&lt;</span><span class="n">Your</span> <span class="n">Jitpack</span> <span class="n">Token</span><span class="o">&gt;</span>
 
 <span class="c1">// Project build.gradle</span>
@@ -358,22 +360,24 @@ Remember — Your Mudra device should always be connected. Check your host devic
 
 <span class="c1">// Java 8 support</span>
   <span class="n">compileOptions</span> <span class="o">{</span>
-    <span class="n">sourceCompatibility</span> <span class="mf">1.8</span>
-    <span class="n">targetCompatibility</span> <span class="mf">1.8</span>
+    <span class="n">sourceCompatibility</span> <span class="n">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_8</span>
+    <span class="n">targetCompatibility</span> <span class="n">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_8</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1">// App build.gradle file:</span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="n">v1</span><span class="o">.</span><span class="mf">5.0</span><span class="err">'</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="n">v1</span><span class="o">.</span><span class="mf">5.2</span><span class="err">'</span>
 <span class="n">configurations</span> <span class="o">{</span> <span class="n">all</span><span class="o">*.</span><span class="na">exclude</span> <span class="nl">group:</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="err">'</span> <span class="o">}</span>
-<span class="c1">// Bluetooth support</span>
+
+<span class="c1">// Bluetooth support:</span>
 <span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">ble:</span><span class="mf">2.3</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v18</span><span class="o">:</span><span class="nl">scanner:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v18</span><span class="o">:</span><span class="nl">scanner:</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">reactivex</span><span class="o">.</span><span class="na">rxjava2</span><span class="o">:</span><span class="nl">rxandroid:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">1</span><span class="err">'</span>
 
 <span class="c1">// Android manifest file:</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.INTERNET"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH"</span> <span class="o">/&gt;</span>
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH_ADMIN"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_FINE_LOCATION"</span> <span class="o">/&gt;</span>
 </code></pre><h3 id='ios'>iOS</h3>
 <ul>
 <li>Open a terminal </li>
@@ -462,9 +466,8 @@ Go to the Hierarchy pane in your mudra editor, press create and select a Mudra m
 <li> Use device.connectDevice(context);</li>
 </ol></p>
 
-<p>Following a successful connection, the address will be registered in the cloud (this requires online access).
-To retrieve previously connected devices use: Mudra.getInstance().getPairedDevices(context)
-Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code. Initialization is exposed via the getPairedDevices function.</p>
+<p>To retrieve the previously connected MudraDevices use: Mudra.getInstance().getBondedDevices().Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code. Initialization is exposed via the getBondedDevices function.
+Please notice that the callbacks doesn’t have a reference to the view itself, so it can try to use a destroyed view fields. You can use disableAllCallbacks() before exiting a fragment/activity.</p>
 
 <p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
 <h3 id='windows-3'>Windows</h3>
@@ -571,9 +574,7 @@ Assuming the device is paired manually (for example - via the Android Bluetooth 
 
 </code></pre><h3 id='logging'>Logging</h3>
 <p>The logger has 4 different types of logging severity options: Debug, Info, Warning and Error. You can set the logging severity using the Mudra.setCoreLoggingSeverity().</p>
-<pre class="highlight java tab-java"><code><span class="c1">// Assuming the device is paired manually.</span>
-<span class="kn">import</span> <span class="nn">MudraAndroidSDK.Mudra</span><span class="o">;</span>
-<span class="n">Mudra</span> <span class="n">mudra</span> <span class="o">=</span> <span class="n">Mudra</span><span class="o">.</span><span class="na">autoConnectPaired</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
+<pre class="highlight java tab-java"><code><span class="n">Mudra</span> <span class="n">mudra</span> <span class="o">=</span> <span class="n">Mudra</span><span class="o">.</span> <span class="nf">getBondedDevices</span><span class="o">();</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="k">using</span> <span class="k">namespace</span> <span class="n">Mudra</span><span class="o">::</span><span class="n">SDK</span><span class="o">::</span><span class="n">Windows</span><span class="p">;</span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">Mudra</span><span class="o">::</span><span class="n">Computation</span><span class="p">;</span>
 
@@ -699,8 +700,54 @@ Assuming the device is paired manually (for example - via the Android Bluetooth 
     <span class="c1">//...
 </span><span class="p">}</span>
 </code></pre><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span> <span class="p">{(</span><span class="n">proportional</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span> <span class="s">"OnProportionalReady </span><span class="se">\(</span><span class="n">proportional</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
+</code></pre><h2 id='gesture-calibration'>Gesture Calibration</h2>
+<p>The calibration process was designed to calibrate the MudraDevice for a specific user:
+<ol>
+<li>    Start the calibration: mudraDevice.calibrateGesture(gestureType) </li>
+<li>    Register 2 callbacks: setOnCalibrationChange and setOnCalibrationFinished </li>
+<li>    Following a successful gesture calibration process, the setOnCalibrationChange callback is received </li>
+<li>    In order to process to the calibration of the next gesture, call mudraDevice.calibrateGesture(nextGestureType) (Note - each different gesture must be calibrated separately)<br>
+<li>    Use mudraDevice.exitCalibration() </li>
+</ol></p>
+
+<p>You may track your progress using mudraDevice.getCalibrationProgress(). Note that this function returns a progress indicator, a float between 0 and 1.</p>
+
+<ul>
+<li>Currently, the calibration only supports 3 gestures: Mid Tap, Index Tap, Thumb.</li>
+<li>You may delete the last gesture instance (i.e. erase an unwanted gesture) using mudraDevice.deleteLastGestureEmbedding();</li>
+</ul>
+
+<aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra Inspire app.</aside>
+<pre class="highlight java tab-java"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">startCalibration</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">){</span>
+    <span class="n">OnCalibrationChange</span> <span class="n">onCalibrationChange</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnCalibrationChange</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">GestureType</span> <span class="n">gesture</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">,</span> <span class="n">Quality</span> <span class="n">quality</span><span class="o">,</span> <span class="kt">float</span> <span class="n">width</span><span class="o">,</span> <span class="kt">float</span> <span class="n">midpoint</span><span class="o">,</span> <span class="kt">float</span> <span class="n">energy</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mudraDevice</span><span class="o">.</span><span class="na">getCalibrationProgress</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">GestureType</span> <span class="n">nextGesture</span> <span class="o">=</span> <span class="n">gesture</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">GestureType</span><span class="o">.</span><span class="na">Thumb</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()</span> <span class="o">?</span> <span class="n">GestureType</span><span class="o">.</span><span class="na">None</span> <span class="o">:</span> <span class="n">GestureType</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="n">gesture</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
+            <span class="n">mudraDevice</span><span class="o">.</span><span class="na">calibrateGesture</span><span class="o">(</span><span class="n">nextGesture</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+    <span class="n">mudraDevice</span><span class="o">.</span><span class="na">calibrateGesture</span><span class="o">(</span><span class="n">GestureType</span><span class="o">.</span><span class="na">Mid_Tap</span><span class="o">);</span>
+    <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnCalibrationChange</span><span class="o">(</span><span class="n">onCalibrationChange</span><span class="o">);</span>
+    <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnCalibrationFinished</span><span class="o">(</span><span class="n">requireContext</span><span class="o">(),</span> <span class="k">this</span><span class="o">::</span><span class="n">onCalibrationFinished</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre><h2 id='calibration-finished'>Calibration finished</h2>
+<p>Functionality for exposing the calibration JSON when the calibration process has completed.
+* Please do not forget to exit the calibration: mudraDevice.exitCalibration();</p>
+<pre class="highlight java tab-java"><code><span class="n">OnCalibrationFinished</span> <span class="n">onCalibrationFinished</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnCalibrationFinished</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">String</span> <span class="n">calibrationJson</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mudraDevice</span><span class="o">.</span><span class="na">exitCalibration</span><span class="o">();</span>    
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnCalibrationFinished</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">onCalibrationFinished</span><span class="o">);</span> <span class="c1">// Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnCalibrationFinished</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span> <span class="c1">// disable</span>
+<span class="o">});</span>
 </code></pre><h2 id='gesture-recognition'>Gesture Recognition</h2>
-<p>Functionality for predicting six gesture types: thumb, index, tap, twist, double index and double middle tap. Please check out the Mudra app for more info and example usage.</p>
+<p>Functionality for predicting six gesture types: thumb, index, tap, twist. Please check out the Mudra app for more info and example usage.</p>
 <pre class="highlight java tab-java"><code><span class="n">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>    
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">GestureType</span> <span class="n">gestureType</span><span class="o">)</span> <span class="o">{</span>
@@ -744,9 +791,7 @@ Assuming the device is paired manually (for example - via the Android Bluetooth 
     <span class="c1">//...
 </span><span class="p">}</span>
 </code></pre><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnGestureReady</span> <span class="p">{</span> <span class="p">(</span><span class="n">gesture</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"OnGestureReady </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="nf">gesture2String</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">gesture</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
-</code></pre>
-<aside class="notice"> Calibration is highly recommended for accurate gesture recognition. A calibration procedure is available in the Mudra Inspire app.</aside>
-<h2 id='air-mouse'>Air Mouse</h2>
+</code></pre><h2 id='air-mouse'>Air Mouse</h2>
 <p>Functionality for exposing an air mouse based on IMU quaternions. The Mudra air mouse projects raw quaternion values onto a 2d plane, which can be used to move a cursor.  </p>
 <pre class="highlight java tab-java"><code><span class="kt">int</span> <span class="n">mScreenWidth</span><span class="o">,</span> <span class="n">mScreenHeight</span><span class="o">;</span> <span class="c1">// Size of screen in pixels</span>
 
@@ -895,7 +940,12 @@ Assuming the device is paired manually (for example - via the Android Bluetooth 
 <tr>
 <td>Mudra does not connect to host device</td>
 <td>Android</td>
-<td>Check your Bluetooth version, we recommend 4.2 and above.</td>
+<td>Check your Bluetooth version, we recommend 4.2 and above</td>
+</tr>
+<tr>
+<td>No implementation found</td>
+<td>Android</td>
+<td>Please first use Mudra.getInstance() for initializing the mudra environment</td>
 </tr>
 <tr>
 <td>Mudra does not connect to host device</td>
@@ -905,7 +955,7 @@ Assuming the device is paired manually (for example - via the Android Bluetooth 
 <tr>
 <td>Mudra gestures are not correctly recognize</td>
 <td>All</td>
-<td>Please try again our on-boarding app. Try to follow the instruction and perform another calibration.</td>
+<td>Please try again our on-boarding app. Try to follow the instruction and perform another calibration</td>
 </tr>
 <tr>
 <td>Mudra pressure values fluctuate</td>
