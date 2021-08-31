@@ -332,12 +332,14 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <h1 id='api-functions'>API functions</h1><h2 id='access-the-api'>Access the API</h2><h3 id='android'>Android</h3>
 <ul>
 <li>To access the API you must first generate an access token<br></li>
-<li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a> and Sign in using your GitHub account and credentials<br></li>
+<li>Navigate to <a href='https://jitpack.io/'>Jitpack website</a> and sign in using your GitHub account and credentials<br></li>
 <li>Authorize Jitpack in order to connect to Github<br></li>
 <li>Tap your username on the top left corner of the screen</li>
-<li><p>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:                                                                                                </p></li>
-<li><p>Add the repository to your project build.gradle file:</p></li>
+<li>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:<br></li>
+<li>Add the repository to your project build.gradle file</li>
 </ul>
+
+<p>See <a href='https://github.com/wearable-devices/MudraAndroidExample'>this example</a> for running the SDK on Android.  </p>
 <pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
 <span class="n">org</span><span class="o">.</span><span class="na">gradle</span><span class="o">.</span><span class="na">jvmargs</span><span class="o">=-</span><span class="n">Xmx2048m</span>
 <span class="n">authToken</span><span class="o">=&lt;</span><span class="n">Your</span> <span class="n">Jitpack</span> <span class="n">Token</span><span class="o">&gt;</span>
@@ -706,8 +708,7 @@ Please notice that the callbacks doesn’t have a reference to the view itself, 
 <li>    Start the calibration: mudraDevice.calibrateGesture(gestureType) </li>
 <li>    Register 2 callbacks: setOnCalibrationChange and setOnCalibrationFinished </li>
 <li>    Following a successful gesture calibration process, the setOnCalibrationChange callback is received </li>
-<li>    In order to process to the calibration of the next gesture, call mudraDevice.calibrateGesture(nextGestureType) (Note - each different gesture must be calibrated separately)<br>
-<li>    Use mudraDevice.exitCalibration() </li>
+<li>    In order to process to the calibration of the next gesture, call mudraDevice.calibrateGesture(nextGestureType) (Note - each different gesture must be calibrated separately)
 </ol></p>
 
 <p>You may track your progress using mudraDevice.getCalibrationProgress(). Note that this function returns a progress indicator, a float between 0 and 1.</p>
@@ -736,14 +737,10 @@ Please notice that the callbacks doesn’t have a reference to the view itself, 
 <span class="o">}</span>
 </code></pre><h2 id='calibration-finished'>Calibration finished</h2>
 <p>Functionality for exposing the calibration JSON when the calibration process has completed.</p>
-
-<ul>
-<li>Please do not forget to exit the calibration: mudraDevice.exitCalibration();</li>
-</ul>
 <pre class="highlight java tab-java"><code><span class="n">OnCalibrationFinished</span> <span class="n">onCalibrationFinished</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OnCalibrationFinished</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>    
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">String</span> <span class="n">calibrationJson</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">mudraDevice</span><span class="o">.</span><span class="na">exitCalibration</span><span class="o">();</span>    
+
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnCalibrationFinished</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">onCalibrationFinished</span><span class="o">);</span> <span class="c1">// Enable</span>
