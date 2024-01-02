@@ -1,0 +1,738 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Mudra SDK</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-9c19b03a.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-b12a2749.js"></script>
+
+  </head>
+
+  <body class="index" data-languages="[&quot;swift&quot;,&quot;java&quot;,&quot;fsharp&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-c5be0c22.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="swift">Swift</a>
+              <a href="#" data-language-name="java">Java</a>
+              <a href="#" data-language-name="fsharp">Unity</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#welcome" class="toc-h1 toc-link" data-title="Welcome">Welcome</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#device-modes" class="toc-h2 toc-link" data-title="Device Modes">Device Modes</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#access-the-api" class="toc-h1 toc-link" data-title="Access the API">Access the API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#ios" class="toc-h2 toc-link" data-title="iOS">iOS</a>
+                  </li>
+                  <li>
+                    <a href="#android" class="toc-h2 toc-link" data-title="Android">Android</a>
+                  </li>
+                  <li>
+                    <a href="#unity" class="toc-h2 toc-link" data-title="Unity">Unity</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#initialization-and-connection" class="toc-h1 toc-link" data-title="Initialization and Connection">Initialization and Connection</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#ios-2" class="toc-h2 toc-link" data-title="iOS">iOS</a>
+                  </li>
+                  <li>
+                    <a href="#android-2" class="toc-h2 toc-link" data-title="Android">Android</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#connectivity-api" class="toc-h1 toc-link" data-title="Connectivity API">Connectivity API</a>
+          </li>
+          <li>
+            <a href="#gesture-recognition" class="toc-h1 toc-link" data-title="Gesture Recognition">Gesture Recognition</a>
+          </li>
+          <li>
+            <a href="#fingertip-pressure" class="toc-h1 toc-link" data-title="Fingertip Pressure">Fingertip Pressure</a>
+          </li>
+          <li>
+            <a href="#air-mouse" class="toc-h1 toc-link" data-title="Air Mouse">Air Mouse</a>
+          </li>
+          <li>
+            <a href="#raw-data" class="toc-h1 toc-link" data-title="Raw Data">Raw Data</a>
+          </li>
+          <li>
+            <a href="#troubleshooting" class="toc-h1 toc-link" data-title="Troubleshooting">Troubleshooting</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://www.getmudra.com/'>Mudra Band</a></li>
+            <li><a href='http://wearabledevices.co.il/'>Wearable Devices</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='welcome'>Welcome</h1>
+<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band&trade;</strong> and Mudra API. Here we will explain how to use the band as well as interface  with your device. Our API includes language bindings for <em>Swift (iOS)</em>, <em>Java (Android)</em> and <em>C# (Unity)</em>. </p>
+<h2 id='device-modes'>Device Modes</h2>
+<table><thead>
+<tr>
+<th>Mode</th>
+<th>Description</th>
+<th>LED Indication</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Pairing</td>
+<td>Quick orange burst</td>
+<td><img src="images/full_wrap_led_yellow-27e9e51e.png" width="100"></td>
+</tr>
+<tr>
+<td>Connected</td>
+<td>Flashing green for 1 second</td>
+<td><img src="images/full_wrap_led_green-206a1cbe.png" width="100"></td>
+</tr>
+<tr>
+<td>Low Battery</td>
+<td>Continuously red</td>
+<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
+</tr>
+<tr>
+<td>Data Congestion</td>
+<td>Continuously red</td>
+<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
+</tr>
+<tr>
+<td>Charging</td>
+<td>Continuously blue</td>
+<td><img src="images/full_wrap_led_blue-6cbc19f3.png" width="100"></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — Your Mudra device should always be connected. Check your host device to verify connectivity.
+</aside>
+<h1 id='access-the-api'>Access the API</h1><h2 id='ios'>iOS</h2>
+<ul>
+<li>Create a new project in XCode</li>
+<li>Create a new group/folder under your project file with the name &quot;frameworks&quot;</li>
+<li>Add Mudra.framework to this group/folder &quot;frameworks&quot;</li>
+<li>Go to your project -&gt; General tab -&gt; Frameworks, Libraries, And Embedded Content -&gt; Set the value of Mudra.framework to &quot;Embed &amp; Sign&quot;</li>
+<li>Go to your project -&gt; Info tab -&gt; Add new row &quot;Privacy - Bluetooth Always Usage Description&quot; with value description, for example &quot;This will allow the app to find and connect to your iPhone&quot;</li>
+</ul>
+<h2 id='android'>Android</h2>
+<ul>
+<li>To access the API you must first generate an access token<br></li>
+<li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a>, Sign in using your GitHub account and credentials<br></li>
+<li>Authorize Jitpack in order to connect to Github<br></li>
+<li>Tap your username on the top left corner of the screen</li>
+<li>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:<br></li>
+</ul>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
+<span class="n">authToken</span><span class="o">=</span><span class="err">'</span><span class="o">&lt;</span><span class="nc">Your</span> <span class="nc">Jitpack</span> <span class="nc">Token</span><span class="o">&gt;</span><span class="err">'</span>
+</code></pre></div>
+<ul>
+<li>Add the repository to your project build.gradle file:</li>
+</ul>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
+<span class="n">authToken</span><span class="o">=&lt;</span><span class="nc">Your</span> <span class="nc">Jitpack</span> <span class="nc">Token</span><span class="o">&gt;</span>
+
+<span class="c1">// Project build.gradle</span>
+<span class="n">allprojects</span> <span class="o">{</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">maven</span> <span class="o">{</span>
+                <span class="n">url</span> <span class="err">'</span><span class="nl">https:</span><span class="c1">//jitpack.io'</span>
+                <span class="n">credentials</span> <span class="o">{</span> <span class="n">username</span> <span class="n">authToken</span> <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Module build.gradle</span>
+<span class="n">android</span> <span class="o">{</span>
+  <span class="n">defaultConfig</span> <span class="o">{</span>
+ <span class="n">minSdkVersion</span> <span class="mi">23</span>
+  <span class="o">}</span>
+
+<span class="c1">// Java 8 support</span>
+  <span class="n">compileOptions</span> <span class="o">{</span>
+    <span class="n">sourceCompatibility</span> <span class="mf">1.8</span>
+    <span class="n">targetCompatibility</span> <span class="mf">1.8</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// App build.gradle file:</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="n">v1</span><span class="o">.</span><span class="mf">5.0</span><span class="err">'</span>
+<span class="n">configurations</span> <span class="o">{</span> <span class="n">all</span><span class="o">*.</span><span class="na">exclude</span> <span class="nl">group:</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="err">'</span> <span class="o">}</span>
+<span class="c1">// Bluetooth support</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">ble:</span><span class="mf">2.3</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v18</span><span class="o">:</span><span class="nl">scanner:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+
+<span class="c1">// Android manifest file:</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH_ADMIN"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_FINE_LOCATION"</span> <span class="o">/&gt;</span>
+</code></pre></div><h2 id='unity'>Unity</h2>
+<p>Go to the Hierarchy pane in your mudra editor, press create and select a Mudra manager. A new MudraManager Object will be created.</p>
+
+<p>There are two ways to use the Mudra plugin:</p>
+
+<p>(1) Using C# Unity scripts (requires coding). See Unity tab on the right for explanation. You can find the full example  in the assets folder in the file named <em>MudraUnityScriptExample</em>.</p>
+
+<p>(2) Using GUI on the MudraManager Unity object menu (no coding required). Using the MudraManager GUI, it is possible to enable\disable each of the features. For each feature, it is also possible to add callbacks. </p>
+
+<p><strong>IMPORTANT:</strong> Write the path of your calibration file in the GUI. Default file path is: &quot;C:\Program Files\Wearable Devices\Mudra\Calibration.txt&quot;. In the Unity &#39;Poject Settings&#39;, set &#39;Write Permission&#39; to &#39;External(SDCard)&#39; instead of the default &#39;Internal&#39; (in order to read the calibration txt file). </p>
+
+<p>*Please make sure you are using the latest version of Unity and that the dongle is plugged in to your PC.</p>
+<h1 id='initialization-and-connection'>Initialization and Connection</h1><h2 id='ios-2'>iOS</h2>
+<p>The iOS SDK supports developing both in Objective-C and Swift. The iOS API supports multiple Mudra devices.</p>
+
+<ul>
+<li><p>Please observe the following instuctions to work with Mudra BLE:</p>
+
+<ul>
+<li> The Mudra and Bluetooth environment will be initialized the first time by &quot;Mudra.shared.initBluetooth()&quot;. Once the Bluetooth is ready the &quot;onBluetoothStateChanged&quot; callback is called with state True. <em>Please note</em> - connect Mudra through BLE in the iOS Settings menu.</li>
+<li>There are 4 connection callbacks we support: onDeviceConnectedByIos, onDeviceDisconnectedByIos, onMudraDeviceConnected, onMudraDeviceDisconnected. These functions expose the state of Mudra. connectivity, since iOS distinguishes between OS and app connectivity. Please note: all Mudra devices connected via the Settings menu will receive such onDeviceConnectedByIos() callback.</li>
+<li>Note that all the callbacks are called on a different BLE thread, so the GUI needs to be updated asynchronously (see Swift code examples).</li>
+</ul></li>
+<li><p>Please observe the following instuctions when coding yur application:</p>
+
+<ul>
+<li>Implement the MudraDelegate protocol described under the Swift tab.</li>
+<li>Implement your app delegate in the same manner as described in the Swift Tab. This implies that you must call 3 functions when the app launches, as shown in  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?).</li>
+</ul></li>
+</ul>
+<div class="highlight"><pre class="highlight swift tab-swift"><code>
+<span class="c1">// MudraDelegate SDK Code to be implemented</span>
+<span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="kd">@objc</span> <span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
+  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onBluetoothStateChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span>
+
+  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onDeviceConnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
+
+  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onDeviceDisconnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
+
+  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
+
+  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onMudraDeviceDisconnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
+
+  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onBatteryLevelChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// AppDelegate</span>
+<span class="kd">import</span> <span class="kt">Mudra</span>
+<span class="kd">import</span> <span class="kt">UIKit</span>
+
+
+<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span><span class="p">,</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
+
+    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplication</span><span class="o">.</span><span class="kt">LaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"application launched"</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">setMudraDelegate</span><span class="p">()</span>  <span class="c1">//&lt;--</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">setLicense</span><span class="p">()</span>        <span class="c1">//&lt;--</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">initBluetouth</span><span class="p">()</span>     <span class="c1">//&lt;--</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">applicationWillTerminate</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"application terminated"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">setMudraDelegate</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="kt">ContentViewModel</span><span class="o">.</span><span class="n">shared</span>  <span class="c1">//&lt;-- "ContentViewModel which implements the MudraDelegate"</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">setLicense</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Set your licenses (sent by Wearable Devices for expanded features)</span>
+        <span class="kt">Mudra</span><span class="o">.</span><span class="nf">setLicense</span><span class="p">(</span><span class="kt">License</span><span class="o">.</span><span class="kt">Main</span><span class="p">,</span> <span class="s">"-----------"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">initBluetouth</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"initBlueTouth"</span><span class="p">)</span>
+        <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">initBluetouth</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="c1">//ContentViewModel that implements the MudraDelegate</span>
+<span class="kd">import</span> <span class="kt">Mudra</span>
+<span class="kd">import</span> <span class="kt">Foundation</span>
+
+<span class="kd">class</span> <span class="kt">ContentViewModel</span> <span class="p">:</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span> <span class="o">=</span> <span class="kt">ContentViewModel</span><span class="p">()</span>
+    <span class="kd">@Published</span> <span class="k">var</span> <span class="nv">contentModel</span> <span class="p">:</span> <span class="kt">ContentModel</span> <span class="o">=</span> <span class="kt">ContentModel</span><span class="p">()</span>
+
+    <span class="kd">func</span> <span class="kt">EnableDevicePressure</span><span class="p">(</span><span class="nv">device</span> <span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">){</span>
+        <span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span><span class="p">{</span><span class="n">value</span> <span class="k">in</span>
+            <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+                <span class="c1">//Update the GUI Here!</span>
+
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="kt">DisableDevicePressure</span><span class="p">(</span><span class="nv">device</span> <span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">){</span>
+        <span class="n">device</span><span class="o">.</span><span class="nf">setOnProportionalReady</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kd">extension</span> <span class="kt">ContentViewModel</span><span class="p">:</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">onBluetoothStateChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the GUI Here!</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onDeviceConnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device connects to the iPone operating system "iOS"</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the GUI Here!</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onDeviceDisconnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device disconnects from the iPone operating system "iOS"</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the GUI Here!</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device connects to the app</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the GUI Here!</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onMudraDeviceDisconnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device disconnects from the app</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the GUI Here!</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onBatteryLevelChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when battery level changed for connected device</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the GUI Here!</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='android-2'>Android</h2>
+<p>The connection process has 2 steps: 
+<ol>
+<li> Scanning for the device we would like to connect. </li> 
+<li> Connection with the device and registration of the desired callbacks. </li>
+</ol></p>
+
+<p>The scan function receives a callback that triggers when a new device is found and receives a list of the mudraDevices found.</p>
+
+<p>To start the scan:
+<ol>
+<li> Request the needed permmissions: Mudra.getInstance().requestAccessPermissions(this). </li>
+<li> Start scanning: Mudra.getInstance().scan(callback)*callback should implement the OnDeviceDiscovered interface. </li>
+<li> The callback method receives the discovered mudraDevices. Note that this list is filtered to match only mudra devices.</li>
+</ol></p>
+
+<p>*Don’t forget to stop the scan using: Mudra.getInstance().stopScan()</p>
+
+<p>To connect to a device:
+<ol>
+<li> Scan for to the desired device.</li>
+<li> Use device.connectDevice(context);</li>
+</ol></p>
+
+<p>Following a successful connection, the address will be registered in the cloud (this requires online access).
+To retrieve previously connected devices use: Mudra.getInstance().getPairedDevices(context)
+Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code. Initialization is exposed via the getPairedDevices function.</p>
+
+<p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
+<h1 id='connectivity-api'>Connectivity API</h1>
+<p>Functionality for connecting &amp; disconnecting device to the application.</p>
+<div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="nf">connect</span><span class="p">()</span> <span class="c1">// connects the device to the application.</span>
+<span class="n">device</span><span class="o">.</span><span class="nf">disconnect</span><span class="p">()</span> <span class="c1">// disconnects the device from the application.</span>
+</code></pre></div><h1 id='gesture-recognition'>Gesture Recognition</h1>
+<p>Functionality for predicting six gesture types: thumb, index, tap, twist, double index and double middle tap. Please check out the Mudra app for more info and example usage.
+<code>swift
+device.setOnGestureReady { (gesture) in print(&quot;OnGestureReady \(self.gesture2String(gesture: gesture))&quot;) }
+</code></p>
+<h1 id='fingertip-pressure'>Fingertip Pressure</h1>
+<p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
+<div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span> <span class="p">{(</span><span class="n">proportional</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span> <span class="s">"OnProportionalReady </span><span class="se">\(</span><span class="n">proportional</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OnFingertipPressureReady</span> <span class="n">onFingertipPressureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OnFingertipPressureReady</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>      
+        <span class="c1">// Do something with v (this value is between 0 and 1)</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="n">onFingertipPressureReady</span><span class="o">);</span> <span class="c1">//Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">//Disable</span>
+</code></pre></div><div class="highlight"><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span><span class="p">?</span> <span class="n">fingerTipPressure</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">fingerTipPressure</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">print</span><span class="o">($</span><span class="s2">"FingerTipPressure {fingerTipPressure}"</span><span class="o">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
+<span class="p">{</span>
+    <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div><h1 id='air-mouse'>Air Mouse</h1>
+<p>The Mudra air mouse utilizes a 6DOF IMU, which can be used to move a mouse cursor. This functionality is exposed via HID.</p>
+<h1 id='raw-data'>Raw Data</h1>
+<p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
+<h1 id='troubleshooting'>Troubleshooting</h1>
+<table><thead>
+<tr>
+<th>Problem</th>
+<th>OS</th>
+<th>Solution</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Mudra does not connect to host device</td>
+<td>Android</td>
+<td>Check your Bluetooth version, we recommend 4.2 and above.</td>
+</tr>
+<tr>
+<td>Mudra does not connect to host device</td>
+<td>All</td>
+<td>Check if your device&#39;s LED flashes red, if so recharge (LED will flash blue)</td>
+</tr>
+<tr>
+<td>Mudra gestures are not correctly recognize</td>
+<td>All</td>
+<td>Please try again our on-boarding app. Try to follow the instruction and perform another calibration.</td>
+</tr>
+<tr>
+<td>Mudra pressure values fluctuate</td>
+<td>All</td>
+<td>Please make sure your device is in contact with your skin (no need to be tight)</td>
+</tr>
+<tr>
+<td>Missing dll error</td>
+<td>Unity</td>
+<td>Make sure installation created an environment variable path and unpacked the dlls inside. If not, try running Setup.msi as administrator</td>
+</tr>
+</tbody></table>
+
+<p>Please contact <a href="mailto:support@wearabledevices.co.il">support@wearabledevices.co.il</a> for any additional questions or suggestions. </p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="swift">Swift</a>
+                <a href="#" data-language-name="java">Java</a>
+                <a href="#" data-language-name="fsharp">Unity</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
