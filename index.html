@@ -341,16 +341,10 @@
               </ul>
           </li>
           <li>
-            <a href="#connectivity-api" class="toc-h1 toc-link" data-title="Connectivity API">Connectivity API</a>
-          </li>
-          <li>
             <a href="#gesture-recognition" class="toc-h1 toc-link" data-title="Gesture Recognition">Gesture Recognition</a>
           </li>
           <li>
             <a href="#fingertip-pressure" class="toc-h1 toc-link" data-title="Fingertip Pressure">Fingertip Pressure</a>
-          </li>
-          <li>
-            <a href="#air-mouse" class="toc-h1 toc-link" data-title="Air Mouse">Air Mouse</a>
           </li>
           <li>
             <a href="#raw-data" class="toc-h1 toc-link" data-title="Raw Data">Raw Data</a>
@@ -378,8 +372,8 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>Pairing</td>
-<td>Quick orange burst</td>
+<td>Advertising</td>
+<td>Flashing orange for one minute</td>
 <td><img src="images/full_wrap_led_yellow-27e9e51e.png" width="100"></td>
 </tr>
 <tr>
@@ -389,32 +383,49 @@
 </tr>
 <tr>
 <td>Low Battery</td>
-<td>Continuously red</td>
-<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
-</tr>
-<tr>
-<td>Data Congestion</td>
-<td>Continuously red</td>
+<td>Flashing red</td>
 <td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
 </tr>
 <tr>
 <td>Charging</td>
-<td>Continuously blue</td>
+<td>In case full charged constant blue, otherwise flashing blue</td>
 <td><img src="images/full_wrap_led_blue-6cbc19f3.png" width="100"></td>
+</tr>
+<tr>
+<td>Data Idle Mode(1)</td>
+<td>Flashing red once per minute</td>
+<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
+</tr>
+<tr>
+<td>Firmware update</td>
+<td>Constant purple</td>
+<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — Your Mudra device should always be connected. Check your host device to verify connectivity.
+<aside>
+(1) — In case of the signals are on for two and a half minutes.
 </aside>
 <h1 id='access-the-api'>Access the API</h1><h2 id='ios'>iOS</h2>
 <ul>
-<li>Create a new project in XCode</li>
-<li>Create a new group/folder under your project file with the name &quot;frameworks&quot;</li>
-<li>Add Mudra.framework to this group/folder &quot;frameworks&quot;</li>
-<li>Go to your project -&gt; General tab -&gt; Frameworks, Libraries, And Embedded Content -&gt; Set the value of Mudra.framework to &quot;Embed &amp; Sign&quot;</li>
-<li>Go to your project -&gt; Info tab -&gt; Add new row &quot;Privacy - Bluetooth Always Usage Description&quot; with value description, for example &quot;This will allow the app to find and connect to your iPhone&quot;</li>
+<li><p>Download Mudra.framework from the following link : ---</p></li>
+<li><p>Add to your project in Xcode group/folder named &quot;frameworks&quot;.</p></li>
+<li><p>Add Mudra.framework to this group/folder &quot;frameworks&quot; and sign &#39;Copy if needed&#39; when adding the framework.</p></li>
 </ul>
+
+<p><img src="images/framework-44fc202f.png" width="500"></p>
+
+<ul>
+<li>Go to your project -&gt; General tab -&gt; Frameworks, Libraries, And Embedded Content -&gt; Set the value of Mudra.framework to &quot;Embed &amp; Sign&quot; </li>
+</ul>
+
+<p><img src="images/embed-cd5602ef.png" width="500"></p>
+
+<ul>
+<li>Go to your project -&gt; Info tab -&gt; Add a new row titled &#39;Privacy - Bluetooth Always Usage Description.&#39; In the value field, provide the reason for requiring BLE. For example, you could write: &#39;This allows the app to find and connect to your iPhone.&#39;&quot;</li>
+</ul>
+
+<p><img src="images/permission-f80f7c7e.png" width="500"></p>
 <h2 id='android'>Android</h2>
 <ul>
 <li>To access the API you must first generate an access token<br></li>
@@ -473,51 +484,69 @@ Remember — Your Mudra device should always be connected. Check your host devic
 
 <p>(1) Using C# Unity scripts (requires coding). See Unity tab on the right for explanation. You can find the full example  in the assets folder in the file named <em>MudraUnityScriptExample</em>.</p>
 
-<p>(2) Using GUI on the MudraManager Unity object menu (no coding required). Using the MudraManager GUI, it is possible to enable\disable each of the features. For each feature, it is also possible to add callbacks. </p>
+<p>(2) Using UI on the MudraManager Unity object menu (no coding required). Using the MudraManager UI, it is possible to enable\disable each of the features. For each feature, it is also possible to add callbacks. </p>
 
-<p><strong>IMPORTANT:</strong> Write the path of your calibration file in the GUI. Default file path is: &quot;C:\Program Files\Wearable Devices\Mudra\Calibration.txt&quot;. In the Unity &#39;Poject Settings&#39;, set &#39;Write Permission&#39; to &#39;External(SDCard)&#39; instead of the default &#39;Internal&#39; (in order to read the calibration txt file). </p>
+<p><strong>IMPORTANT:</strong> Write the path of your calibration file in the UI. Default file path is: &quot;C:\Program Files\Wearable Devices\Mudra\Calibration.txt&quot;. In the Unity &#39;Poject Settings&#39;, set &#39;Write Permission&#39; to &#39;External(SDCard)&#39; instead of the default &#39;Internal&#39; (in order to read the calibration txt file). </p>
 
 <p>*Please make sure you are using the latest version of Unity and that the dongle is plugged in to your PC.</p>
-<h1 id='initialization-and-connection'>Initialization and Connection</h1><h2 id='ios-2'>iOS</h2>
-<p>The iOS SDK supports developing both in Objective-C and Swift. The iOS API supports multiple Mudra devices.</p>
-
-<ul>
-<li><p>Please observe the following instuctions to work with Mudra BLE:</p>
-
-<ul>
-<li> The Mudra and Bluetooth environment will be initialized the first time by &quot;Mudra.shared.initBluetooth()&quot;. Once the Bluetooth is ready the &quot;onBluetoothStateChanged&quot; callback is called with state True. <em>Please note</em> - connect Mudra through BLE in the iOS Settings menu.</li>
-<li>There are 4 connection callbacks we support: onDeviceConnectedByIos, onDeviceDisconnectedByIos, onMudraDeviceConnected, onMudraDeviceDisconnected. These functions expose the state of Mudra. connectivity, since iOS distinguishes between OS and app connectivity. Please note: all Mudra devices connected via the Settings menu will receive such onDeviceConnectedByIos() callback.</li>
-<li>Note that all the callbacks are called on a different BLE thread, so the GUI needs to be updated asynchronously (see Swift code examples).</li>
-</ul></li>
-<li><p>Please observe the following instuctions when coding yur application:</p>
-
-<ul>
-<li>Implement the MudraDelegate protocol described under the Swift tab.</li>
-<li>Implement your app delegate in the same manner as described in the Swift Tab. This implies that you must call 3 functions when the app launches, as shown in  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?).</li>
-</ul></li>
-</ul>
-<div class="highlight"><pre class="highlight swift tab-swift"><code>
-<span class="c1">// MudraDelegate SDK Code to be implemented</span>
+<h1 id='initialization-and-connection'>Initialization and Connection</h1><h2 id='ios-2'>iOS</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//ContentViewModel that implements the MudraDelegate</span>
+<span class="kd">import</span> <span class="kt">Mudra</span>
 <span class="kd">import</span> <span class="kt">Foundation</span>
 
-<span class="kd">@objc</span> <span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
-  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onBluetoothStateChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span>
+<span class="kd">class</span> <span class="kt">ContentViewModel</span> <span class="p">:</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span> <span class="o">=</span> <span class="kt">ContentViewModel</span><span class="p">()</span>
+    <span class="kd">@Published</span> <span class="k">var</span> <span class="nv">contentModel</span> <span class="p">:</span> <span class="kt">ContentModel</span> <span class="o">=</span> <span class="kt">ContentModel</span><span class="p">()</span>
 
-  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onDeviceConnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
-
-  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onDeviceDisconnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
-
-  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
-
-  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onMudraDeviceDisconnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
-
-  <span class="kd">@objc</span> <span class="kd">optional</span> <span class="kd">func</span> <span class="nf">onBatteryLevelChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span>
 <span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">ContentViewModel</span><span class="p">:</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">onBluetoothStateChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the UI Here!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onDeviceConnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device connects to the iPone operating system "iOS"</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the UI Here!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onDeviceDisconnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device disconnects from the iPone operating system "iOS"</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the UI Here!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device connects to the app</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the UI Here!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onMudraDeviceDisconnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when mudra device disconnects from the app</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the UI Here!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">onBatteryLevelChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Event : when battery level changed for connected device</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+            <span class="c1">//Update the UI Here!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//--------------------------------------------------------------------------------------------------------------------</span>
 
 <span class="c1">// AppDelegate</span>
 <span class="kd">import</span> <span class="kt">Mudra</span>
 <span class="kd">import</span> <span class="kt">UIKit</span>
-
 
 <span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span><span class="p">,</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
 
@@ -539,7 +568,7 @@ Remember — Your Mudra device should always be connected. Check your host devic
 
     <span class="kd">func</span> <span class="nf">setLicense</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// Set your licenses (sent by Wearable Devices for expanded features)</span>
-        <span class="kt">Mudra</span><span class="o">.</span><span class="nf">setLicense</span><span class="p">(</span><span class="kt">License</span><span class="o">.</span><span class="kt">Main</span><span class="p">,</span> <span class="s">"-----------"</span><span class="p">)</span>
+        <span class="kt">Mudra</span><span class="o">.</span><span class="nf">setLicense</span><span class="p">(</span><span class="kt">License</span><span class="o">.</span><span class="kt">Main</span><span class="p">,</span> <span class="s">"LicenseType::Main"</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="kd">func</span> <span class="nf">initBluetouth</span><span class="p">()</span> <span class="p">{</span>
@@ -549,78 +578,82 @@ Remember — Your Mudra device should always be connected. Check your host devic
 <span class="p">}</span>
 
 
-<span class="c1">//ContentViewModel that implements the MudraDelegate</span>
-<span class="kd">import</span> <span class="kt">Mudra</span>
-<span class="kd">import</span> <span class="kt">Foundation</span>
+</code></pre></div>
+<ul>
+<li>The iOS SDK supports development in both Objective-C and Swift through the implementation of the MudraDelegate Protocol. Note that the API supports multiple devices; when the &#39;device&#39; parameter is received in the following functions, it refers to this specific device.
 
-<span class="kd">class</span> <span class="kt">ContentViewModel</span> <span class="p">:</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span> <span class="o">=</span> <span class="kt">ContentViewModel</span><span class="p">()</span>
-    <span class="kd">@Published</span> <span class="k">var</span> <span class="nv">contentModel</span> <span class="p">:</span> <span class="kt">ContentModel</span> <span class="o">=</span> <span class="kt">ContentModel</span><span class="p">()</span>
+<ul>
+<li><img src="images/MudraDelegateProtocol-4106e86c.png" width="500"></li>
+</ul></li>
+</ul>
 
-    <span class="kd">func</span> <span class="kt">EnableDevicePressure</span><span class="p">(</span><span class="nv">device</span> <span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">){</span>
-        <span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span><span class="p">{</span><span class="n">value</span> <span class="k">in</span>
-            <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-                <span class="c1">//Update the GUI Here!</span>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>func onBluetoothStateChanged(_ state: Bool)</td>
+<td>Called when the bluetooth state is changed.</td>
+</tr>
+<tr>
+<td>func onDeviceConnectedByIos(_ device: MudraDevice)</td>
+<td>When the bluetooth is finished Initializing this callback is called for each device is appeared on the iOS BLE settings as connected.(2)</td>
+</tr>
+<tr>
+<td>func onDeviceDisconnectedByIos(_ device: MudraDevice)</td>
+<td>Called when a device is disconnected by the iOS.</td>
+</tr>
+<tr>
+<td>func onMudraDeviceConnected(_ device: MudraDevice)</td>
+<td>Called when a device is connected to the application.</td>
+</tr>
+<tr>
+<td>func onMudraDeviceDisconnected(_ device: MudraDevice)</td>
+<td>Called when a device is disconnected by the application.</td>
+</tr>
+<tr>
+<td>func onBatteryLevelChanged(_ device: MudraDevice)</td>
+<td>Called when the battery level is changed.</td>
+</tr>
+</tbody></table>
 
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<aside>
+(2) — For every device that appears on the setting list, iOS sends a connection event to the application onDeviceConnectedByIos(_ device: MudraDevice). Then, the user can connect this device or not. When the device is actually connected to the application, onDeviceConnected(_ device: MudraDevice) is called.
+</aside>
 
-    <span class="kd">func</span> <span class="kt">DisableDevicePressure</span><span class="p">(</span><span class="nv">device</span> <span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">){</span>
-        <span class="n">device</span><span class="o">.</span><span class="nf">setOnProportionalReady</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<ul>
+<li><p>Start by initializing bluetooth environment and setting up the system :</p>
 
+<ul>
+<li>Mudra.shared.delegate = ContentViewModel.shared</li>
+<li>Mudra.setLicense(License.Main, &quot;LicenseType::Main&quot;) </li>
+<li>Mudra.shared.initBluetouth() </li>
+</ul></li>
+<li><p>In order to connect or disconnect a device to the application : </p></li>
+</ul>
 
-<span class="kd">extension</span> <span class="kt">ContentViewModel</span><span class="p">:</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">onBluetoothStateChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the GUI Here!</span>
+<table><thead>
+<tr>
+<th>Description</th>
+<th>Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>To connect a device call the connect function</td>
+<td>device.connect()</td>
+</tr>
+<tr>
+<td>To disconnect a device call the disconnect function</td>
+<td>device.disconnect()</td>
+</tr>
+</tbody></table>
 
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onDeviceConnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device connects to the iPone operating system "iOS"</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the GUI Here!</span>
-
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onDeviceDisconnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device disconnects from the iPone operating system "iOS"</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the GUI Here!</span>
-
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device connects to the app</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the GUI Here!</span>
-
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onMudraDeviceDisconnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device disconnects from the app</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the GUI Here!</span>
-
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onBatteryLevelChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when battery level changed for connected device</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the GUI Here!</span>
-
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h2 id='android-2'>Android</h2>
+<aside>
+Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread. So, for handling UI activity you need to run any UI code under DispatchQueue.main.async { ... }
+</aside>
+<h2 id='android-2'>Android</h2>
 <p>The connection process has 2 steps: 
 <ol>
 <li> Scanning for the device we would like to connect. </li> 
@@ -649,17 +682,11 @@ To retrieve previously connected devices use: Mudra.getInstance().getPairedDevic
 Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code. Initialization is exposed via the getPairedDevices function.</p>
 
 <p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
-<h1 id='connectivity-api'>Connectivity API</h1>
-<p>Functionality for connecting &amp; disconnecting device to the application.</p>
-<div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="nf">connect</span><span class="p">()</span> <span class="c1">// connects the device to the application.</span>
-<span class="n">device</span><span class="o">.</span><span class="nf">disconnect</span><span class="p">()</span> <span class="c1">// disconnects the device from the application.</span>
-</code></pre></div><h1 id='gesture-recognition'>Gesture Recognition</h1>
-<p>Functionality for predicting six gesture types: thumb, index, tap, twist, double index and double middle tap. Please check out the Mudra app for more info and example usage.
-<code>swift
-device.setOnGestureReady { (gesture) in print(&quot;OnGestureReady \(self.gesture2String(gesture: gesture))&quot;) }
-</code></p>
-<h1 id='fingertip-pressure'>Fingertip Pressure</h1>
-<p>Functionality for estimating the amount of fingertip pressure. Returned values range between 0 and 1 and callbacks arrive at a rate of approximately 60fps. </p>
+<h1 id='gesture-recognition'>Gesture Recognition</h1>
+<p>After connecting to a device it is possible to register to all kinds of callbacks like listening to gestures and pressure. This section is focused on listening to gestures. It is possible to listen to all kinds of gestures like : thumb, index, tap, twist, double index, double middle tap and by etc.</p>
+<div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnGestureReady</span> <span class="p">{</span> <span class="p">(</span><span class="n">gesture</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"OnGestureReady </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="nf">gesture2String</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">gesture</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div><h1 id='fingertip-pressure'>Fingertip Pressure</h1>
+<p>In order to esstimate the amount of finger tip pressure, use the descriped API. The returned pressure parameter indecates 1.0 for the most amount of pressure while 0.0 indecates the lowest. </p>
 <div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span> <span class="p">{(</span><span class="n">proportional</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span> <span class="s">"OnProportionalReady </span><span class="se">\(</span><span class="n">proportional</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">OnFingertipPressureReady</span> <span class="n">onFingertipPressureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OnFingertipPressureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>    
@@ -684,9 +711,7 @@ device.setOnGestureReady { (gesture) in print(&quot;OnGestureReady \(self.gestur
     <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
     <span class="c1">//...</span>
 <span class="p">}</span>
-</code></pre></div><h1 id='air-mouse'>Air Mouse</h1>
-<p>The Mudra air mouse utilizes a 6DOF IMU, which can be used to move a mouse cursor. This functionality is exposed via HID.</p>
-<h1 id='raw-data'>Raw Data</h1>
+</code></pre></div><h1 id='raw-data'>Raw Data</h1>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
 <h1 id='troubleshooting'>Troubleshooting</h1>
 <table><thead>
