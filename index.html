@@ -350,6 +350,9 @@
             <a href="#raw-data" class="toc-h1 toc-link" data-title="Raw Data">Raw Data</a>
           </li>
           <li>
+            <a href="#sample-applications" class="toc-h1 toc-link" data-title="Sample Applications">Sample Applications</a>
+          </li>
+          <li>
             <a href="#troubleshooting" class="toc-h1 toc-link" data-title="Troubleshooting">Troubleshooting</a>
           </li>
       </ul>
@@ -362,7 +365,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band&trade;</strong> and Mudra API. Here we will explain how to use the band as well as interface  with your device. Our API includes language bindings for <em>Swift (iOS)</em>, <em>Java (Android)</em> and <em>C# (Unity)</em>. </p>
+<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band&trade;</strong> and Mudra API. Here we will explain how to use the band as well as interface  with your device. Our API includes language bindings for <em>Swift (iOS)</em>, <em>Java (Android)</em> and <em>C# (Unity Plugin)</em>. You can find links to a sample application for each of iOS, Android or Unity under the Sample Applications section.</p>
 <h2 id='device-modes'>Device Modes</h2>
 <table><thead>
 <tr>
@@ -374,41 +377,32 @@
 <tr>
 <td>Advertising</td>
 <td>Flashing orange for one minute</td>
-<td><img src="images/full_wrap_led_yellow-27e9e51e.png" width="100"></td>
+<td><img src="images/full_wrap_led_yellow-27e9e51e.png" width="50"></td>
 </tr>
 <tr>
 <td>Connected</td>
 <td>Flashing green for 1 second</td>
-<td><img src="images/full_wrap_led_green-206a1cbe.png" width="100"></td>
+<td><img src="images/full_wrap_led_green-206a1cbe.png" width="50"></td>
 </tr>
 <tr>
 <td>Low Battery</td>
 <td>Flashing red</td>
-<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
+<td><img src="images/full_wrap_led_red-5189cd67.png" width="50"></td>
 </tr>
 <tr>
 <td>Charging</td>
-<td>In case full charged constant blue, otherwise flashing blue</td>
-<td><img src="images/full_wrap_led_blue-6cbc19f3.png" width="100"></td>
-</tr>
-<tr>
-<td>Data Idle Mode(1)</td>
-<td>Flashing red once per minute</td>
-<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
+<td>In case of a full charged battery constant blue, otherwise flashing blue</td>
+<td><img src="images/full_wrap_led_blue-6cbc19f3.png" width="50"></td>
 </tr>
 <tr>
 <td>Firmware update</td>
 <td>Constant purple</td>
-<td><img src="images/full_wrap_led_red-5189cd67.png" width="100"></td>
+<td><img src="images/full_wrap_led_red-5189cd67.png" width="50"></td>
 </tr>
 </tbody></table>
-
-<aside>
-(1) — In case of the signals are on for two and a half minutes.
-</aside>
 <h1 id='access-the-api'>Access the API</h1><h2 id='ios'>iOS</h2>
 <ul>
-<li><p>Download Mudra.framework from the following link : ---</p></li>
+<li><p>Download Mudra.framework from the following link : <a href='https://github.com/wearable-devices/iOSAppExample/tree/master/iOSExample/iOSExample/frameworks'>framework</a></p></li>
 <li><p>Add to your project in Xcode group/folder named &quot;frameworks&quot;.</p></li>
 <li><p>Add Mudra.framework to this group/folder &quot;frameworks&quot; and sign &#39;Copy if needed&#39; when adding the framework.</p></li>
 </ul>
@@ -422,62 +416,51 @@
 <p><img src="images/embed-cd5602ef.png" width="500"></p>
 
 <ul>
-<li>Go to your project -&gt; Info tab -&gt; Add a new row titled &#39;Privacy - Bluetooth Always Usage Description.&#39; In the value field, provide the reason for requiring BLE. For example, you could write: &#39;This allows the app to find and connect to your iPhone.&#39;&quot;</li>
+<li>Go to your project -&gt; Info tab -&gt; Add a new row titled &quot;Called when the bluetooth state is changed.Privacy - Bluetooth Always Usage Description.&quot; In the value field, provide the reason for requiring BLE. For example, you could write: &quot;This allows the app to find and connect to your iPhone.&quot;</li>
 </ul>
 
 <p><img src="images/permission-f80f7c7e.png" width="500"></p>
-<h2 id='android'>Android</h2>
+<h2 id='android'>Android</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// gradle.properties file:</span>
+<span class="n">authToken</span><span class="o">=&lt;</span><span class="nc">Your</span> <span class="nc">Jitpack</span> <span class="nc">Token</span><span class="o">&gt;</span>
+
+
+<span class="c1">// settings.gradle file:</span>
+<span class="n">dependencyResolutionManagement</span> <span class="o">{</span>
+    <span class="n">repositoriesMode</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">RepositoriesMode</span><span class="o">.</span><span class="na">FAIL_ON_PROJECT_REPOS</span><span class="o">)</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">google</span><span class="o">()</span>
+        <span class="n">mavenCentral</span><span class="o">()</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="err">'</span><span class="nl">https:</span><span class="c1">//jitpack.io'</span>
+            <span class="n">credentials</span> <span class="o">{</span> <span class="n">username</span> <span class="n">authToken</span> <span class="o">}}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="c1">// build.gradle file:</span>
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">10.3</span><span class="err">'</span>
+<span class="o">}</span>
+
+<span class="c1">// manifest file:    </span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH_ADMIN"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_FINE_LOCATION"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
+</code></pre></div>
 <ul>
 <li>To access the API you must first generate an access token<br></li>
 <li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a>, Sign in using your GitHub account and credentials<br></li>
 <li>Authorize Jitpack in order to connect to Github<br></li>
 <li>Tap your username on the top left corner of the screen</li>
 <li>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:<br></li>
+<li>Add the repository to your project <strong>settings.gradle</strong> file:</li>
+<li>Add BLE permission to your project <strong>manifest.xml</strong> file:</li>
+<li>Implement the SDK to your project <strong>gradle.build</strong> file inside the dependencies:</li>
 </ul>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
-<span class="n">authToken</span><span class="o">=</span><span class="err">'</span><span class="o">&lt;</span><span class="nc">Your</span> <span class="nc">Jitpack</span> <span class="nc">Token</span><span class="o">&gt;</span><span class="err">'</span>
-</code></pre></div>
-<ul>
-<li>Add the repository to your project build.gradle file:</li>
-</ul>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// gradle.properties</span>
-<span class="n">authToken</span><span class="o">=&lt;</span><span class="nc">Your</span> <span class="nc">Jitpack</span> <span class="nc">Token</span><span class="o">&gt;</span>
-
-<span class="c1">// Project build.gradle</span>
-<span class="n">allprojects</span> <span class="o">{</span>
-    <span class="n">repositories</span> <span class="o">{</span>
-        <span class="n">maven</span> <span class="o">{</span>
-                <span class="n">url</span> <span class="err">'</span><span class="nl">https:</span><span class="c1">//jitpack.io'</span>
-                <span class="n">credentials</span> <span class="o">{</span> <span class="n">username</span> <span class="n">authToken</span> <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="c1">// Module build.gradle</span>
-<span class="n">android</span> <span class="o">{</span>
-  <span class="n">defaultConfig</span> <span class="o">{</span>
- <span class="n">minSdkVersion</span> <span class="mi">23</span>
-  <span class="o">}</span>
-
-<span class="c1">// Java 8 support</span>
-  <span class="n">compileOptions</span> <span class="o">{</span>
-    <span class="n">sourceCompatibility</span> <span class="mf">1.8</span>
-    <span class="n">targetCompatibility</span> <span class="mf">1.8</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="c1">// App build.gradle file:</span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:MudraAndroidSDK:</span><span class="n">v1</span><span class="o">.</span><span class="mf">5.0</span><span class="err">'</span>
-<span class="n">configurations</span> <span class="o">{</span> <span class="n">all</span><span class="o">*.</span><span class="na">exclude</span> <span class="nl">group:</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="err">'</span> <span class="o">}</span>
-<span class="c1">// Bluetooth support</span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">ble:</span><span class="mf">2.3</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
-<span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v18</span><span class="o">:</span><span class="nl">scanner:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
-
-<span class="c1">// Android manifest file:</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH_ADMIN"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission. ACCESS_FINE_LOCATION"</span> <span class="o">/&gt;</span>
-</code></pre></div><h2 id='unity'>Unity</h2>
+<h2 id='unity'>Unity</h2>
 <p>Go to the Hierarchy pane in your mudra editor, press create and select a Mudra manager. A new MudraManager Object will be created.</p>
 
 <p>There are two ways to use the Mudra plugin:</p>
@@ -507,14 +490,14 @@
     <span class="p">}</span>
 
     <span class="kd">func</span> <span class="nf">onDeviceConnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device connects to the iPone operating system "iOS"</span>
+        <span class="c1">//Event : when mudra device connects to the iPhone operating system "iOS"</span>
         <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
             <span class="c1">//Update the UI Here!</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
     <span class="kd">func</span> <span class="nf">onDeviceDisconnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device disconnects from the iPone operating system "iOS"</span>
+        <span class="c1">//Event : when mudra device disconnects from the iPhone operating system "iOS"</span>
         <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
             <span class="c1">//Update the UI Here!</span>
         <span class="p">}</span>
@@ -558,10 +541,6 @@
         <span class="k">return</span> <span class="kc">true</span>
     <span class="p">}</span>
 
-    <span class="kd">func</span> <span class="nf">applicationWillTerminate</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"application terminated"</span><span class="p">)</span>
-    <span class="p">}</span>
-
     <span class="kd">func</span> <span class="nf">setMudraDelegate</span><span class="p">()</span> <span class="p">{</span>
         <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="kt">ContentViewModel</span><span class="o">.</span><span class="n">shared</span>  <span class="c1">//&lt;-- "ContentViewModel which implements the MudraDelegate"</span>
     <span class="p">}</span>
@@ -595,15 +574,15 @@
 </thead><tbody>
 <tr>
 <td>func onBluetoothStateChanged(_ state: Bool)</td>
-<td>Called when the bluetooth state is changed.</td>
+<td>Called when the bluetooth state is changed. When the bluetooth is turened on/off the state becomes true/false.</td>
 </tr>
 <tr>
 <td>func onDeviceConnectedByIos(_ device: MudraDevice)</td>
-<td>When the bluetooth is finished Initializing this callback is called for each device is appeared on the iOS BLE settings as connected.(2)</td>
+<td>Called for each device which appeared as <strong>connected</strong> on the iOS BLE settings. This callback is called right after the bluetooth is finished Initializing (2).</td>
 </tr>
 <tr>
 <td>func onDeviceDisconnectedByIos(_ device: MudraDevice)</td>
-<td>Called when a device is disconnected by the iOS.</td>
+<td>Called when a device is <strong>disconnected</strong> by the iOS.</td>
 </tr>
 <tr>
 <td>func onMudraDeviceConnected(_ device: MudraDevice)</td>
@@ -654,37 +633,138 @@
 Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread. So, for handling UI activity you need to run any UI code under DispatchQueue.main.async { ... }
 </aside>
 <h2 id='android-2'>Android</h2>
-<p>The connection process has 2 steps: 
-<ol>
-<li> Scanning for the device we would like to connect. </li> 
-<li> Connection with the device and registration of the desired callbacks. </li>
-</ol></p>
+<ul>
+<li>The Android SDK supports development with Java through the implementation of the MudraDelegate Interface. Note that the API supports multiple devices; when the &#39;device&#39; parameter is received in the following functions, it refers to this specific device.
 
-<p>The scan function receives a callback that triggers when a new device is found and receives a list of the mudraDevices found.</p>
+<ul>
+<li><img src="images/AndroidMudraDelegate-5abd3922.png" width="500"></li>
+</ul></li>
+</ul>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="nc">AppCompatActivity</span> <span class="o">{</span>
 
-<p>To start the scan:
-<ol>
-<li> Request the needed permmissions: Mudra.getInstance().requestAccessPermissions(this). </li>
-<li> Start scanning: Mudra.getInstance().scan(callback)*callback should implement the OnDeviceDiscovered interface. </li>
-<li> The callback method receives the discovered mudraDevices. Note that this list is filtered to match only mudra devices.</li>
-</ol></p>
+    <span class="kd">private</span> <span class="nc">ActivityMainBinding</span> <span class="n">binding</span><span class="o">;</span>
 
-<p>*Don’t forget to stop the scan using: Mudra.getInstance().stopScan()</p>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
 
-<p>To connect to a device:
-<ol>
-<li> Scan for to the desired device.</li>
-<li> Use device.connectDevice(context);</li>
-</ol></p>
+        <span class="n">binding</span> <span class="o">=</span> <span class="nc">ActivityMainBinding</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="n">getLayoutInflater</span><span class="o">());</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">binding</span><span class="o">.</span><span class="na">getRoot</span><span class="o">());</span>
+        <span class="n">initializeMudra</span><span class="o">();</span>
+    <span class="o">}</span>
 
-<p>Following a successful connection, the address will be registered in the cloud (this requires online access).
-To retrieve previously connected devices use: Mudra.getInstance().getPairedDevices(context)
-Assuming the device is paired manually (for example - via the Android Bluetooth settings), there is no need for initial connection code. Initialization is exposed via the getPairedDevices function.</p>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">initializeMudra</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">requestAccessPermissions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">setLicense</span><span class="o">(</span><span class="nc">Feature</span><span class="o">.</span><span class="na">RawData</span><span class="o">,</span> <span class="s">"LicenseType::Main"</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<p><strong>Important:</strong> Please insert your authentication token in your app <em>gradle.properties</em> file in order to use our sdk. See our github example (see <a href='https://github.com/wearable-devices/MudraAndroidReference'>here</a>).</p>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onCreateOptionsMenu</span><span class="o">(</span><span class="nc">Menu</span> <span class="n">menu</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Inflate the menu; this adds items to the action bar if it is present.</span>
+        <span class="n">getMenuInflater</span><span class="o">().</span><span class="na">inflate</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">menu</span><span class="o">.</span><span class="na">menu_main</span><span class="o">,</span> <span class="n">menu</span><span class="o">);</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>public void onDeviceDiscovered(MudraDevice mudraDevice)</td>
+<td>Called when a device is discoverd by the application.</td>
+</tr>
+<tr>
+<td>public void onDeviceConnected(MudraDevice mudraDevice)</td>
+<td>Called when a device is connected to the application.</td>
+</tr>
+<tr>
+<td>public void onDeviceDisconnected(MudraDevice mudraDevice)</td>
+<td>Called when a device is disconnected by the application.</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><p>Start by initializing Mudra environment and setting up the system inside the MainActivity:
+<ol> 
+<li> Mudra.getInstance().requestAccessPermissions(this); </li> 
+<li> Mudra.getInstance().setLicense(Feature.RawData, &quot;LicenseType::Main&quot;); </li>
+</ol></p></li>
+<li><p>In order to connect, disconnect, scan, stop scanning and get paired devices for a device to the application : </p></li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Description</th>
+<th>Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>To connect a device call the connect function</td>
+<td>mudraDevice.connect(Context context)</td>
+</tr>
+<tr>
+<td>To disconnect a device call the disconnect function</td>
+<td>mudraDevice.disconnect()</td>
+</tr>
+<tr>
+<td>To scan for a Mudra device</td>
+<td>Mudra.getInstance().scan(Context context);</td>
+</tr>
+<tr>
+<td>To stop scaning for a Mudra device</td>
+<td>Mudra.getInstance().stopScan();</td>
+</tr>
+<tr>
+<td>To get the paried Mudra devices to the OS</td>
+<td>Mudra.getInstance().getBondedDevices(Context context);</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//--------------------------------------------------------------------------------------------------------------------</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">setMudraDelegate</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">setMudraDelegate</span><span class="o">(</span><span class="k">new</span> <span class="nc">MudraDelegate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceDiscovered</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceConnected</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceDisconnected</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div>
+<ul>
+<li>To listen to MudraDelegate callbacks you need to set the MudraDelegate by :
+Mudra.getInstance().setMudraDelegate(MudraDelegate mudraDelegate); </li>
+</ul>
+
+<aside>
+Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread.
+So, for handling UI activity you need to run any UI code under ((Activity)(getContext())).runOnUiThread(()-> { ... });
+</aside>
 <h1 id='gesture-recognition'>Gesture Recognition</h1>
 <p>After connecting to a device it is possible to register to all kinds of callbacks like listening to gestures and pressure. This section is focused on listening to gestures. It is possible to listen to all kinds of gestures like : thumb, index, tap, twist, double index, double middle tap and by etc.</p>
 <div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnGestureReady</span> <span class="p">{</span> <span class="p">(</span><span class="n">gesture</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"OnGestureReady </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="nf">gesture2String</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">gesture</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span> <span class="o">{</span> <span class="o">(</span><span class="n">gesture</span><span class="o">)</span> <span class="n">in</span> <span class="nf">print</span><span class="o">(</span><span class="s">"OnGestureReady \(self.gesture2String(gesture: gesture))"</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="nc">OnGestureReady</span> <span class="n">onGestureReady</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">GestureType</span> <span class="n">gesture</span><span class="o">)</span> <span class="o">{</span>      
+        <span class="c1">// Do something with gesture (this value could be thumb, index, tap, twist, double index, double middle tap and by etc)</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="n">onFingertipPressureReady</span><span class="o">);</span> <span class="c1">//Enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">//Disable</span>
 </code></pre></div><h1 id='fingertip-pressure'>Fingertip Pressure</h1>
 <p>In order to esstimate the amount of finger tip pressure, use the descriped API. The returned pressure parameter indecates 1.0 for the most amount of pressure while 0.0 indecates the lowest. </p>
 <div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnProportionalReady</span> <span class="p">{(</span><span class="n">proportional</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span> <span class="s">"OnProportionalReady </span><span class="se">\(</span><span class="n">proportional</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
@@ -713,6 +793,11 @@ Assuming the device is paired manually (for example - via the Android Bluetooth 
 <span class="p">}</span>
 </code></pre></div><h1 id='raw-data'>Raw Data</h1>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
+<h1 id='sample-applications'>Sample Applications</h1>
+<ul>
+<li>Android Sample Application gitHub : <a href='https://github.com/wearable-devices/AndroidAppExample'> AndroidAppExample </a></li>
+<li>iOS Sample Application gitHub : <a href='https://github.com/wearable-devices/iOSAppExample'> iOSAppExample </a></li>
+</ul>
 <h1 id='troubleshooting'>Troubleshooting</h1>
 <table><thead>
 <tr>
