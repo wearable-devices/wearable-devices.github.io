@@ -341,6 +341,17 @@
               </ul>
           </li>
           <li>
+            <a href="#mudradevice-properties" class="toc-h1 toc-link" data-title="MudraDevice properties">MudraDevice properties</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#ios-3" class="toc-h2 toc-link" data-title="iOS">iOS</a>
+                  </li>
+                  <li>
+                    <a href="#android-3" class="toc-h2 toc-link" data-title="Android">Android</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#gesture-recognition" class="toc-h1 toc-link" data-title="Gesture Recognition">Gesture Recognition</a>
           </li>
           <li>
@@ -685,6 +696,10 @@ Note that all the above callbacks are called on the BLE thread and <strong>not o
 <td>public void onDeviceDisconnected(MudraDevice mudraDevice)</td>
 <td>Called when a device is disconnected by the application.</td>
 </tr>
+<tr>
+<td>public void onBatteryLevelChanged(MudraDevice mudraDevice)</td>
+<td>Called when the battery level is changed.</td>
+</tr>
 </tbody></table>
 
 <ul>
@@ -757,6 +772,66 @@ Mudra.getInstance().setMudraDelegate(MudraDelegate mudraDelegate); </li>
 Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread.
 So, for handling UI activity you need to run any UI code under ((Activity)(getContext())).runOnUiThread(()-> { ... });
 </aside>
+<h1 id='mudradevice-properties'>MudraDevice properties</h1>
+<p>After getting the MudraDevice it is possible to ask the device for more information using the following properties: </p>
+<h2 id='ios-3'>iOS</h2>
+<table><thead>
+<tr>
+<th>property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mudraDevice.battery</td>
+<td>Int</td>
+<td>Indicating the device&#39;s battery level.</td>
+</tr>
+<tr>
+<td>mudraDevice.firmwareVersion</td>
+<td>Optinal String</td>
+<td>Indicating the device&#39;s firmware version, or <strong>nil</strong> in case there is no firmware version.</td>
+</tr>
+<tr>
+<td>mudraDevice.serialNumber</td>
+<td>Optinal Int</td>
+<td>Indicating the device&#39;s serial number, or <strong>nil</strong> in case there is no serial number.</td>
+</tr>
+<tr>
+<td>mudraDevice.bandNumber</td>
+<td>Optinal String</td>
+<td>Indicating the device&#39;s bandNumber, or <strong>nil</strong> in case there is no band number.</td>
+</tr>
+</tbody></table>
+<h2 id='android-3'>Android</h2>
+<table><thead>
+<tr>
+<th>property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mudraDevice.getBatteryLevel()</td>
+<td>int</td>
+<td>Returns the device&#39;s battery level.</td>
+</tr>
+<tr>
+<td>mudraDevice.getFirmwareVersion()</td>
+<td>String</td>
+<td>Returns the device&#39;s firmware version, returns <strong>empty string</strong> in case there is no firmware version.</td>
+</tr>
+<tr>
+<td>mudraDevice.getSerialNumber()</td>
+<td>long</td>
+<td>Returns the device&#39;s the device&#39;s serial number, or <strong>0</strong> in case there is no serial number.</td>
+</tr>
+<tr>
+<td>mudraDevice.getDeviceNumberByName()</td>
+<td>String</td>
+<td>Returns the device&#39;s band number, or <strong>0</strong> in case there is no band number.</td>
+</tr>
+</tbody></table>
 <h1 id='gesture-recognition'>Gesture Recognition</h1>
 <p>After connecting to a device it is possible to register to all kinds of callbacks like listening to gestures and pressure. This section is focused on listening to gestures. It is possible to listen to all kinds of gestures like : thumb, index, tap, twist, double index, double middle tap and by etc.</p>
 <div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">device</span><span class="o">.</span><span class="n">setOnGestureReady</span> <span class="p">{</span> <span class="p">(</span><span class="n">gesture</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="s">"OnGestureReady </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="nf">gesture2String</span><span class="p">(</span><span class="nv">gesture</span><span class="p">:</span> <span class="n">gesture</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span> <span class="p">}</span>
