@@ -338,6 +338,9 @@
                   <li>
                     <a href="#android-2" class="toc-h2 toc-link" data-title="Android">Android</a>
                   </li>
+                  <li>
+                    <a href="#unity-2" class="toc-h2 toc-link" data-title="Unity">Unity</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -472,17 +475,30 @@
 <li>Implement the SDK to your project <strong>gradle.build</strong> file inside the dependencies:</li>
 </ul>
 <h2 id='unity'>Unity</h2>
-<p>Go to the Hierarchy pane in your mudra editor, press create and select a Mudra manager. A new MudraManager Object will be created.</p>
+<ul>
+<li>Go to Mudra/Mudra Setup in the toolbar</li>
+<li>The Mudra Plugin depends on the new Unity input system. Clicking &#39;Install&#39; will install the new input system.</li>
+</ul>
 
-<p>There are two ways to use the Mudra plugin:</p>
+<p><img src="images/Page1-bf70d4b5.png" width="350"></p>
 
-<p>(1) Using C# Unity scripts (requires coding). See Unity tab on the right for explanation. You can find the full example  in the assets folder in the file named <em>MudraUnityScriptExample</em>.</p>
+<ul>
+<li>The MudraUnity Plugin currently does not support standalone builds. Please select either iOS or Android as your build target. You can use the dedicated buttons in the Mudra Setup window for this purpose.</li>
+</ul>
 
-<p>(2) Using UI on the MudraManager Unity object menu (no coding required). Using the MudraManager UI, it is possible to enable\disable each of the features. For each feature, it is also possible to add callbacks. </p>
+<p><img src="images/Page2-8b605f90.png" width="350"></p>
 
-<p><strong>IMPORTANT:</strong> Write the path of your calibration file in the UI. Default file path is: &quot;C:\Program Files\Wearable Devices\Mudra\Calibration.txt&quot;. In the Unity &#39;Poject Settings&#39;, set &#39;Write Permission&#39; to &#39;External(SDCard)&#39; instead of the default &#39;Internal&#39; (in order to read the calibration txt file). </p>
+<ul>
+<li>If the chosen build target is Android, press the &#39;Fix&#39; buttons to modify the relevant build settings.</li>
+</ul>
 
-<p>*Please make sure you are using the latest version of Unity and that the dongle is plugged in to your PC.</p>
+<p><img src="images/Page3-ee766afa.png" width="350"></p>
+
+<ul>
+<li>Now, press &#39;EnableMudra&#39; to activate all the MudraPlugin scripts.</li>
+</ul>
+
+<p><img src="images/Page4-57d82d9f.png" width="350"></p>
 <h1 id='initialization-and-connection'>Initialization and Connection</h1><h2 id='ios-2'>iOS</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//ContentViewModel that implements the MudraDelegate</span>
 <span class="kd">import</span> <span class="kt">Mudra</span>
 <span class="kd">import</span> <span class="kt">Foundation</span>
@@ -772,6 +788,65 @@ Mudra.getInstance().setMudraDelegate(MudraDelegate mudraDelegate); </li>
 Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread.
 So, for handling UI activity you need to run any UI code under ((Activity)(getContext())).runOnUiThread(()-> { ... });
 </aside>
+<h2 id='unity-2'>Unity</h2>
+<aside>
+Note that the MudraUnity Plugin currently supports only one device. This device should be connected through the BLE (Bluetooth Low Energy) settings, after which it will automatically connect to the Unity app.
+</aside>
+
+<aside style="background-color: rgba(255, 0, 0, 0.2); text">
+<strong>It is important</strong> to ensure that only <strong>one</strong> MudraDevice is paired in the BLE settings.
+</aside>
+
+<ul>
+<li><p>A MudraManager is required in the scene. To create one, go to Mudra/MudraManager in the toolbar.</p></li>
+<li><p>When the SDK connects to the device, it will create a new device in the Unity input system. To receive input values, you need to set up both an input action asset and a script to listen to the messages. The plugin package includes both by default.</p></li>
+<li><p>These are all the input bindings for the MudraDevice. You can find them under &#39;Other/MudraDevice&#39; when setting up a new action.</p></li>
+</ul>
+
+<p><img src="images/Page5-70a85d6e.png" width="350"></p>
+
+<ul>
+<li><p>You will also need to add a PlayerInput Component to ensure the inputs function properly.</p></li>
+<li><p>Here is an example of a fully functional MudraManager and Inputs setup.</p></li>
+</ul>
+
+<p><img src="images/Page6-e0235e4a.png" width="350"></p>
+
+<ul>
+<li>The MudraManager serves as your connection to the SDK and it performs several important functions.</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>public void SetAirmouseState(bool state)</td>
+<td>Sets airmouse on/off.</td>
+</tr>
+<tr>
+<td>public void SetScale(int scale)</td>
+<td>Sets the pressure scale.</td>
+</tr>
+<tr>
+<td>public void SetPressureSensitivity(int sens)</td>
+<td>Sets the pressure sensitivity.</td>
+</tr>
+<tr>
+<td>public void SetAirMouseSpeed(int speed)</td>
+<td>Set the airmouse speed.</td>
+</tr>
+<tr>
+<td>public void SetHand(int hand)</td>
+<td>Set the main hand of the user.</td>
+</tr>
+</tbody></table>
+
+<aside>
+Note that any changes made to settings in the Editor will be applied when starting the app.
+</aside>
 <h1 id='mudradevice-properties'>MudraDevice properties</h1>
 <p>After getting the MudraDevice it is possible to ask the device for more information using the following properties: </p>
 <h2 id='ios-3'>iOS</h2>
@@ -856,21 +931,6 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 <span class="o">};</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="n">onFingertipPressureReady</span><span class="o">);</span> <span class="c1">//Enable</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFingertipPressureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">//Disable</span>
-</code></pre></div><div class="highlight"><pre class="highlight fsharp tab-fsharp"><code><span class="k">private</span> <span class="k">void</span> <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span>
-<span class="p">{</span>
-    <span class="kt">float</span><span class="p">?</span> <span class="n">fingerTipPressure</span> <span class="p">=</span> <span class="nn">Plugin</span><span class="p">.</span><span class="nn">Instance</span><span class="p">.</span><span class="nc">GetLastFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">fingerTipPressure</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">print</span><span class="o">($</span><span class="s2">"FingerTipPressure {fingerTipPressure}"</span><span class="o">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">void</span> <span class="nc">Update</span><span class="bp">()</span>
-<span class="p">{</span>
-    <span class="nc">UpdateFingerTipPressure</span><span class="bp">()</span><span class="p">;</span>
-    <span class="c1">//...</span>
-<span class="p">}</span>
 </code></pre></div><h1 id='raw-data'>Raw Data</h1>
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
 <h1 id='sample-applications'>Sample Applications</h1>
