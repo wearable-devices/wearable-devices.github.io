@@ -414,7 +414,16 @@
 <td><img src="images/full_wrap_led_purple-b2045f1c.png" width="50"></td>
 </tr>
 </tbody></table>
-<h1 id='access-the-api'>Access the API</h1><h2 id='ios'>iOS</h2>
+<h1 id='access-the-api'>Access the API</h1>
+<ol>
+<li>Sign up a new user for the MudraBand application on iOS.</li>
+<li>Contact Tom at tom.y@wearabledevices.co.il to obtain licenses for using features in the SDK.</li>
+</ol>
+
+<aside style="background-color: rgba(255, 100, 0, 0.2); text">
+<center><strong>Using the SDK requires an internet connection.</strong></center>
+</aside>
+<h2 id='ios'>iOS</h2>
 <ul>
 <li><p>Download Mudra.framework from the following link : <a href='https://github.com/wearable-devices/iOSAppExample/tree/master/iOSExample/iOSExample/frameworks'>framework</a></p></li>
 <li><p>Add to your project in Xcode group/folder named &quot;frameworks&quot;.</p></li>
@@ -455,7 +464,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">10.3</span><span class="err">'</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.0</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
@@ -574,7 +583,14 @@
 
     <span class="kd">func</span> <span class="nf">setLicense</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// Set your licenses (sent by Wearable Devices for expanded features)</span>
-        <span class="kt">Mudra</span><span class="o">.</span><span class="nf">setLicense</span><span class="p">(</span><span class="kt">License</span><span class="o">.</span><span class="kt">Main</span><span class="p">,</span> <span class="s">"LicenseType::Main"</span><span class="p">)</span>
+        <span class="kt">Mudra</span><span class="o">.</span><span class="nf">getLicenseForEmailFromCloud</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="s">"-----@------"</span><span class="p">)</span> <span class="p">{</span> <span class="n">success</span> <span class="p">,</span> <span class="n">errorResult</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="n">success</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"licenses set successfully."</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"failed to set licenses : </span><span class="se">\(</span><span class="n">errorResult</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
     <span class="p">}</span>
 
     <span class="kd">func</span> <span class="nf">initBluetouth</span><span class="p">()</span> <span class="p">{</span>
@@ -634,7 +650,7 @@
 
 <ul>
 <li>Mudra.shared.delegate = ContentViewModel.shared</li>
-<li>Mudra.setLicense(License.Main, &quot;LicenseType::Main&quot;) </li>
+<li>Mudra.getLicenseForEmailFromCloud(email: &quot;-----@------&quot;) { success , errorResult in }</li>
 <li>Mudra.shared.initBluetouth() </li>
 </ul></li>
 <li><p>In order to connect or disconnect a device to the application : </p></li>
@@ -683,7 +699,13 @@ Note that all the above callbacks are called on the BLE thread and <strong>not o
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">initializeMudra</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">requestAccessPermissions</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
-        <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">setLicense</span><span class="o">(</span><span class="nc">Feature</span><span class="o">.</span><span class="na">RawData</span><span class="o">,</span> <span class="s">"LicenseType::Main"</span><span class="o">);</span>
+        <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getLicenseForEmailFromCloud</span><span class="o">(</span><span class="s">"-----@------"</span><span class="o">,</span> <span class="o">(</span><span class="n">success</span><span class="o">,</span> <span class="n">errorResult</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">success</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span> <span class="o">,</span> <span class="s">"licenses set successfully."</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span> <span class="o">,</span> <span class="s">"failed to set licenses : "</span> <span class="o">+</span> <span class="n">errorResult</span> <span class="o">+</span><span class="s">"."</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
@@ -722,7 +744,7 @@ Note that all the above callbacks are called on the BLE thread and <strong>not o
 <li><p>Start by initializing Mudra environment and setting up the system inside the MainActivity:
 <ol> 
 <li> Mudra.getInstance().requestAccessPermissions(this); </li> 
-<li> Mudra.getInstance().setLicense(Feature.RawData, &quot;LicenseType::Main&quot;); </li>
+<li> Mudra.getInstance().getLicenseForEmailFromCloud(&quot;-------@--------&quot;, (success, errorResult) -&gt; {  }); </li>
 </ol></p></li>
 <li><p>In order to connect, disconnect, scan, stop scanning and get paired devices for a device to the application : </p></li>
 </ul>
