@@ -464,7 +464,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.0</span><span class="err">'</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.5</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
@@ -680,7 +680,7 @@ Note that all the above callbacks are called on the BLE thread and <strong>not o
 <li>The Android SDK supports development with Java through the implementation of the MudraDelegate Interface. Note that the API supports multiple devices; when the &#39;device&#39; parameter is received in the following functions, it refers to this specific device.
 
 <ul>
-<li><img src="images/AndroidMudraDelegate-60862ef9.png" width="500"></li>
+<li><img src="images/AndroidMudraDelegate-51785f7e.png" width="500"></li>
 </ul></li>
 </ul>
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="nc">AppCompatActivity</span> <span class="o">{</span>
@@ -733,10 +733,6 @@ Note that all the above callbacks are called on the BLE thread and <strong>not o
 <tr>
 <td>public void onDeviceDisconnected(MudraDevice mudraDevice)</td>
 <td>Called when a device is disconnected by the application.</td>
-</tr>
-<tr>
-<td>public void onBatteryLevelChanged(MudraDevice mudraDevice)</td>
-<td>Called when the battery level is changed.</td>
 </tr>
 </tbody></table>
 
