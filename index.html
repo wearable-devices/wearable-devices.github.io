@@ -364,16 +364,16 @@
             <a href="#api-sensors" class="toc-h1 toc-link" data-title="API - Sensors">API - Sensors</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#snc" class="toc-h2 toc-link" data-title="Snc">Snc</a>
+                    <a href="#snc" class="toc-h2 toc-link" data-title="SNC">SNC</a>
                   </li>
                   <li>
-                    <a href="#gyro" class="toc-h2 toc-link" data-title="Gyro">Gyro</a>
+                    <a href="#gyroscope" class="toc-h2 toc-link" data-title="Gyroscope">Gyroscope</a>
                   </li>
                   <li>
-                    <a href="#acc" class="toc-h2 toc-link" data-title="Acc">Acc</a>
+                    <a href="#accelerometer" class="toc-h2 toc-link" data-title="Accelerometer">Accelerometer</a>
                   </li>
                   <li>
-                    <a href="#acc-norm" class="toc-h2 toc-link" data-title="Acc Norm">Acc Norm</a>
+                    <a href="#accelerometer-norm" class="toc-h2 toc-link" data-title="Accelerometer Norm">Accelerometer Norm</a>
                   </li>
               </ul>
           </li>
@@ -503,14 +503,12 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.17</span><span class="err">'</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.19</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH"</span> <span class="o">/&gt;</span>
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH_ADMIN"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_FINE_LOCATION"</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
 </code></pre></div>
 <ul>
 <li>To access the API you must first generate an access token.</li>
@@ -993,25 +991,22 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><p>Firmware Version Update: This event is triggered when the firmware version has been successfully retrieved.</p></li>
 </ol>
 <h2 id='models'>Models</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To change the algorithm model</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">algorithemMode</span> <span class="o">=</span> <span class="o">.</span><span class="kt">AirMouseMode</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">algorithemMode</span> <span class="o">=</span> <span class="o">.</span><span class="kt">NeuralClicker</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">algorithemMode</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Embedded</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">NeuralClicker</span><span class="p">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">Embedded</span><span class="p">);</span>
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To change the algorithm model</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModel</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">AirMouse</span><span class="o">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModel</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">NeuralClicker</span><span class="o">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModel</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">Embedded</span><span class="o">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModelType</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">NeuralClicker</span><span class="o">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModelType</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">Embedded</span><span class="o">);</span>
 </code></pre></div>
 <p>It is possible to change the AI algorithem that runs &quot;Under the hood&quot;.</p>
 
 <ul>
 <li><strong>Model : </strong>
 <ol> 
-<li> AirMouse</li> 
 <li> NeuralClicker</li> 
 <li> Embedded</li> 
 </ol></li>
 </ul>
-<h1 id='api-sensors'>API - Sensors</h1><h2 id='snc'>Snc</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
+<h1 id='api-sensors'>API - Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnSncPackageReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
     <span class="c1">// data's length is 24</span>
     <span class="c1">// [0-7)   is SNC_1</span>
@@ -1052,7 +1047,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/Snc-2966a75c.png" width="600"></p>
 
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='gyro'>Gyro</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
+<h2 id='gyroscope'>Gyroscope</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">setImuGyroReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
         <span class="c1">// data's length is 24</span>
         <span class="c1">// [0, 3, 6, 9 , 12, 15, 18, 21]   is GYRO_1</span>
@@ -1093,7 +1088,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/Imu-16cba28d.png" width="600"></p>
 
 <p>Functionality for exposing raw GYRO (Gyroscope) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='acc'>Acc</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
+<h2 id='accelerometer'>Accelerometer</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">setImuAccRawReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
         <span class="c1">// data's length is 24</span>
         <span class="c1">// [0, 3, 6, 9 , 12, 15, 18, 21]   is ACC_1</span>
@@ -1135,7 +1130,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/Imu-16cba28d.png" width="600"></p>
 
 <p>Functionality for exposing raw ACC (Accelerometer Characterization Capability) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='acc-norm'>Acc Norm</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
+<h2 id='accelerometer-norm'>Accelerometer Norm</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnImuAccNormPackageReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
 
 <span class="p">}</span>
@@ -1168,7 +1163,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 
 <p><img src="images/ImuNorm-4b98c17f.png" width="300"></p>
 
-<p>Functionality for revealing raw ACC NORM (Accelerometer Normalization) sensor values. This function might entail an extra charge (We will dispatch a license with guidelines for those interested in this feature).</p>
+<p>Returns the Root Mean Square (RMS) value of the three-axis (X, Y, Z) acceleration measurements, which are normalized for gravity.  Removing the effects of gravity from the acceleration data, providing a more accurate representation of the band motion in three dimensions.</p>
 <h1 id='api-features'>API - Features</h1><h2 id='pressure-level'>Pressure Level</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnProportionalReady</span><span class="p">{</span> <span class="p">(</span><span class="n">pressure</span><span class="p">)</span> <span class="k">in</span>  
 
@@ -1197,7 +1192,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><strong>Requirements : </strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
-<li> <a href="https://wearable-devices.github.io/#models">AI_Model</a> - One of : AirMouse / Embedded</li> 
+<li> <a href="https://wearable-devices.github.io/#models">AI_Model</a> - One of : Embedded</li> 
 </ol></li>
 </ul>
 
@@ -1319,12 +1314,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <tr>
 <td>Mudra gestures are not correctly recognize</td>
 <td>All</td>
-<td>Please try again our on-boarding app. Try to follow the instruction and perform another calibration.</td>
-</tr>
-<tr>
-<td>Mudra pressure values fluctuate</td>
-<td>All</td>
-<td>Please make sure your device is in contact with your skin (no need to be tight)</td>
+<td>Make sure that the electrodes are in contact with your skin.</td>
 </tr>
 <tr>
 <td>Missing dll error</td>
