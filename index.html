@@ -349,7 +349,7 @@
               </ul>
           </li>
           <li>
-            <a href="#api-general" class="toc-h1 toc-link" data-title="API - General">API - General</a>
+            <a href="#general" class="toc-h1 toc-link" data-title="General">General</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#mudradevice-properties" class="toc-h2 toc-link" data-title="MudraDevice properties">MudraDevice properties</a>
@@ -358,15 +358,15 @@
                     <a href="#general-events" class="toc-h2 toc-link" data-title="General Events">General Events</a>
                   </li>
                   <li>
-                    <a href="#hand" class="toc-h2 toc-link" data-title="Hand">Hand</a>
+                    <a href="#set-hand" class="toc-h2 toc-link" data-title="Set Hand">Set Hand</a>
                   </li>
                   <li>
-                    <a href="#models" class="toc-h2 toc-link" data-title="Models">Models</a>
+                    <a href="#ai_models" class="toc-h2 toc-link" data-title="AI_Models">AI_Models</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#api-sensors" class="toc-h1 toc-link" data-title="API - Sensors">API - Sensors</a>
+            <a href="#sensors" class="toc-h1 toc-link" data-title="Sensors">Sensors</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#snc" class="toc-h2 toc-link" data-title="SNC">SNC</a>
@@ -383,7 +383,7 @@
               </ul>
           </li>
           <li>
-            <a href="#api-features" class="toc-h1 toc-link" data-title="API - Features">API - Features</a>
+            <a href="#features" class="toc-h1 toc-link" data-title="Features">Features</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#pressure-level" class="toc-h2 toc-link" data-title="Pressure Level">Pressure Level</a>
@@ -397,7 +397,7 @@
               </ul>
           </li>
           <li>
-            <a href="#api-hid-commands" class="toc-h1 toc-link" data-title="API - HID commands">API - HID commands</a>
+            <a href="#hid-commands" class="toc-h1 toc-link" data-title="HID commands">HID commands</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#mouse-left-button-action" class="toc-h2 toc-link" data-title="Mouse Left Button Action">Mouse Left Button Action</a>
@@ -405,7 +405,7 @@
               </ul>
           </li>
           <li>
-            <a href="#api-experiences" class="toc-h1 toc-link" data-title="API - Experiences">API - Experiences</a>
+            <a href="#experiences" class="toc-h1 toc-link" data-title="Experiences">Experiences</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#air-touch" class="toc-h2 toc-link" data-title="Air-Touch">Air-Touch</a>
@@ -917,7 +917,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <aside>
 Note that any changes made to settings in the Editor will be applied when starting the app.
 </aside>
-<h1 id='api-general'>API - General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="n">battery</span> <span class="c1">// Int, Indicating the device's battery level.</span>
+<h1 id='general'>General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="n">battery</span> <span class="c1">// Int, Indicating the device's battery level.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">firmwareVersion</span> <span class="c1">// Optinal String, Indicating the device's firmware version, or **nil** in case there is no firmware version.</span>
 
@@ -973,7 +973,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><p>Battery Level Change: This event occurs whenever there is a change in the battery level.</p></li>
 <li><p>Firmware Version Update: This event is triggered when the firmware version has been successfully retrieved.</p></li>
 </ol>
-<h2 id='hand'>Hand</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To set hand</span>
+<h2 id='set-hand'>Set Hand</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To set hand</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">hand</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Right</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">hand</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Left</span>
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To set hand</span>
@@ -981,7 +981,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">LEFT</span><span class="o">);</span>
 </code></pre></div>
 <p>When the device is connected, you need to update its settings via the API depending on whether you wear the band on your left or right hand.</p>
-<h2 id='models'>Models</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To change the algorithm model</span>
+<h2 id='ai_models'>AI_Models</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To change the algorithm model</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">NeuralClicker</span><span class="p">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">Embedded</span><span class="p">);</span>
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To change the algorithm model</span>
@@ -991,13 +991,13 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p>It is possible to change the AI algorithem that runs &quot;Under the hood&quot;.</p>
 
 <ul>
-<li><strong>Model : </strong>
+<li><strong>Available AI_Models : </strong>
 <ol> 
 <li> NeuralClicker</li> 
 <li> Embedded</li> 
 </ol></li>
 </ul>
-<h1 id='api-sensors'>API - Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
+<h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnSncPackageReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
     <span class="c1">// data's length is 24</span>
     <span class="c1">// [0-7)   is SNC_1</span>
@@ -1155,7 +1155,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/ImuNorm-4b98c17f.png" width="300"></p>
 
 <p>Returns the Root Mean Square (RMS) value of the three-axis (X, Y, Z) acceleration measurements, which are normalized for gravity.  Removing the effects of gravity from the acceleration data, providing a more accurate representation of the band motion in three dimensions.</p>
-<h1 id='api-features'>API - Features</h1><h2 id='pressure-level'>Pressure Level</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
+<h1 id='features'>Features</h1><h2 id='pressure-level'>Pressure Level</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnProportionalReady</span><span class="p">{</span> <span class="p">(</span><span class="n">pressure</span><span class="p">)</span> <span class="k">in</span>  
 
 <span class="p">}</span>
@@ -1183,7 +1183,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><strong>Requirements : </strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
-<li> <a href="https://wearable-devices.github.io/#models">AI_Model</a> - One of : Embedded</li> 
+<li> <a href="https://wearable-devices.github.io/#ai_models">AI_Model</a> - Embedded</li> 
 </ol></li>
 </ul>
 
@@ -1207,7 +1207,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><strong>Requirements : </strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
-<li> <a href="https://wearable-devices.github.io/#models">AI_Model</a> - One of : AirMouse / NeuralClicker</li> 
+<li> <a href="https://wearable-devices.github.io/#ai_models">AI_Model</a> - NeuralClicker</li> 
 </ol></li>
 </ul>
 
@@ -1231,7 +1231,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 </ul>
 
 <p>To activate the Air-Mouse-Pointer, you need to execute the following command:</p>
-<h1 id='api-hid-commands'>API - HID commands</h1><h2 id='mouse-left-button-action'>Mouse Left Button Action</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To trigger a "Press" or "Release" action in your application, you can use the appropriate API methods provided by the mudraDevice. Here's how you can implement them:</span>
+<h1 id='hid-commands'>HID commands</h1><h2 id='mouse-left-button-action'>Mouse Left Button Action</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To trigger a "Press" or "Release" action in your application, you can use the appropriate API methods provided by the mudraDevice. Here's how you can implement them:</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="nf">sendAirMouseButton</span><span class="p">(</span><span class="o">.</span><span class="kt">Release</span><span class="p">);</span> <span class="c1">// This line sends a release command</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="nf">sendAirMouseButton</span><span class="p">(</span><span class="o">.</span><span class="kt">Press</span><span class="p">);</span>   <span class="c1">// This line sends a press command</span>
 </code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To trigger a "Press" or "Release" action in your application, you can use the appropriate API methods provided by the mudraDevice. Here's how you can implement them:</span>
@@ -1239,7 +1239,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">sendAirMouseButton</span><span class="o">(</span><span class="nc">AirMouseCommand</span><span class="o">.</span><span class="na">Press</span><span class="o">);</span>   <span class="c1">// This line sends a press command</span>
 </code></pre></div>
 <p>Using mouse profile, supporting left button press and release.</p>
-<h1 id='api-experiences'>API - Experiences</h1><h2 id='air-touch'>Air-Touch</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePointerActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>   <span class="c1">// To activate the Air-Mouse-Pointer</span>
+<h1 id='experiences'>Experiences</h1><h2 id='air-touch'>Air-Touch</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePointerActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>   <span class="c1">// To activate the Air-Mouse-Pointer</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePressReleaseActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>   <span class="c1">// To activate press and release</span>
 
 
