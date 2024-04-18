@@ -288,7 +288,7 @@
 
   </head>
 
-  <body class="index" data-languages="[&quot;swift&quot;,&quot;java&quot;,&quot;fsharp&quot;]">
+  <body class="index" data-languages="[&quot;swift&quot;,&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -300,7 +300,6 @@
         <div class="lang-selector">
               <a href="#" data-language-name="swift">Swift</a>
               <a href="#" data-language-name="java">Java</a>
-              <a href="#" data-language-name="fsharp">Unity</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -311,7 +310,10 @@
             <a href="#welcome" class="toc-h1 toc-link" data-title="Welcome">Welcome</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#device-modes" class="toc-h2 toc-link" data-title="Device Modes">Device Modes</a>
+                    <a href="#device-led-status" class="toc-h2 toc-link" data-title="Device Led Status">Device Led Status</a>
+                  </li>
+                  <li>
+                    <a href="#band-wearing" class="toc-h2 toc-link" data-title="Band Wearing">Band Wearing</a>
                   </li>
               </ul>
           </li>
@@ -354,6 +356,9 @@
                   </li>
                   <li>
                     <a href="#general-events" class="toc-h2 toc-link" data-title="General Events">General Events</a>
+                  </li>
+                  <li>
+                    <a href="#hand" class="toc-h2 toc-link" data-title="Hand">Hand</a>
                   </li>
                   <li>
                     <a href="#models" class="toc-h2 toc-link" data-title="Models">Models</a>
@@ -424,40 +429,16 @@
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
 <p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band&trade;</strong> and Mudra API. Here we will explain how to use the band as well as interface  with your device. Our API includes language bindings for <em>Swift (iOS)</em>, <em>Java (Android)</em> and <em>C# (Unity Plugin)</em>. You can find links to a sample application for each of iOS, Android or Unity under the Sample Applications section.</p>
-<h2 id='device-modes'>Device Modes</h2>
-<table><thead>
-<tr>
-<th>Mode</th>
-<th>Description</th>
-<th>LED Indication</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Advertising</td>
-<td>Flashing orange for one minute</td>
-<td><img src="images/full_wrap_led_yellow-27e9e51e.png" width="50"></td>
-</tr>
-<tr>
-<td>Connected</td>
-<td>Flashing green for 1 second</td>
-<td><img src="images/full_wrap_led_green-206a1cbe.png" width="50"></td>
-</tr>
-<tr>
-<td>Low Battery</td>
-<td>Flashing red</td>
-<td><img src="images/full_wrap_led_red-5189cd67.png" width="50"></td>
-</tr>
-<tr>
-<td>Charging</td>
-<td>In case of a full charged battery constant blue, otherwise flashing blue</td>
-<td><img src="images/full_wrap_led_blue-6cbc19f3.png" width="50"></td>
-</tr>
-<tr>
-<td>Firmware update</td>
-<td>Constant purple</td>
-<td><img src="images/full_wrap_led_purple-b2045f1c.png" width="50"></td>
-</tr>
-</tbody></table>
+<h2 id='device-led-status'>Device Led Status</h2>
+<p><img src="images/adv-67b44c95.png" width="500">
+<img src="images/connected-88aca95d.png" width="500">
+<img src="images/lowBattery-56c8504e.png" width="500">
+<img src="images/charging-f1320a03.png" width="500">
+<img src="images/dfu-ec25e3ea.png" width="500"></p>
+<h2 id='band-wearing'>Band Wearing</h2>
+<p>To put on the wristband correctly, make sure to check whether the logo is positioned on the left or right hand.</p>
+
+<p><img src="images/Hands-1675fd06.png" width="600"></p>
 <h1 id='access-the-api'>Access the API</h1>
 <aside style="background-color: rgba(255, 100, 0, 0.2); text">
 <center><strong>Using the SDK requires an internet connection.</strong></center>
@@ -503,12 +484,14 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.19</span><span class="err">'</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.18</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH"</span> <span class="o">/&gt;</span>
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.BLUETOOTH_ADMIN"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_FINE_LOCATION"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
 </code></pre></div>
 <ul>
 <li>To access the API you must first generate an access token.</li>
@@ -990,6 +973,14 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><p>Battery Level Change: This event occurs whenever there is a change in the battery level.</p></li>
 <li><p>Firmware Version Update: This event is triggered when the firmware version has been successfully retrieved.</p></li>
 </ol>
+<h2 id='hand'>Hand</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To set hand</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="n">hand</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Right</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="n">hand</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Left</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To set hand</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">LEFT</span><span class="o">);</span>
+</code></pre></div>
+<p>When the device is connected, you need to update its settings via the API depending on whether you wear the band on your left or right hand.</p>
 <h2 id='models'>Models</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To change the algorithm model</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">NeuralClicker</span><span class="p">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">Embedded</span><span class="p">);</span>
@@ -1330,7 +1321,6 @@ Note that any changes made to settings in the Editor will be applied when starti
           <div class="lang-selector">
                 <a href="#" data-language-name="swift">Swift</a>
                 <a href="#" data-language-name="java">Java</a>
-                <a href="#" data-language-name="fsharp">Unity</a>
           </div>
       </div>
     </div>
