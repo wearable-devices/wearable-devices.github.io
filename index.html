@@ -288,7 +288,7 @@
 
   </head>
 
-  <body class="index" data-languages="[&quot;swift&quot;,&quot;java&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -298,7 +298,6 @@
     <div class="toc-wrapper">
       <img src="images/logo-c5be0c22.png" class="logo" alt="" />
         <div class="lang-selector">
-              <a href="#" data-language-name="swift">Swift</a>
               <a href="#" data-language-name="java">Java</a>
         </div>
         <div class="search">
@@ -321,9 +320,6 @@
             <a href="#access-the-api" class="toc-h1 toc-link" data-title="Access the API">Access the API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#ios" class="toc-h2 toc-link" data-title="iOS">iOS</a>
-                  </li>
-                  <li>
                     <a href="#android" class="toc-h2 toc-link" data-title="Android">Android</a>
                   </li>
                   <li>
@@ -337,9 +333,6 @@
           <li>
             <a href="#initialization-and-connection" class="toc-h1 toc-link" data-title="Initialization and Connection">Initialization and Connection</a>
               <ul class="toc-list-h2">
-                  <li>
-                    <a href="#ios-2" class="toc-h2 toc-link" data-title="iOS">iOS</a>
-                  </li>
                   <li>
                     <a href="#android-2" class="toc-h2 toc-link" data-title="Android">Android</a>
                   </li>
@@ -428,7 +421,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band&trade;</strong> and Mudra API. Here we will explain how to use the band as well as interface  with your device. Our API includes language bindings for <em>Swift (iOS)</em>, <em>Java (Android)</em> and <em>C# (Unity Plugin)</em>. You can find links to a sample application for each of iOS, Android or Unity under the Sample Applications section.</p>
+<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band&trade;</strong> and Mudra API. Here we will explain how to use the band as well as interface  with your device. Our API includes language bindings for <em>Java (Android)</em> and <em>C# (Unity Plugin)</em>. You can find links to a sample application for each of iOS, Android or Unity under the Sample Applications section.</p>
 <h2 id='device-led-status'>Device Led Status</h2>
 <p><img src="images/adv-67b44c95.png" width="500">
 <img src="images/connected-88aca95d.png" width="500">
@@ -443,26 +436,6 @@
 <aside style="background-color: rgba(255, 100, 0, 0.2); text">
 <center><strong>Using the SDK requires an internet connection.</strong></center>
 </aside>
-<h2 id='ios'>iOS</h2>
-<ul>
-<li><p>Download Mudra.framework from the following link : <a href='https://github.com/wearable-devices/iOSAppExample/tree/master/iOSExample/iOSExample/frameworks'>framework</a></p></li>
-<li><p>Add to your project in Xcode group/folder named &quot;frameworks&quot;.</p></li>
-<li><p>Add Mudra.framework to this group/folder &quot;frameworks&quot; and sign &#39;Copy if needed&#39; when adding the framework.</p></li>
-</ul>
-
-<p><img src="images/framework-44fc202f.png" width="500"></p>
-
-<ul>
-<li>Go to your project -&gt; General tab -&gt; Frameworks, Libraries, And Embedded Content -&gt; Set the value of Mudra.framework to &quot;Embed &amp; Sign&quot; </li>
-</ul>
-
-<p><img src="images/embed-cd5602ef.png" width="500"></p>
-
-<ul>
-<li>Go to your project -&gt; Info tab -&gt; Add a new row titled &quot;Called when the bluetooth state is changed.Privacy - Bluetooth Always Usage Description.&quot; In the value field, provide the reason for requiring BLE. For example, you could write: &quot;This allows the app to find and connect to your iPhone.&quot;</li>
-</ul>
-
-<p><img src="images/permission-f80f7c7e.png" width="500"></p>
 <h2 id='android'>Android</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// gradle.properties file:</span>
 <span class="n">authToken</span><span class="o">=&lt;</span><span class="nc">Your</span> <span class="nc">Jitpack</span> <span class="nc">Token</span><span class="o">&gt;</span>
 
@@ -527,15 +500,7 @@
 </ul>
 
 <p><img src="images/Page4-57d82d9f.png" width="350"></p>
-<h1 id='licenses'>Licenses</h1><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="kt">Mudra</span><span class="o">.</span><span class="nf">getLicenseForEmailFromCloud</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="s">"-----@------"</span><span class="p">)</span> <span class="p">{</span> <span class="n">success</span> <span class="p">,</span> <span class="n">errorResult</span> <span class="k">in</span>
-    <span class="k">if</span> <span class="n">success</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"licenses set successfully."</span><span class="p">)</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"failed to set licenses : </span><span class="se">\(</span><span class="n">errorResult</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getLicenseForEmailFromCloud</span><span class="o">(</span><span class="s">"-----@------"</span><span class="o">,</span> <span class="o">(</span><span class="n">success</span><span class="o">,</span> <span class="n">errorResult</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+<h1 id='licenses'>Licenses</h1><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getLicenseForEmailFromCloud</span><span class="o">(</span><span class="s">"-----@------"</span><span class="o">,</span> <span class="o">(</span><span class="n">success</span><span class="o">,</span> <span class="n">errorResult</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
     <span class="k">if</span><span class="o">(</span> <span class="n">success</span> <span class="o">)</span> <span class="o">{</span>
         <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span> <span class="o">,</span> <span class="s">"licenses set successfully."</span><span class="o">);</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -565,174 +530,7 @@
 <td>SNC, IMU GYRO, IMU ACC</td>
 </tr>
 </tbody></table>
-<h1 id='initialization-and-connection'>Initialization and Connection</h1><h2 id='ios-2'>iOS</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//ContentViewModel that implements the MudraDelegate</span>
-<span class="kd">import</span> <span class="kt">Mudra</span>
-<span class="kd">import</span> <span class="kt">Foundation</span>
-
-<span class="kd">class</span> <span class="kt">ContentViewModel</span> <span class="p">:</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span> <span class="o">=</span> <span class="kt">ContentViewModel</span><span class="p">()</span>
-    <span class="kd">@Published</span> <span class="k">var</span> <span class="nv">contentModel</span> <span class="p">:</span> <span class="kt">ContentModel</span> <span class="o">=</span> <span class="kt">ContentModel</span><span class="p">()</span>
-
-<span class="p">}</span>
-
-<span class="kd">extension</span> <span class="kt">ContentViewModel</span><span class="p">:</span> <span class="kt">MudraDelegate</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">onBluetoothStateChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the UI Here!</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onDeviceConnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device connects to the iPhone operating system "iOS"</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the UI Here!</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onDeviceDisconnectedByIos</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device disconnects from the iPhone operating system "iOS"</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the UI Here!</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onMudraDeviceConnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device connects to the app</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the UI Here!</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onMudraDeviceDisconnected</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when mudra device disconnects from the app</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the UI Here!</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">onBatteryLevelChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">device</span><span class="p">:</span> <span class="kt">MudraDevice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Event : when battery level changed for connected device</span>
-        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
-            <span class="c1">//Update the UI Here!</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">//--------------------------------------------------------------------------------------------------------------------</span>
-
-<span class="c1">// AppDelegate</span>
-<span class="kd">import</span> <span class="kt">Mudra</span>
-<span class="kd">import</span> <span class="kt">UIKit</span>
-
-<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span><span class="p">,</span> <span class="kt">ObservableObject</span> <span class="p">{</span>
-
-    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplication</span><span class="o">.</span><span class="kt">LaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"application launched"</span><span class="p">)</span>
-        <span class="k">self</span><span class="o">.</span><span class="nf">setMudraDelegate</span><span class="p">()</span>  <span class="c1">//&lt;--</span>
-        <span class="k">self</span><span class="o">.</span><span class="nf">setLicense</span><span class="p">()</span>        <span class="c1">//&lt;--</span>
-        <span class="k">self</span><span class="o">.</span><span class="nf">initBluetouth</span><span class="p">()</span>     <span class="c1">//&lt;--</span>
-        <span class="k">return</span> <span class="kc">true</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">setMudraDelegate</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="kt">ContentViewModel</span><span class="o">.</span><span class="n">shared</span>  <span class="c1">//&lt;-- "ContentViewModel which implements the MudraDelegate"</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">setLicense</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Set your licenses (sent by Wearable Devices for expanded features)</span>
-        <span class="kt">Mudra</span><span class="o">.</span><span class="nf">getLicenseForEmailFromCloud</span><span class="p">(</span><span class="nv">email</span><span class="p">:</span> <span class="s">"-----@------"</span><span class="p">)</span> <span class="p">{</span> <span class="n">success</span> <span class="p">,</span> <span class="n">errorResult</span> <span class="k">in</span>
-            <span class="k">if</span> <span class="n">success</span> <span class="p">{</span>
-                <span class="nf">print</span><span class="p">(</span><span class="s">"licenses set successfully."</span><span class="p">)</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nf">print</span><span class="p">(</span><span class="s">"failed to set licenses : </span><span class="se">\(</span><span class="n">errorResult</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
-            <span class="p">}</span>
-
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">initBluetouth</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"initBlueTouth"</span><span class="p">)</span>
-        <span class="kt">Mudra</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">initBluetouth</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-</code></pre></div>
-<ul>
-<li>The iOS SDK supports development in both Objective-C and Swift through the implementation of the MudraDelegate Protocol. Note that the API supports multiple devices; when the &#39;device&#39; parameter is received in the following functions, it refers to this specific device.
-
-<ul>
-<li><img src="images/MudraDelegateProtocol-4106e86c.png" width="500"></li>
-</ul></li>
-</ul>
-
-<table><thead>
-<tr>
-<th>Event</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>func onBluetoothStateChanged(_ state: Bool)</td>
-<td>Called when the bluetooth state is changed. When the bluetooth is turened on/off the state becomes true/false.</td>
-</tr>
-<tr>
-<td>func onDeviceConnectedByIos(_ device: MudraDevice)</td>
-<td>Called for each device which appeared as <strong>connected</strong> on the iOS BLE settings. This callback is called right after the bluetooth is finished Initializing (2).</td>
-</tr>
-<tr>
-<td>func onDeviceDisconnectedByIos(_ device: MudraDevice)</td>
-<td>Called when a device is <strong>disconnected</strong> by the iOS.</td>
-</tr>
-<tr>
-<td>func onMudraDeviceConnected(_ device: MudraDevice)</td>
-<td>Called when a device is connected to the application.</td>
-</tr>
-<tr>
-<td>func onMudraDeviceDisconnected(_ device: MudraDevice)</td>
-<td>Called when a device is disconnected by the application.</td>
-</tr>
-<tr>
-<td>func onBatteryLevelChanged(_ device: MudraDevice)</td>
-<td>Called when the battery level is changed.</td>
-</tr>
-</tbody></table>
-
-<aside>
-(2) — For every device that appears on the setting list, iOS sends a connection event to the application onDeviceConnectedByIos(_ device: MudraDevice). Then, the user can connect this device or not. When the device is actually connected to the application, onDeviceConnected(_ device: MudraDevice) is called.
-</aside>
-
-<ul>
-<li><p>Start by initializing bluetooth environment and setting up the system :</p>
-
-<ul>
-<li>Mudra.shared.delegate = ContentViewModel.shared</li>
-<li>Mudra.getLicenseForEmailFromCloud(email: &quot;-----@------&quot;) { success , errorResult in }</li>
-<li>Mudra.shared.initBluetouth() </li>
-</ul></li>
-<li><p>In order to connect or disconnect a device to the application : </p></li>
-</ul>
-
-<table><thead>
-<tr>
-<th>Description</th>
-<th>Function</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>To connect a device call the connect function</td>
-<td>device.connect()</td>
-</tr>
-<tr>
-<td>To disconnect a device call the disconnect function</td>
-<td>device.disconnect()</td>
-</tr>
-</tbody></table>
-
-<aside>
-Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread. So, for handling UI activity you need to run any UI code under DispatchQueue.main.async { ... }
-</aside>
-<h2 id='android-2'>Android</h2>
+<h1 id='initialization-and-connection'>Initialization and Connection</h1><h2 id='android-2'>Android</h2>
 <ul>
 <li>The Android SDK supports development with Java through the implementation of the MudraDelegate Interface. Note that the API supports multiple devices; when the &#39;device&#39; parameter is received in the following functions, it refers to this specific device.
 
@@ -917,14 +715,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <aside>
 Note that any changes made to settings in the Editor will be applied when starting the app.
 </aside>
-<h1 id='general'>General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="n">battery</span> <span class="c1">// Int, Indicating the device's battery level.</span>
-
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">firmwareVersion</span> <span class="c1">// Optinal String, Indicating the device's firmware version, or **nil** in case there is no firmware version.</span>
-
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">serialNumber</span> <span class="c1">// Optinal Int, Indicating the device's serial number, or **nil** in case there is no serial number.</span>
-
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">bandNumber</span> <span class="c1">// Optinal String, Indicating the device's bandNumber, or **nil** in case there is no band number.</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="c1">// int, Returns the device's battery level.</span>
+<h1 id='general'>General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="c1">// int, Returns the device's battery level.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareVersion</span><span class="o">()</span> <span class="c1">// String, Returns the device's firmware version, returns **empty string** in case there is no firmware version.</span>
 
@@ -933,19 +724,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getDeviceNumberByName</span><span class="o">()</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
 </code></pre></div>
 <p>Once you have acquired the MudraDevice, you can request additional information from the device by accessing the following properties:</p>
-<h2 id='general-events'>General Events</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnChargingStatusChanged</span> <span class="p">{</span> <span class="n">isCharging</span> <span class="k">in</span>
-
-<span class="p">}</span>
-
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnBatteryLevelChangedCallBack</span><span class="p">{</span> <span class="n">batteryLevel</span> <span class="k">in</span>
-
-<span class="p">}</span>
-
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnFirmwareVersionReceivedCallBack</span><span class="p">{</span> <span class="n">version</span> <span class="k">in</span>
-
-<span class="p">}</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnChargingStatusChange</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnChargingStatusChanged</span><span class="o">()</span> <span class="o">{</span>
+<h2 id='general-events'>General Events</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnChargingStatusChange</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnChargingStatusChanged</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">isCharging</span><span class="o">)</span> <span class="o">{</span>
 
@@ -973,18 +752,12 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><p>Battery Level Change: This event occurs whenever there is a change in the battery level.</p></li>
 <li><p>Firmware Version Update: This event is triggered when the firmware version has been successfully retrieved.</p></li>
 </ol>
-<h2 id='set-hand'>Set Hand</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To set hand</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">hand</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Right</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">hand</span> <span class="o">=</span> <span class="o">.</span><span class="kt">Left</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To set hand</span>
+<h2 id='set-hand'>Set Hand</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To set hand</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">LEFT</span><span class="o">);</span>
 </code></pre></div>
 <p>When the device is connected, you need to update its settings via the API depending on whether you wear the band on your left or right hand.</p>
-<h2 id='ai_models'>AI_Models</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To change the algorithm model</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">NeuralClicker</span><span class="p">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setModelType</span><span class="p">(</span><span class="o">.</span><span class="kt">Embedded</span><span class="p">);</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To change the algorithm model</span>
+<h2 id='ai_models'>AI_Models</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To change the algorithm model</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModelType</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">NeuralClicker</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModelType</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">Embedded</span><span class="o">);</span>
 </code></pre></div>
@@ -997,20 +770,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li> Embedded</li> 
 </ol></li>
 </ul>
-<h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnSncPackageReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
-    <span class="c1">// data's length is 24</span>
-    <span class="c1">// [0-7)   is SNC_1</span>
-    <span class="c1">// [8-15)  is SNC_2</span>
-    <span class="c1">// [15-23) is SNC_3</span>
-<span class="p">}</span>
-
-<span class="c1">//To disable put nil.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setOnSncPackageReady</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-
-<span class="c1">//To check if the callback is set.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">onSncBlock</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
+<h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
@@ -1038,20 +798,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/Snc-2966a75c.png" width="600"></p>
 
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='gyroscope'>Gyroscope</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setImuGyroReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
-        <span class="c1">// data's length is 24</span>
-        <span class="c1">// [0, 3, 6, 9 , 12, 15, 18, 21]   is GYRO_1</span>
-        <span class="c1">// [1, 4, 7, 10, 13, 16, 19, 22]   is GYRO_2</span>
-        <span class="c1">// [2, 5, 8, 11, 14, 17, 20, 23]   is GYRO_3</span>
-<span class="p">}</span>
-
-<span class="c1">//To disable put nil.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setImuGyroReady</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-
-<span class="c1">//To check if the callback is set.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">onImuGyroBlock</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
+<h2 id='gyroscope'>Gyroscope</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuGyroReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuGyroReady</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
@@ -1079,21 +826,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/Imu-16cba28d.png" width="600"></p>
 
 <p>Functionality for exposing raw GYRO (Gyroscope) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='accelerometer'>Accelerometer</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setImuAccRawReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
-        <span class="c1">// data's length is 24</span>
-        <span class="c1">// [0, 3, 6, 9 , 12, 15, 18, 21]   is ACC_1</span>
-        <span class="c1">// [1, 4, 7, 10, 13, 16, 19, 22]   is ACC_2</span>
-        <span class="c1">// [2, 5, 8, 11, 14, 17, 20, 23]   is ACC_3</span>
-
-<span class="p">}</span>
-
-<span class="c1">//To disable put nil.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setImuAccRawReady</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-
-<span class="c1">//To check if the callback is set.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">onImuAccRawBlock</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
+<h2 id='accelerometer'>Accelerometer</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccRawReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuGyroReady</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
@@ -1121,17 +854,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/Imu-16cba28d.png" width="600"></p>
 
 <p>Functionality for exposing raw ACC (Accelerometer Characterization Capability) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='accelerometer-norm'>Accelerometer Norm</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnImuAccNormPackageReady</span><span class="p">{</span> <span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="k">in</span>
-
-<span class="p">}</span>
-
-<span class="c1">//To disable put nil.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setOnImuAccNormPackageReady</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-
-<span class="c1">//To check if the callback is set.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">onImuAccNormBlock</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
+<h2 id='accelerometer-norm'>Accelerometer Norm</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccNormReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuAccNormReady</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
@@ -1155,17 +878,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/ImuNorm-4b98c17f.png" width="300"></p>
 
 <p>Returns the Root Mean Square (RMS) value of the three-axis (X, Y, Z) acceleration measurements, which are normalized for gravity.  Removing the effects of gravity from the acceleration data, providing a more accurate representation of the band motion in three dimensions.</p>
-<h1 id='features'>Features</h1><h2 id='pressure-level'>Pressure Level</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To enable register, for the callback.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnProportionalReady</span><span class="p">{</span> <span class="p">(</span><span class="n">pressure</span><span class="p">)</span> <span class="k">in</span>  
-
-<span class="p">}</span>
-
-<span class="c1">//To disable put nil.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setOnProportionalReady</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-
-<span class="c1">//To check if the callback is set.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">onProportionalBlock</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
+<h1 id='features'>Features</h1><h2 id='pressure-level'>Pressure Level</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnPressureReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnPressureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">float</span> <span class="n">pressure</span><span class="o">)</span> <span class="o">{</span>
@@ -1188,13 +901,8 @@ Note that any changes made to settings in the Editor will be applied when starti
 </ul>
 
 <p>In order to esstimate the amount of finger tip pressure, use the descriped API. The returned pressure parameter indecates 1.0 for the most amount of pressure while 0.0 indecates the lowest. </p>
-<h2 id='gesture-recognition'>Gesture Recognition</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To register for tap event:</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">setOnAirMouseButtonChanged</span><span class="p">{</span> <span class="n">buttonEvent</span> <span class="k">in</span> 
-    <span class="c1">// buttonEvent == .Release, in case release event</span>
-    <span class="c1">// buttonEvent == .Press, in case press event</span>
-<span class="p">}</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To register for tap event:</span>
-<span class="n">lastConnectedDevice</span><span class="o">.</span><span class="na">setOnAirMouseButtonChanged</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnAirMouseButtonChanged</span><span class="o">()</span> <span class="o">{</span>
+<h2 id='gesture-recognition'>Gesture Recognition</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To register for tap event:</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnAirMouseButtonChanged</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnAirMouseButtonChanged</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">AirMouseCommand</span> <span class="n">command</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// buttonEvent == AirMouseCommand.Release, in case release event</span>
@@ -1212,12 +920,7 @@ Note that any changes made to settings in the Editor will be applied when starti
 </ul>
 
 <p>To register for an event that is triggered whenever the chosen model detects a click or release, you can use the following approach:</p>
-<h2 id='navigation'>Navigation</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePointerActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>   <span class="c1">// to enable the air-mouse pointer</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePointerActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>  <span class="c1">// to disbale the air-mouse pointer</span>
-
-<span class="c1">//In order to check if the air-mouse pointer is enabled</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">isAirMousePointerActive</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// to enable the air-mouse pointer</span>
+<h2 id='navigation'>Navigation</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// to enable the air-mouse pointer</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// to disbale the air-mouse pointer</span>
 
 <span class="c1">//In order to check if the air-mouse pointer is enabled</span>
@@ -1231,26 +934,12 @@ Note that any changes made to settings in the Editor will be applied when starti
 </ul>
 
 <p>To activate the Air-Mouse-Pointer, you need to execute the following command:</p>
-<h1 id='hid-commands'>HID commands</h1><h2 id='mouse-left-button-action'>Mouse Left Button Action</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="c1">//To trigger a "Press" or "Release" action in your application, you can use the appropriate API methods provided by the mudraDevice. Here's how you can implement them:</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">sendAirMouseButton</span><span class="p">(</span><span class="o">.</span><span class="kt">Release</span><span class="p">);</span> <span class="c1">// This line sends a release command</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">sendAirMouseButton</span><span class="p">(</span><span class="o">.</span><span class="kt">Press</span><span class="p">);</span>   <span class="c1">// This line sends a press command</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To trigger a "Press" or "Release" action in your application, you can use the appropriate API methods provided by the mudraDevice. Here's how you can implement them:</span>
+<h1 id='hid-commands'>HID commands</h1><h2 id='mouse-left-button-action'>Mouse Left Button Action</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To trigger a "Press" or "Release" action in your application, you can use the appropriate API methods provided by the mudraDevice. Here's how you can implement them:</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">sendAirMouseButton</span><span class="o">(</span><span class="nc">AirMouseCommand</span><span class="o">.</span><span class="na">Release</span><span class="o">);</span> <span class="c1">// This line sends a release command</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">sendAirMouseButton</span><span class="o">(</span><span class="nc">AirMouseCommand</span><span class="o">.</span><span class="na">Press</span><span class="o">);</span>   <span class="c1">// This line sends a press command</span>
 </code></pre></div>
 <p>Using mouse profile, supporting left button press and release.</p>
-<h1 id='experiences'>Experiences</h1><h2 id='air-touch'>Air-Touch</h2><div class="highlight"><pre class="highlight swift tab-swift"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePointerActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>   <span class="c1">// To activate the Air-Mouse-Pointer</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePressReleaseActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>   <span class="c1">// To activate press and release</span>
-
-
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePointerActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>  <span class="c1">// To deactivate the Air-Mouse-Pointer</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="nf">setAirMousePressReleaseActive</span><span class="p">(</span><span class="nv">active</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>   <span class="c1">// To deactivate press and release</span>
-
-
-<span class="c1">//To verify if these commands are enabled, execute the following command:</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">isAirMousePointerActive</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="n">isAirMousePressReleaseActive</span>
-</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// To activate the Air-Mouse-Pointer</span>
+<h1 id='experiences'>Experiences</h1><h2 id='air-touch'>Air-Touch</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// To activate the Air-Mouse-Pointer</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePressReleaseActive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// To activate press and release</span>
 
 
@@ -1282,7 +971,6 @@ Note that any changes made to settings in the Editor will be applied when starti
 <h1 id='sample-applications'>Sample Applications</h1>
 <ul>
 <li>Android Sample Application gitHub : <a href='https://github.com/wearable-devices/AndroidAppExample'> AndroidAppExample </a></li>
-<li>iOS Sample Application gitHub : <a href='https://github.com/wearable-devices/iOSAppExample'> iOSAppExample </a></li>
 </ul>
 <h1 id='troubleshooting'>Troubleshooting</h1>
 <table><thead>
@@ -1319,7 +1007,6 @@ Note that any changes made to settings in the Editor will be applied when starti
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="swift">Swift</a>
                 <a href="#" data-language-name="java">Java</a>
           </div>
       </div>
