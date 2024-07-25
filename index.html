@@ -348,13 +348,13 @@
                     <a href="#mudradevice-properties" class="toc-h2 toc-link" data-title="MudraDevice properties">MudraDevice properties</a>
                   </li>
                   <li>
+                    <a href="#mudradevice-firmware-status" class="toc-h2 toc-link" data-title="MudraDevice firmware status">MudraDevice firmware status</a>
+                  </li>
+                  <li>
                     <a href="#general-events" class="toc-h2 toc-link" data-title="General Events">General Events</a>
                   </li>
                   <li>
                     <a href="#set-hand" class="toc-h2 toc-link" data-title="Set Hand">Set Hand</a>
-                  </li>
-                  <li>
-                    <a href="#ai_models" class="toc-h2 toc-link" data-title="AI_Models">AI_Models</a>
                   </li>
               </ul>
           </li>
@@ -370,9 +370,6 @@
                   <li>
                     <a href="#accelerometer" class="toc-h2 toc-link" data-title="Accelerometer">Accelerometer</a>
                   </li>
-                  <li>
-                    <a href="#accelerometer-norm" class="toc-h2 toc-link" data-title="Accelerometer Norm">Accelerometer Norm</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -387,13 +384,8 @@
                   <li>
                     <a href="#navigation" class="toc-h2 toc-link" data-title="Navigation">Navigation</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#hid-commands" class="toc-h1 toc-link" data-title="HID commands">HID commands</a>
-              <ul class="toc-list-h2">
                   <li>
-                    <a href="#mouse-left-button-action" class="toc-h2 toc-link" data-title="Mouse Left Button Action">Mouse Left Button Action</a>
+                    <a href="#hand-orientation" class="toc-h2 toc-link" data-title="Hand Orientation">Hand Orientation</a>
                   </li>
               </ul>
           </li>
@@ -404,9 +396,6 @@
                     <a href="#air-touch" class="toc-h2 toc-link" data-title="Air-Touch">Air-Touch</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#sample-applications" class="toc-h1 toc-link" data-title="Sample Applications">Sample Applications</a>
           </li>
           <li>
             <a href="#troubleshooting" class="toc-h1 toc-link" data-title="Troubleshooting">Troubleshooting</a>
@@ -457,7 +446,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">11.18</span><span class="err">'</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">12.12</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
@@ -523,7 +512,7 @@
 </thead><tbody>
 <tr>
 <td>Main</td>
-<td>Pressure, Gesture recognition, Air Mouse, ACC NORM</td>
+<td>Pressure, Gesture, Navigation, Quaternion, Air-Touch</td>
 </tr>
 <tr>
 <td>RawData</td>
@@ -724,16 +713,55 @@ Note that any changes made to settings in the Editor will be applied when starti
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getDeviceNumberByName</span><span class="o">()</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
 </code></pre></div>
 <p>Once you have acquired the MudraDevice, you can request additional information from the device by accessing the following properties:</p>
-<h2 id='general-events'>General Events</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnChargingStatusChange</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnChargingStatusChanged</span><span class="o">()</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">isCharging</span><span class="o">)</span> <span class="o">{</span>
+<h2 id='mudradevice-firmware-status'>MudraDevice firmware status</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Check if navigation feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isNavigationEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isNavigationEnabled</span><span class="o">();</span>
 
+<span class="c1">// Check if gesture feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isGestureEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isGestureEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if pressure feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isPressureEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isPressureEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if SNC (Synchronous Neural Connection) feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isSncEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSncEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if accelerometer feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isAccEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isAccEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if gyroscope feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isGyroEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isGyroEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if quaternion feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isQuaternionEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isQuaternionEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if firmware sends navigation delta X and delta Y to the app on movement</span>
+<span class="kt">boolean</span> <span class="n">isSendsToAppEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsToAppEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if firmware sends navigation delta X and delta Y to the HID (Human Interface Device)</span>
+<span class="kt">boolean</span> <span class="n">isSendsToNavigationHIDEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsToNavigationHIDEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if firmware sends mouse click and release on gesture to the HID</span>
+<span class="kt">boolean</span> <span class="n">isSendsToGestureHIDEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsToGestureHIDEnabled</span><span class="o">();</span>
+
+<span class="c1">// Check if Air-Touch feature is enabled</span>
+<span class="kt">boolean</span> <span class="n">isAirTouchEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isAirTouch</span><span class="o">();</span>
+
+<span class="c1">// Request the firmware to send its status</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">requestForFirmwareStatus</span><span class="o">();</span>
+
+<span class="c1">// Set a callback to be executed each time the firmware status changes</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFirmwareStatusChanged</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnFirmwareStatusChanged</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">updated</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Implement callback logic here</span>
     <span class="o">}</span>
 <span class="o">});</span>
 
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnFirmwareVersionRead</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnFirmwareVersionRead</span><span class="o">()</span> <span class="o">{</span>
+</code></pre></div>
+<p>The firmware status indicates the current status of the firmware.</p>
+<h2 id='general-events'>General Events</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnChargingStatusChange</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnChargingStatusChanged</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">String</span> <span class="n">firmware</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">isCharging</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="o">}</span>
 <span class="o">});</span>
@@ -750,26 +778,12 @@ Note that any changes made to settings in the Editor will be applied when starti
 <ol>
 <li><p>Charging State Change: This event is triggered whenever the MudraDevice is connected to or disconnected from the charger.</p></li>
 <li><p>Battery Level Change: This event occurs whenever there is a change in the battery level.</p></li>
-<li><p>Firmware Version Update: This event is triggered when the firmware version has been successfully retrieved.</p></li>
 </ol>
 <h2 id='set-hand'>Set Hand</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To set hand</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">LEFT</span><span class="o">);</span>
 </code></pre></div>
 <p>When the device is connected, you need to update its settings via the API depending on whether you wear the band on your left or right hand.</p>
-<h2 id='ai_models'>AI_Models</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To change the algorithm model</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModelType</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">NeuralClicker</span><span class="o">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setModelType</span><span class="o">(</span><span class="nc">ModelType</span><span class="o">.</span><span class="na">Embedded</span><span class="o">);</span>
-</code></pre></div>
-<p>It is possible to change the AI algorithem that runs &quot;Under the hood&quot;.</p>
-
-<ul>
-<li><strong>Available AI_Models : </strong>
-<ol> 
-<li> NeuralClicker</li> 
-<li> Embedded</li> 
-</ol></li>
-</ul>
 <h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
@@ -854,30 +868,6 @@ Note that any changes made to settings in the Editor will be applied when starti
 <p><img src="images/Imu-16cba28d.png" width="600"></p>
 
 <p>Functionality for exposing raw ACC (Accelerometer Characterization Capability) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='accelerometer-norm'>Accelerometer Norm</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccNormReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuAccNormReady</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="o">}</span>
-<span class="o">});</span>
-
-<span class="c1">//To disable put null.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccNormReady</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
-
-<span class="c1">//To check if the callback is set.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuAccNormCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div>
-<ul>
-<li><strong>Requirements : </strong>
-<ol> 
-<li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
-</ol></li>
-</ul>
-
-<p><img src="images/ImuNorm-4b98c17f.png" width="300"></p>
-
-<p>Returns the Root Mean Square (RMS) value of the three-axis (X, Y, Z) acceleration measurements, which are normalized for gravity.  Removing the effects of gravity from the acceleration data, providing a more accurate representation of the band motion in three dimensions.</p>
 <h1 id='features'>Features</h1><h2 id='pressure-level'>Pressure Level</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnPressureReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnPressureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
@@ -896,35 +886,100 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li><strong>Requirements : </strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
-<li> <a href="https://wearable-devices.github.io/#ai_models">AI_Model</a> - Embedded</li> 
 </ol></li>
 </ul>
 
 <p>In order to esstimate the amount of finger tip pressure, use the descriped API. The returned pressure parameter indecates 1.0 for the most amount of pressure while 0.0 indecates the lowest. </p>
-<h2 id='gesture-recognition'>Gesture Recognition</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To register for tap event:</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnAirMouseButtonChanged</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnAirMouseButtonChanged</span><span class="o">()</span> <span class="o">{</span>
+<h2 id='gesture-recognition'>Gesture Recognition</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Enable discrete gestures</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">AirMouseCommand</span> <span class="n">command</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// buttonEvent == AirMouseCommand.Release, in case release event</span>
-        <span class="c1">// buttonEvent == AirMouseCommand.Press, in case press event</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">GestureType</span> <span class="n">gestureType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Callback executed when a discrete gesture is detected</span>
     <span class="o">}</span>
 <span class="o">});</span>
 
+<span class="c1">// Disable discrete gestures</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+
+<span class="c1">// Enable continuous gestures</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnButtonChanged</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnButtonChanged</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">AirMouseCommand</span> <span class="n">airMouseCommand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// buttonEvent == AirMouseCommand.Release for release event</span>
+        <span class="c1">// buttonEvent == AirMouseCommand.Press for press event</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+
+<span class="c1">// Disable continuous gestures</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnButtonChanged</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+
+<span class="c1">// Enable sending HID commands "Mouse Left Button Press" and "Mouse Left Button Release"</span>
+<span class="c1">// by setting sending to Firmware Target GESTURE_TO_HID.</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">// Enable sending through HID</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending through HID</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements : </strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
-<li> <a href="https://wearable-devices.github.io/#ai_models">AI_Model</a> - NeuralClicker</li> 
 </ol></li>
 </ul>
 
-<p>To register for an event that is triggered whenever the chosen model detects a click or release, you can use the following approach:</p>
-<h2 id='navigation'>Navigation</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// to enable the air-mouse pointer</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// to disbale the air-mouse pointer</span>
+<p>Gesture Detection</p>
 
-<span class="c1">//In order to check if the air-mouse pointer is enabled</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">isAirMousePointerActive</span><span class="o">()</span> 
+<p>The SDK provides comprehensive gesture detection capabilities for both discrete and continuous gestures, enhancing interaction and control with the wristband.</p>
+
+<ul>
+<li>Discrete Gestures:
+are single actions that are immediately recognizable and have distinct start and end points. The SDK detects the following discrete gestures:</li>
+</ul>
+
+<ol> 
+<li><strong>Tap</strong>: A quick thumb and index tap. </li> 
+<li><strong>Double Tap</strong>.</li> 
+<li><strong>Twist</strong>: A rapid back-and-forth rotation of the wrist. </li> 
+<li><strong>Double Twist</strong>. </li> 
+</ol>
+
+<ul>
+<li>Continuous Gestures:
+involve sustained interaction over a period of time, where the gesture is active until a specific condition is met, such as releasing the fingers</li>
+</ul>
+
+<ol>
+<li><strong>Press</strong>: This gesture involves pressing with both the thumb and index finger.</li>
+<li><strong>Release</strong>: Both fingers are released.</li>
+</ol>
+
+<p></aside>
+<aside style="background-color: rgba(255, 0, 0, 0.2); text">
+<strong>Note</strong> You can control whether to send HID commands on press, release, and twist gestures by enabling or disabling gesture recognition (discrete or continuous) using the following code on the right side of the page.
+</aside></p>
+<h2 id='navigation'>Navigation</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// To enable navigation:\</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnNavigationReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnNavigationReady</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">int</span> <span class="n">delta_x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delta_y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Callback executed when receiving Delta_x and Delta_y</span>
+        <span class="c1">// In case enabled: mudraDevice.setSendingToFirmwareTarget(FirmwareTarget.TO_APP, true);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">Direction</span> <span class="n">direction</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Callback executed when receiving direction movement : UP, DOWN, RIGHT, LEFT</span>
+        <span class="c1">// In case enabled: mudraDevice.setSendingToFirmwareTarget(FirmwareTarget.TO_APP, true);</span>
+        <span class="o">}</span>
+<span class="o">});</span>
+<span class="c1">// To disable navigation:</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnNavigationReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+<span class="c1">// Developer can control where to send the navigation Delta_x and Delta_y:</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y through HID</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y through HID</span>
+
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">TO_APP</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y to the app as a callback</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">TO_APP</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y to the app as a callback</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements : </strong>
@@ -933,45 +988,96 @@ Note that any changes made to settings in the Editor will be applied when starti
 </ol></li>
 </ul>
 
-<p>To activate the Air-Mouse-Pointer, you need to execute the following command:</p>
-<h1 id='hid-commands'>HID commands</h1><h2 id='mouse-left-button-action'>Mouse Left Button Action</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To trigger a "Press" or "Release" action in your application, you can use the appropriate API methods provided by the mudraDevice. Here's how you can implement them:</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">sendAirMouseButton</span><span class="o">(</span><span class="nc">AirMouseCommand</span><span class="o">.</span><span class="na">Release</span><span class="o">);</span> <span class="c1">// This line sends a release command</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">sendAirMouseButton</span><span class="o">(</span><span class="nc">AirMouseCommand</span><span class="o">.</span><span class="na">Press</span><span class="o">);</span>   <span class="c1">// This line sends a press command</span>
-</code></pre></div>
-<p>Using mouse profile, supporting left button press and release.</p>
-<h1 id='experiences'>Experiences</h1><h2 id='air-touch'>Air-Touch</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// To activate the Air-Mouse-Pointer</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePressReleaseActive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// To activate press and release</span>
+<p>Navigation feature provides either delta x and y or direction movements (UP, DOWN, RIGHT, LEFT), and allows developers to control where these inputs are sent (either to HID or directly to the application).</p>
+<h2 id='hand-orientation'>Hand Orientation</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">l</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">floats</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//floats[0] -&gt; W</span>
+            <span class="c1">//floats[1] -&gt; X</span>
+            <span class="c1">//floats[2] -&gt; Y</span>
+            <span class="c1">//floats[3] -&gt; Z</span>
+        <span class="o">}</span>
+<span class="o">});</span>
 
-
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePointerActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>  <span class="c1">// To deactivate the Air-Mouse-Pointer</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirMousePressReleaseActive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>   <span class="c1">// To deactivate press and release</span>
-
-
-<span class="c1">//To verify if these commands are enabled, execute the following command:</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">isAirMousePointerActive</span><span class="o">()</span> 
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">isAirMousePressReleaseActive</span><span class="o">()</span> 
+<span class="c1">//To disable</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
 </code></pre></div>
 <ul>
-<li><p><strong>Requirements : </strong>
+<li><strong>Requirements : </strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
-</ol></p></li>
-<li><p><strong>The &quot;Air Touch&quot; experience encompasses the following features:</strong>
-<ol> 
-<li><strong>Navigation:</strong> Utilizes a pointer mode for on-screen navigation.</li> 
-<li><strong>Gesture Recognition:</strong> Recognizes tapping gestures for interaction.</li> 
-<li><strong>Pressure Level:</strong> There is no pressure sensitivity involved in the interaction.</li> 
-<li><strong>HID Commands:</strong> Using mouse profile, supporting left button press and release.</li> 
-</ol></p></li>
+</ol></li>
 </ul>
 
-<p>Enable or disable the air touch.</p>
+<p>Report the orientation of the wristband in terms of quaternions. 
+Quaternions are a mathematical representation that describes the orientation of an object in 3D space. 
+Each quaternion is represented by four components: qw,qx,qy,qz. These components collectively describe the rotation of the wristband relative to a reference orientation.</p>
+<h1 id='experiences'>Experiences</h1><h2 id='air-touch'>Air-Touch</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirTouchActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// To activate Air-Touch</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirTouchActive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// To deactivate Air-Touch</span>
 
-<p>When the Air-Touch is enabled, the device start to simulate mouse actions like clicks or movements. The device then sends the clicks and movement to any operating system using the HID (Human Interface Device) protocol. </p>
-<h1 id='sample-applications'>Sample Applications</h1>
+
+<span class="c1">//In order to change mode</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">IPHONE</span><span class="o">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">MAC</span><span class="o">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">APPLE_TV</span><span class="o">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">IPAD</span><span class="o">);</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">ANDROID</span><span class="o">);</span>
+</code></pre></div>
 <ul>
-<li>Android Sample Application gitHub : <a href='https://github.com/wearable-devices/AndroidAppExample'> AndroidAppExample </a></li>
+<li><strong>Requirements : </strong>
+<ol> 
+<li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
+</ol></li>
 </ul>
+
+<p>When the Air-Touch is enabled, the device starts to simulate mouse/keyboard/media actions like clicks or movements. The device then sends the clicks and movement to any operating system using the HID (Human Interface Device) protocol. </p>
+
+<table><thead>
+<tr>
+<th>Air-Touch Mode</th>
+<th>Navigation</th>
+<th>Gesture</th>
+<th>HID Command On Each Gesture</th>
+<th>HID Profile</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>iOS</td>
+<td>Pointer</td>
+<td>Press <br> Release <br> Twist</td>
+<td>Left Button Press <br>Left Button Release <br>Home</td>
+<td>Mouse <br> Mouse <br>  Keyboard</td>
+</tr>
+<tr>
+<td>MAC</td>
+<td>Pointer</td>
+<td>Press <br> Release <br> Twist</td>
+<td>Left Button Press <br>Left Button Release <br>App Manager</td>
+<td>Mouse <br> Mouse <br>  Keyboard</td>
+</tr>
+<tr>
+<td>AppleTV</td>
+<td>DPad</td>
+<td>Double Tap <br> Twist <br> Double Twist</td>
+<td>Select<br>Back<br>App Manager</td>
+<td>Media <br>Keyboard <br>  Keyboard</td>
+</tr>
+<tr>
+<td>iPad</td>
+<td>Pointer</td>
+<td>Press <br> Release <br> Twist</td>
+<td>Left Button Press <br>Left Button Release <br>Home</td>
+<td>Mouse <br> Mouse <br>  Keyboard</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>Pointer</td>
+<td>Press <br> Release <br> Twist <br> Double Twist</td>
+<td>Left Button Press <br>Left Button Release <br>Home <br>App Manager</td>
+<td>Mouse <br> Mouse <br>  Keyboard <br>  Keyboard</td>
+</tr>
+</tbody></table>
 <h1 id='troubleshooting'>Troubleshooting</h1>
 <table><thead>
 <tr>
