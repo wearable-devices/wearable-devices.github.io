@@ -421,6 +421,10 @@
 <p>To put on the wristband correctly, make sure to check whether the logo is positioned on the left or right hand.</p>
 
 <p><img src="images/Hands-1675fd06.png" width="600"></p>
+
+<p><strong>Make sure the band is tight</strong>
+<br>
+<img src="images/BandTight-1d51a2ae.png" width="350"></p>
 <h1 id='access-the-api'>Access the API</h1>
 <aside style="background-color: rgba(255, 100, 0, 0.2); text">
 <center><strong>Using the SDK requires an internet connection.</strong></center>
@@ -446,7 +450,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">12.12</span><span class="err">'</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">12.15</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
@@ -500,7 +504,7 @@
 <p>To utilize certain features of the SDK, a license is required.</p>
 
 <ol>
-<li>Sign up a new user for the MudraBand application on iOS.</li>
+<li>Sign up a new user for the MudraBand application on iOS Or MDK application for Android.</li>
 <li>Contact Tom at tom.y@wearabledevices.co.il to obtain licenses for using features in the SDK.</li>
 </ol>
 
@@ -521,12 +525,11 @@
 </tbody></table>
 <h1 id='initialization-and-connection'>Initialization and Connection</h1><h2 id='android-2'>Android</h2>
 <ul>
-<li>The Android SDK supports development with Java through the implementation of the MudraDelegate Interface. Note that the API supports multiple devices; when the &#39;device&#39; parameter is received in the following functions, it refers to this specific device.
-
-<ul>
-<li><img src="images/AndroidMudraDelegate-51785f7e.png" width="500"></li>
-</ul></li>
+<li>The Android SDK supports development with Java through the implementation of the MudraDelegate Interface. Note that the API supports multiple devices; when the &#39;device&#39; parameter is received in the following functions, it refers to this specific device.</li>
 </ul>
+
+<p><br>
+<img src="images/AndroidMudraDelegate-76d7f2fe.png" width="500"></p>
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="nc">AppCompatActivity</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="nc">ActivityMainBinding</span> <span class="n">binding</span><span class="o">;</span>
@@ -571,8 +574,24 @@
 <td>Called when a device is discoverd by the application.</td>
 </tr>
 <tr>
+<td>public void onDeviceConnecting(MudraDevice mudraDevice)</td>
+<td>Called when the Android device started connecting to given device.</td>
+</tr>
+<tr>
+<td>public void onDeviceConnectedByAndroidOS(MudraDevice mudraDevice)</td>
+<td>Called when the device has been connected. This does not mean that the application may start communication. Service discovery will be handled automatically after this call.</td>
+</tr>
+<tr>
+<td>public void onDeviceFailedToConnect(MudraDevice mudraDevice)</td>
+<td>Called when the device failed to connect.</td>
+</tr>
+<tr>
 <td>public void onDeviceConnected(MudraDevice mudraDevice)</td>
 <td>Called when a device is connected to the application.</td>
+</tr>
+<tr>
+<td>public void onDeviceDisconnecting(MudraDevice mudraDevice)</td>
+<td>Called when user initialized disconnection.</td>
 </tr>
 <tr>
 <td>public void onDeviceDisconnected(MudraDevice mudraDevice)</td>
@@ -625,7 +644,27 @@
         <span class="o">}</span>
 
         <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceConnecting</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceConnectedByAndroidOS</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceFailedToConnect</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceConnected</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceDisconnecting</span><span class="o">(</span><span class="nc">MudraDevice</span> <span class="n">mudraDevice</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="o">}</span>
 
@@ -713,6 +752,13 @@ Note that any changes made to settings in the Editor will be applied when starti
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getDeviceNumberByName</span><span class="o">()</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
 </code></pre></div>
 <p>Once you have acquired the MudraDevice, you can request additional information from the device by accessing the following properties:</p>
+
+<ul>
+<li>BatteryLevel</li>
+<li>FirmwareVersion</li>
+<li>SerialNumber</li>
+<li>DeviceNumber</li>
+</ul>
 <h2 id='mudradevice-firmware-status'>MudraDevice firmware status</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Check if navigation feature is enabled</span>
 <span class="kt">boolean</span> <span class="n">isNavigationEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isNavigationEnabled</span><span class="o">();</span>
 
@@ -917,8 +963,8 @@ Note that any changes made to settings in the Editor will be applied when starti
 
 <span class="c1">// Enable sending HID commands "Mouse Left Button Press" and "Mouse Left Button Release"</span>
 <span class="c1">// by setting sending to Firmware Target GESTURE_TO_HID.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">// Enable sending through HID</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending through HID</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">// Enable sending through HID</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending through HID</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements : </strong>
@@ -962,24 +1008,24 @@ involve sustained interaction over a period of time, where the gesture is active
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">int</span> <span class="n">delta_x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delta_y</span><span class="o">)</span> <span class="o">{</span>
             <span class="c1">// Callback executed when receiving Delta_x and Delta_y</span>
-        <span class="c1">// In case enabled: mudraDevice.setSendingToFirmwareTarget(FirmwareTarget.TO_APP, true);</span>
+        <span class="c1">// In case enabled: mudraDevice.setFirmwareTarget(FirmwareTarget.NAVIGATION_TO_APP, true);</span>
         <span class="o">}</span>
 
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">Direction</span> <span class="n">direction</span><span class="o">)</span> <span class="o">{</span>
             <span class="c1">// Callback executed when receiving direction movement : UP, DOWN, RIGHT, LEFT</span>
-        <span class="c1">// In case enabled: mudraDevice.setSendingToFirmwareTarget(FirmwareTarget.TO_APP, true);</span>
+        <span class="c1">// In case enabled: mudraDevice.setFirmwareTarget(FirmwareTarget.NAVIGATION_TO_APP, true);</span>
         <span class="o">}</span>
 <span class="o">});</span>
 <span class="c1">// To disable navigation:</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnNavigationReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
 
 <span class="c1">// Developer can control where to send the navigation Delta_x and Delta_y:</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y through HID</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y through HID</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y through HID</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y through HID</span>
 
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">TO_APP</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y to the app as a callback</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setSendingToFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">TO_APP</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y to the app as a callback</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_APP</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y to the app as a callback</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_APP</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y to the app as a callback</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements : </strong>
@@ -1045,37 +1091,37 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <tr>
 <td>iOS</td>
 <td>Pointer</td>
-<td>Press <br> Release <br> Twist</td>
-<td>Left Button Press <br>Left Button Release <br>Home</td>
-<td>Mouse <br> Mouse <br>  Keyboard</td>
+<td>Press <br><br> Release <br><br> Twist</td>
+<td>Left Button Press <br><br>Left Button Release <br><br>Home</td>
+<td>Mouse <br><br> Mouse <br<br>  Keyboard</td>
 </tr>
 <tr>
 <td>MAC</td>
 <td>Pointer</td>
-<td>Press <br> Release <br> Twist</td>
-<td>Left Button Press <br>Left Button Release <br>App Manager</td>
-<td>Mouse <br> Mouse <br>  Keyboard</td>
+<td>Press <br><br> Release <br><br> Twist</td>
+<td>Left Button Press <br><br>Left Button Release <br><br>App Manager</td>
+<td>Mouse <br><br> Mouse <br><br>  Keyboard</td>
 </tr>
 <tr>
 <td>AppleTV</td>
 <td>DPad</td>
-<td>Double Tap <br> Twist <br> Double Twist</td>
-<td>Select<br>Back<br>App Manager</td>
-<td>Media <br>Keyboard <br>  Keyboard</td>
+<td>Double Tap <br><br> Twist <br><br> Double Twist</td>
+<td>Select<br><br>Back<br><br>App Manager</td>
+<td>Media <br><br>Keyboard <br><br>  Keyboard</td>
 </tr>
 <tr>
 <td>iPad</td>
 <td>Pointer</td>
-<td>Press <br> Release <br> Twist</td>
-<td>Left Button Press <br>Left Button Release <br>Home</td>
-<td>Mouse <br> Mouse <br>  Keyboard</td>
+<td>Press <br><br> Release <br><br> Twist</td>
+<td>Left Button Press <br><br>Left Button Release <br><br>Home</td>
+<td>Mouse <br><br> Mouse <br><br>  Keyboard</td>
 </tr>
 <tr>
 <td>Android</td>
 <td>Pointer</td>
-<td>Press <br> Release <br> Twist <br> Double Twist</td>
-<td>Left Button Press <br>Left Button Release <br>Home <br>App Manager</td>
-<td>Mouse <br> Mouse <br>  Keyboard <br>  Keyboard</td>
+<td>Press <br><br> Release <br><br> Twist <br><br> Double Twist</td>
+<td>Left Button Press <br><br>Left Button Release <br><br>Home <br><br>App Manager</td>
+<td>Mouse <br><br> Mouse <br><br>  Keyboard <br><br>  Keyboard</td>
 </tr>
 </tbody></table>
 <h1 id='troubleshooting'>Troubleshooting</h1>
@@ -1089,7 +1135,7 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <tr>
 <td>Mudra does not connect to host device</td>
 <td>Android</td>
-<td>Check your Bluetooth version, we recommend 4.2 and above.</td>
+<td>Check your Bluetooth version, we supports only 4.2 and above.</td>
 </tr>
 <tr>
 <td>Mudra does not connect to host device</td>
@@ -1099,7 +1145,7 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <tr>
 <td>Mudra gestures are not correctly recognize</td>
 <td>All</td>
-<td>Make sure that the electrodes are in contact with your skin.</td>
+<td>Make sure that the electrodes are in contact with your skin. <br> <img src="images/HandTight-cc68ce43.png" width="200"></td>
 </tr>
 <tr>
 <td>Missing dll error</td>
