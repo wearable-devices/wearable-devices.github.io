@@ -450,7 +450,7 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">12.15</span><span class="err">'</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">12.17</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
@@ -504,8 +504,8 @@
 <p>To utilize certain features of the SDK, a license is required.</p>
 
 <ol>
-<li>Sign up a new user for the MudraBand application on iOS Or MDK application for Android.</li>
-<li>Contact Tom at tom.y@wearabledevices.co.il to obtain licenses for using features in the SDK.</li>
+<li>Opem a new account on Mudra Developer Kit App.</li>
+<li>Contact Tom Yao at tom.y@wearabledevices.co.il to obtain licenses for using features in the SDK.</li>
 </ol>
 
 <table><thead>
@@ -516,7 +516,7 @@
 </thead><tbody>
 <tr>
 <td>Main</td>
-<td>Pressure, Gesture, Navigation, Quaternion, Air-Touch</td>
+<td>Pressure, Gesture, Navigation, Hand Orientation, Air-Touch</td>
 </tr>
 <tr>
 <td>RawData</td>
@@ -781,16 +781,16 @@ Note that any changes made to settings in the Editor will be applied when starti
 <span class="kt">boolean</span> <span class="n">isQuaternionEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isQuaternionEnabled</span><span class="o">();</span>
 
 <span class="c1">// Check if firmware sends navigation delta X and delta Y to the app on movement</span>
-<span class="kt">boolean</span> <span class="n">isSendsToAppEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsToAppEnabled</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isSendsToAppEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsNavigationToAppEnabled</span><span class="o">();</span>
 
 <span class="c1">// Check if firmware sends navigation delta X and delta Y to the HID (Human Interface Device)</span>
-<span class="kt">boolean</span> <span class="n">isSendsToNavigationHIDEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsToNavigationHIDEnabled</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isSendsToNavigationHIDEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsNavigationToHIDEnabled</span><span class="o">();</span>
 
 <span class="c1">// Check if firmware sends mouse click and release on gesture to the HID</span>
-<span class="kt">boolean</span> <span class="n">isSendsToGestureHIDEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsToGestureHIDEnabled</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isSendsToGestureHIDEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isSendsGestureToHIDEnabled</span><span class="o">();</span>
 
 <span class="c1">// Check if Air-Touch feature is enabled</span>
-<span class="kt">boolean</span> <span class="n">isAirTouchEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isAirTouch</span><span class="o">();</span>
+<span class="kt">boolean</span> <span class="n">isAirTouchEnabled</span> <span class="o">=</span> <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareStatus</span><span class="o">().</span><span class="na">isAirTouchEnabled</span><span class="o">();</span>
 
 <span class="c1">// Request the firmware to send its status</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">requestForFirmwareStatus</span><span class="o">();</span>
