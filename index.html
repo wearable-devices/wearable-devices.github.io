@@ -296,7 +296,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-c5be0c22.png" class="logo" alt="" />
+      <img src="images/new_logo-c715d809.png" class="logo" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="java">Java</a>
         </div>
@@ -833,10 +833,6 @@ Note that any changes made to settings in the Editor will be applied when starti
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// data's length is 24</span>
-        <span class="c1">// [0-7)   is SNC_1</span>
-        <span class="c1">// [8-15)  is SNC_2</span>
-        <span class="c1">// [15-23) is SNC_3</span>
 
     <span class="o">}</span>
 <span class="o">});</span>
@@ -854,17 +850,11 @@ Note that any changes made to settings in the Editor will be applied when starti
 </ol></li>
 </ul>
 
-<p><img src="images/Snc-2966a75c.png" width="600"></p>
-
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
 <h2 id='gyroscope'>Gyroscope</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuGyroReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuGyroReady</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// data's length is 24</span>
-        <span class="c1">// [0, 3, 6, 9 , 12, 15, 18, 21]   is GYRO_1</span>
-        <span class="c1">// [1, 4, 7, 10, 13, 16, 19, 22]   is GYRO_2</span>
-        <span class="c1">// [2, 5, 8, 11, 14, 17, 20, 23]   is GYRO_3</span>
 
         <span class="o">}</span>
 <span class="o">});</span>
@@ -882,17 +872,11 @@ Note that any changes made to settings in the Editor will be applied when starti
 </ol></li>
 </ul>
 
-<p><img src="images/Imu-16cba28d.png" width="600"></p>
-
 <p>Functionality for exposing raw GYRO (Gyroscope) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
 <h2 id='accelerometer'>Accelerometer</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccRawReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuGyroReady</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// data's length is 24</span>
-        <span class="c1">// [0, 3, 6, 9 , 12, 15, 18, 21]   is ACC_1</span>
-        <span class="c1">// [1, 4, 7, 10, 13, 16, 19, 22]   is ACC_2</span>
-        <span class="c1">// [2, 5, 8, 11, 14, 17, 20, 23]   is ACC_3</span>
 
         <span class="o">}</span>
 <span class="o">});</span>
@@ -909,8 +893,6 @@ Note that any changes made to settings in the Editor will be applied when starti
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - RawData</li> 
 </ol></li>
 </ul>
-
-<p><img src="images/Imu-16cba28d.png" width="600"></p>
 
 <p>Functionality for exposing raw ACC (Accelerometer Characterization Capability) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
 <h1 id='features'>Features</h1><h2 id='pressure-level'>Pressure Level</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
