@@ -428,28 +428,25 @@
 <aside style="background-color: rgba(255, 100, 0, 0.2); text">
 <center><strong>Using the SDK requires an internet connection.</strong></center>
 </aside>
-<h2 id='android'>Android</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// gradle.properties file:</span>
-<span class="n">authToken</span><span class="o">=&lt;</span><span class="nc">Your</span> <span class="nc">Jitpack</span> <span class="nc">Token</span><span class="o">&gt;</span>
-
-
-<span class="c1">// settings.gradle file:</span>
-<span class="n">dependencyResolutionManagement</span> <span class="o">{</span>
-    <span class="n">repositoriesMode</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">RepositoriesMode</span><span class="o">.</span><span class="na">FAIL_ON_PROJECT_REPOS</span><span class="o">)</span>
-    <span class="n">repositories</span> <span class="o">{</span>
-        <span class="n">google</span><span class="o">()</span>
-        <span class="n">mavenCentral</span><span class="o">()</span>
-        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="err">'</span><span class="nl">https:</span><span class="c1">//jitpack.io'</span>
-            <span class="n">credentials</span> <span class="o">{</span> <span class="n">username</span> <span class="n">authToken</span> <span class="o">}}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-
-<span class="c1">// build.gradle file:</span>
+<h2 id='android'>Android</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// build.gradle file:</span>
 <span class="n">dependencies</span> <span class="o">{</span>
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">wearable</span><span class="o">-</span><span class="nl">devices:Dev_MudraAndroidSDK:</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">12.17</span><span class="err">'</span>
+    <span class="c1">// Mudra SDK: </span>
+        <span class="n">implementation</span> <span class="nf">files</span><span class="o">(</span><span class="n">rootDir</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">+</span><span class="err">'</span><span class="nc">Path</span><span class="o">/</span><span class="nc">MudraAndroidSDK</span><span class="o">.</span><span class="na">aar</span><span class="err">'</span><span class="o">)</span> 
+
+    <span class="c1">//Cloud support:</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">reactivex</span><span class="o">.</span><span class="na">rxjava2</span><span class="o">:</span><span class="nl">rxandroid:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">1</span><span class="err">'</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">squareup</span><span class="o">.</span><span class="na">retrofit2</span><span class="o">:</span><span class="nl">retrofit:</span><span class="mf">2.9</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">squareup</span><span class="o">.</span><span class="na">retrofit2</span><span class="o">:</span><span class="n">adapter</span><span class="o">-</span><span class="nl">rxjava2:</span><span class="mf">2.9</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">squareup</span><span class="o">.</span><span class="na">retrofit2</span><span class="o">:</span><span class="n">converter</span><span class="o">-</span><span class="nl">scalars:</span><span class="mf">2.9</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">squareup</span><span class="o">.</span><span class="na">retrofit2</span><span class="o">:</span><span class="n">converter</span><span class="o">-</span><span class="nl">gson:</span><span class="mf">2.9</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">squareup</span><span class="o">.</span><span class="na">okhttp3</span><span class="o">:</span><span class="n">logging</span><span class="o">-</span><span class="nl">interceptor:</span><span class="mf">5.0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">alpha</span><span class="o">.</span><span class="mi">6</span><span class="err">'</span>
+
+    <span class="c1">// Bluetooth support:</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">ble:</span><span class="mf">2.6</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+        <span class="n">implementation</span> <span class="err">'</span><span class="n">no</span><span class="o">.</span><span class="na">nordicsemi</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v18</span><span class="o">:</span><span class="nl">scanner:</span><span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
 <span class="o">}</span>
 
 <span class="c1">// manifest file:    </span>
@@ -459,13 +456,10 @@
 <span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_COARSE_LOCATION"</span> <span class="o">/&gt;</span>
 </code></pre></div>
 <ul>
-<li>To access the API you must first generate an access token.</li>
-<li>Navigate to <a href='https://jitpack.io/'>https://jitpack.io/</a>, Sign in using your GitHub account. </li>
-<li>Click on your Git-hub username, on top right of the page.</li>
-<li>Copy the access token shown on the first line and add it to your project <strong>gradle.properties</strong> file:</li>
-<li>Add the repository to your project <strong>settings.gradle</strong> file:</li>
-<li>Add BLE permission to your project <strong>manifest.xml</strong> file:</li>
+<li>Download .AAR file from the github : <a href="https://github.com/wearable-devices/AndroidSDK">https://github.com/wearable-devices/AndroidSDK</a></li>
+<li>Include this .AAR file inside project files.</li>
 <li>Implement the SDK to your project <strong>gradle.build</strong> file inside the dependencies:</li>
+<li>Add BLE permission to your project <strong>manifest.xml</strong> file:</li>
 </ul>
 <h2 id='unity'>Unity</h2>
 <ul>
