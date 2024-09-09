@@ -692,8 +692,13 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <strong>It is important</strong> to ensure that only <strong>one</strong> MudraDevice is paired in the BLE settings.
 </aside>
 
+<aside style="background-color: rgba(255, 0, 0, 0.2); text">
+<strong>Supports Unity 2021 and later versions. If you need support for a different version, please contact us.</strong> 
+</aside>
+
 <ul>
 <li><p>A MudraManager is required in the scene. To create one, go to Mudra/MudraManager in the toolbar.</p></li>
+<li><p>Enter the email address associated with your license in the &quot;Email License&quot; field.</p></li>
 <li><p>When the SDK connects to the device, it will create a new device in the Unity input system. To receive input values, you need to set up both an input action asset and a script to listen to the messages. The plugin package includes and example.</p></li>
 <li><p>These are all the input bindings for the MudraDevice. You can find them under &#39;Other/MudraDevice&#39; when setting up a new action.</p></li>
 </ul>
@@ -707,7 +712,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <li><p>The OnConnected and OnDissconnected Events will be called when a device has been connected/dissconnected (Look at Mudra Delegate), the parameter is the index of the device(currently only 1 device is supported)</p></li>
 </ul>
 
-<p><img src="images/MudraManager-8a863f54.png" width="350"></p>
+<p><img src="images/MudraManager-c15bb9b6.png" width="350"></p>
 <h1 id='general'>General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="c1">// int, Returns the device's battery level.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareVersion</span><span class="o">()</span> <span class="c1">// String, Returns the device's firmware version, returns **empty string** in case there is no firmware version.</span>
@@ -715,6 +720,13 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getSerialNumber</span><span class="o">()</span> <span class="c1">// long, Returns the device's the device's serial number, or **0** in case there is no serial number.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getDeviceNumberByName</span><span class="o">()</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">BatteryLevel</span> <span class="c1">// int, Returns the device's battery level.</span>
+
+<span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">FirmwareVersion</span> <span class="c1">// String, Returns the device's firmware version, returns **empty string** in case there is no firmware version.</span>
+
+<span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">SerialNumber</span> <span class="c1">// long, Returns the device's the device's serial number, or **0** in case there is no serial number.</span>
+
+<span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">DeviceNumber</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
 </code></pre></div>
 <p>Once you have acquired the MudraDevice, you can request additional information from the device by accessing the following properties:</p>
 
