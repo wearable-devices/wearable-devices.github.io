@@ -5,6 +5,10 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="description"
+            content="Documentation for the Mudra SDK"
+        >
     <title>Mudra SDK</title>
 
     <style media="screen">
@@ -282,10 +286,13 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-a983c972.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-9c19b03a.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-b12a2749.js"></script>
+      <script src="javascripts/all-024da600.js"></script>
 
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
   </head>
 
   <body class="index" data-languages="[&quot;java&quot;,&quot;csharp&quot;]">
@@ -296,7 +303,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/new_logo-c715d809.png" class="logo" alt="" />
+      <img src="images/logo-c715d809.png" class="logo" style="margin: 20px;" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="java">Java</a>
               <a href="#" data-language-name="csharp">Unity</a>
@@ -410,21 +417,21 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band&trade;</strong> and Mudra API. Here we will explain how to use the band as well as interface  with your device. Our API includes language bindings for <em>Java (Android)</em> and <em>C# (Unity Plugin)</em>. You can find links to a sample application for each of Android or Unity under the Sample Applications section.</p>
+<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band™</strong> and Mudra API. Here we will explain how to use the band as well as interface with your device. Our API includes language bindings for <em>Java (Android)</em> and <em>C# (Unity Plugin)</em>. You can find links to a sample application for each of Android or Unity under the Sample Applications section.</p>
 <h2 id='device-led-status'>Device Led Status</h2>
-<p><img src="images/adv-6736b273.png" width="500">
-<img src="images/connected-af1c79a0.png" width="500">
-<img src="images/lowBattery-c5a7b887.png" width="500">
-<img src="images/charging-95866600.png" width="500">
-<img src="images/dfu-856487fa.png" width="500"></p>
+<p><img src="images/adv-6736b273-6736b273.png" width="500">
+<img src="images/connected-af1c79a0-af1c79a0.png" width="500">
+<img src="images/lowBattery-c5a7b887-c5a7b887.png" width="500">
+<img src="images/charging-95866600-95866600.png" width="500">
+<img src="images/dfu-856487fa-856487fa.png" width="500"></p>
 <h2 id='wearing-the-band'>Wearing the band</h2>
-<p>To ensure you wear the wristband correctly, prease follow the instructions below: </p>
+<p>To ensure you wear the wristband correctly, please follow the instructions below:</p>
 
-<p><img src="images/Hands-d528082a.png" width="600"></p>
+<p><img src="images/Hands-d528082a-d528082a.png" width="600"></p>
 
-<p><img src="images/BandTight-268eda90.png" width="600"></p>
+<p><img src="images/BandTight-268eda90-268eda90.png" width="600"></p>
 
-<p><img src="images/CenterHand-58bb7182.png" width="600"></p>
+<p><img src="images/CenterHand-58bb7182-58bb7182.png" width="600"></p>
 <h1 id='access-the-api'>Access the API</h1>
 <aside style="background-color: rgba(255, 100, 0, 0.2); text">
 <center><strong>Using the SDK requires an internet connection.</strong></center>
@@ -473,26 +480,27 @@
 <li><p>The Mudra Plugin depends on the new Unity input system. Clicking &#39;Install&#39; will install the new input system.</p></li>
 </ul>
 
-<p><img src="images/Page1-bf70d4b5.png" width="350"></p>
+<p><img src="images/Page1-bf70d4b5-bf70d4b5.png" width="350"></p>
 
 <ul>
 <li>The Mudra Unity Plugin currently does not support standalone builds. Please select either iOS or Android as your build target. You can use the dedicated buttons in the Mudra Setup window for this purpose.</li>
 </ul>
 
-<p><img src="images/Page2-8b605f90.png" width="350"></p>
+<p><img src="images/Page2-8b605f90-8b605f90.png" width="350"></p>
 
 <ul>
 <li>If the chosen build target is Android, press the &#39;Fix&#39; buttons to modify the relevant build settings.</li>
 </ul>
 
-<p><img src="images/Page3-ee766afa.png" width="350"></p>
+<p><img src="images/Page3-ee766afa-ee766afa.png" width="350"></p>
 
 <ul>
 <li>Now, press &#39;EnableMudra&#39; to activate all the MudraPlugin scripts.</li>
 </ul>
 
-<p><img src="images/Page4-57d82d9f.png" width="350"></p>
-<h1 id='licenses'>Licenses</h1><div class="highlight"><pre class="highlight java tab-java"><code><span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getLicenseForEmailFromCloud</span><span class="o">(</span><span class="s">"-----@------"</span><span class="o">,</span> <span class="o">(</span><span class="n">success</span><span class="o">,</span> <span class="n">errorResult</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+<p><img src="images/Page4-57d82d9f-57d82d9f.png" width="350"></p>
+<h1 id='licenses'>Licenses</h1><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//Replace your email.</span>
+<span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getLicenseForEmailFromCloud</span><span class="o">(</span><span class="s">"-----@------"</span><span class="o">,</span> <span class="o">(</span><span class="n">success</span><span class="o">,</span> <span class="n">errorResult</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
     <span class="k">if</span><span class="o">(</span> <span class="n">success</span> <span class="o">)</span> <span class="o">{</span>
         <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span> <span class="o">,</span> <span class="s">"licenses set successfully."</span><span class="o">);</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -528,7 +536,7 @@
 </ul>
 
 <p><br>
-<img src="images/AndroidMudraDelegate-76d7f2fe.png" width="500"></p>
+<img src="images/AndroidMudraDelegate-76d7f2fe-76d7f2fe.png" width="500"></p>
 <div class="highlight"><pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="nc">AppCompatActivity</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="nc">ActivityMainBinding</span> <span class="n">binding</span><span class="o">;</span>
@@ -604,7 +612,7 @@
 <li> Mudra.getInstance().requestAccessPermissions(this); </li> 
 <li> Mudra.getInstance().getLicenseForEmailFromCloud(&quot;-------@--------&quot;, (success, errorResult) -&gt; {  }); </li>
 </ol></p></li>
-<li><p>In order to connect, disconnect, scan, stop scanning and get paired devices for a device to the application : </p></li>
+<li><p>In order to connect, disconnect, scan, stop scanning and get paired devices for a device to the application :</p></li>
 </ul>
 
 <table><thead>
@@ -676,7 +684,7 @@
 </code></pre></div>
 <ul>
 <li>To listen to MudraDelegate callbacks you need to set the MudraDelegate by :
-Mudra.getInstance().setMudraDelegate(MudraDelegate mudraDelegate); </li>
+Mudra.getInstance().setMudraDelegate(MudraDelegate mudraDelegate);</li>
 </ul>
 
 <aside>
@@ -703,7 +711,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <li><p>These are all the input bindings for the MudraDevice. You can find them under &#39;Other/MudraDevice&#39; when setting up a new action.</p></li>
 </ul>
 
-<p><img src="images/Page5-5d77cfa7.png" width="350"></p>
+<p><img src="images/Page5-5d77cfa7-5d77cfa7.png" width="350"></p>
 
 <ul>
 <li><p>A fully functional scene with Mudra support will have a MudraManager and a way to read inputs from the input action asset</p></li>
@@ -712,7 +720,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <li><p>The OnConnected and OnDissconnected Events will be called when a device has been connected/dissconnected (Look at Mudra Delegate), the parameter is the index of the device(currently only 1 device is supported)</p></li>
 </ul>
 
-<p><img src="images/MudraManager-c15bb9b6.png" width="350"></p>
+<p><img src="images/MudraManager-c15bb9b6-c15bb9b6.png" width="350"></p>
 <h1 id='general'>General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="c1">// int, Returns the device's battery level.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareVersion</span><span class="o">()</span> <span class="c1">// String, Returns the device's firmware version, returns **empty string** in case there is no firmware version.</span>
@@ -779,7 +787,6 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
         <span class="c1">// Implement callback logic here</span>
     <span class="o">}</span>
 <span class="o">});</span>
-
 </code></pre></div>
 <p>The firmware status indicates the current status of the firmware.</p>
 <h2 id='general-events'>General Events</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnChargingStatusChange</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnChargingStatusChanged</span><span class="o">()</span> <span class="o">{</span>
@@ -825,7 +832,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnSncCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - RawData</li> 
 </ol></li>
@@ -847,7 +854,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuGyroCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - RawData</li> 
 </ol></li>
@@ -869,7 +876,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuAccRawCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - RawData</li> 
 </ol></li>
@@ -896,7 +903,7 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetPressureState</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
 </ol></li>
@@ -943,10 +950,9 @@ The returned pressure parameter indicates 1.0 for maximum pressure and 0.0 fir t
 <span class="c1">// by setting sending to Firmware Target GESTURE_TO_HID.</span>
 <span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">GESTURE_TO_HID</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">// Enable sending through HID</span>
 <span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">GESTURE_TO_HID</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">// Disable sending through HID</span>
-
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
 </ol></li>
@@ -976,7 +982,7 @@ involve sustained interaction over a period of time, where the gesture is active
 <li><strong>Release</strong>: Both fingers are released.</li>
 </ol>
 
-<p><img src="images/Gestures-b12678b2.png" width="600"></p>
+<p><img src="images/Gestures-b12678b2-b12678b2.png" width="600"></p>
 
 <p></aside>
 <aside style="background-color: rgba(255, 0, 0, 0.2); text">
@@ -1021,7 +1027,7 @@ involve sustained interaction over a period of time, where the gesture is active
 <span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">NAVIGATION_TO_APP</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">// Disable sending Delta_x and Delta_y to the app as a callback</span>
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
 </ol></li>
@@ -1048,7 +1054,7 @@ involve sustained interaction over a period of time, where the gesture is active
 <span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetQuaternionState</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
 </ol></li>
@@ -1074,13 +1080,13 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetDeviceMode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">ANDROID</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><strong>Requirements : </strong>
+<li><strong>Requirements :</strong>
 <ol> 
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
 </ol></li>
 </ul>
 
-<p>When the Air-Touch is enabled, the device starts to simulate mouse/keyboard/media actions like clicks or movements. The device then sends the clicks and movement to any operating system using the HID (Human Interface Device) protocol. </p>
+<p>When the Air-Touch is enabled, the device starts to simulate mouse/keyboard/media actions like clicks or movements. The device then sends the clicks and movement to any operating system using the HID (Human Interface Device) protocol.</p>
 
 <table><thead>
 <tr>
@@ -1148,7 +1154,7 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <tr>
 <td>Mudra gestures or pressure are not correctly recognize</td>
 <td>All</td>
-<td>Make sure that the electrodes are in contact with your skin. <br> <img src="images/TroubleHands-372b1a8b.png" width="400"></td>
+<td>Make sure that the electrodes are in contact with your skin. <br> <img src="images/TroubleHands-372b1a8b-372b1a8b.png" width="400"></td>
 </tr>
 <tr>
 <td>Missing dll error</td>
@@ -1157,7 +1163,7 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 </tr>
 </tbody></table>
 
-<p>Please contact <a href="mailto:support@mudra-band.com">support@mudra-band.com</a> for any additional questions or suggestions. </p>
+<p>Please contact <a href="mailto:support@mudra-band.com">support@mudra-band.com</a> for any additional questions or suggestions.</p>
 
       </div>
       <div class="dark-box">
