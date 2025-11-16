@@ -295,7 +295,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;java&quot;,&quot;csharp&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -306,7 +306,6 @@
       <img src="images/logo-c715d809.png" class="logo" style="margin: 20px;" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="java">Java</a>
-              <a href="#" data-language-name="csharp">Unity</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -330,9 +329,6 @@
                   <li>
                     <a href="#android" class="toc-h2 toc-link" data-title="Android">Android</a>
                   </li>
-                  <li>
-                    <a href="#unity" class="toc-h2 toc-link" data-title="Unity">Unity</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -343,9 +339,6 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#android-2" class="toc-h2 toc-link" data-title="Android">Android</a>
-                  </li>
-                  <li>
-                    <a href="#unity-2" class="toc-h2 toc-link" data-title="Unity">Unity</a>
                   </li>
               </ul>
           </li>
@@ -417,7 +410,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band™</strong> and Mudra API. Here we will explain how to use the band as well as interface with your device. Our API includes language bindings for <em>Java (Android)</em> and <em>C# (Unity Plugin)</em>. You can find links to a sample application for each of Android or Unity under the Sample Applications section.</p>
+<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band™</strong> and Mudra API. Here we will explain how to use the band as well as interface with your device. Our API includes language bindings for <em>Java (Android)</em>. You can find links to a sample application for Android under the Sample Applications section.</p>
 <h2 id='device-led-status'>Device Led Status</h2>
 <p><img src="images/adv-6736b273-6736b273.png" width="500">
 <img src="images/connected-af1c79a0-af1c79a0.png" width="500">
@@ -470,35 +463,6 @@
 <li>Implement the SDK to your project <strong>gradle.build</strong> file inside the dependencies:</li>
 <li>Add BLE permission to your project <strong>manifest.xml</strong> file:</li>
 </ul>
-<h2 id='unity'>Unity</h2>
-<ul>
-<li><p>Download package from the link : <a href="https://github.com/wearable-devices/MudraUnityPlugin">https://github.com/wearable-devices/MudraUnityPlugin</a></p></li>
-<li><p>Open Window/Package Manager</p></li>
-<li><p>Press on the plus button and select &quot;Add package from disk&quot;</p></li>
-<li><p>Navigate to the location of the previously downloaded package and select the package.json file</p></li>
-<li><p>Go to Mudra/Mudra Setup in the toolbar</p></li>
-<li><p>The Mudra Plugin depends on the new Unity input system. Clicking &#39;Install&#39; will install the new input system.</p></li>
-</ul>
-
-<p><img src="images/Page1-bf70d4b5-bf70d4b5.png" width="350"></p>
-
-<ul>
-<li>The Mudra Unity Plugin currently does not support standalone builds. Please select either iOS or Android as your build target. You can use the dedicated buttons in the Mudra Setup window for this purpose.</li>
-</ul>
-
-<p><img src="images/Page2-8b605f90-8b605f90.png" width="350"></p>
-
-<ul>
-<li>If the chosen build target is Android, press the &#39;Fix&#39; buttons to modify the relevant build settings.</li>
-</ul>
-
-<p><img src="images/Page3-ee766afa-ee766afa.png" width="350"></p>
-
-<ul>
-<li>Now, press &#39;EnableMudra&#39; to activate all the MudraPlugin scripts.</li>
-</ul>
-
-<p><img src="images/Page4-57d82d9f-57d82d9f.png" width="350"></p>
 <h1 id='licenses'>Licenses</h1><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//Replace your email.</span>
 <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getLicenseForEmailFromCloud</span><span class="o">(</span><span class="s">"-----@------"</span><span class="o">,</span> <span class="o">(</span><span class="n">success</span><span class="o">,</span> <span class="n">errorResult</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
     <span class="k">if</span><span class="o">(</span> <span class="n">success</span> <span class="o">)</span> <span class="o">{</span>
@@ -691,36 +655,6 @@ Mudra.getInstance().setMudraDelegate(MudraDelegate mudraDelegate);</li>
 Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread.
 So, for handling UI activity you need to run any UI code under ((Activity)(getContext())).runOnUiThread(()-> { ... });
 </aside>
-<h2 id='unity-2'>Unity</h2>
-<aside>
-Note that the MudraUnity Plugin currently supports only one device. This device should be connected through the BLE (Bluetooth Low Energy) settings, after which it will automatically connect to the Unity app.
-</aside>
-
-<aside style="background-color: rgba(255, 0, 0, 0.2); text">
-<strong>It is important</strong> to ensure that only <strong>one</strong> MudraDevice is paired in the BLE settings.
-</aside>
-
-<aside style="background-color: rgba(255, 0, 0, 0.2); text">
-<strong>Supports Unity 2021 and later versions. If you need support for a different version, please contact us.</strong> 
-</aside>
-
-<ul>
-<li><p>A MudraManager is required in the scene. To create one, go to Mudra/MudraManager in the toolbar.</p></li>
-<li><p>Enter the email address associated with your license in the &quot;Email License&quot; field.</p></li>
-<li><p>When the SDK connects to the device, it will create a new device in the Unity input system. To receive input values, you need to set up both an input action asset and a script to listen to the messages. The plugin package includes and example.</p></li>
-<li><p>These are all the input bindings for the MudraDevice. You can find them under &#39;Other/MudraDevice&#39; when setting up a new action.</p></li>
-</ul>
-
-<p><img src="images/Page5-5d77cfa7-5d77cfa7.png" width="350"></p>
-
-<ul>
-<li><p>A fully functional scene with Mudra support will have a MudraManager and a way to read inputs from the input action asset</p></li>
-<li><p>The MudraManager serves as your connection to the SDK.</p></li>
-<li><p>The Mudra Manager also holds a few variables which can be set from the editor, these will be the settings that will be applied to the device after first connection.</p></li>
-<li><p>The OnConnected and OnDissconnected Events will be called when a device has been connected/dissconnected (Look at Mudra Delegate), the parameter is the index of the device(currently only 1 device is supported)</p></li>
-</ul>
-
-<p><img src="images/MudraManager-c15bb9b6-c15bb9b6.png" width="350"></p>
 <h1 id='general'>General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="c1">// int, Returns the device's battery level.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareVersion</span><span class="o">()</span> <span class="c1">// String, Returns the device's firmware version, returns **empty string** in case there is no firmware version.</span>
@@ -728,13 +662,6 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getSerialNumber</span><span class="o">()</span> <span class="c1">// long, Returns the device's the device's serial number, or **0** in case there is no serial number.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getDeviceNumberByName</span><span class="o">()</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">BatteryLevel</span> <span class="c1">// int, Returns the device's battery level.</span>
-
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">FirmwareVersion</span> <span class="c1">// String, Returns the device's firmware version, returns **empty string** in case there is no firmware version.</span>
-
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">SerialNumber</span> <span class="c1">// long, Returns the device's the device's serial number, or **0** in case there is no serial number.</span>
-
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">GetDevice</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">DeviceNumber</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
 </code></pre></div>
 <p>Once you have acquired the MudraDevice, you can request additional information from the device by accessing the following properties:</p>
 
@@ -812,9 +739,6 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 <h2 id='set-hand'>Set Hand</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To set hand</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">LEFT</span><span class="o">);</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="c1">//To set hand</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetHand</span><span class="p">(</span><span class="n">HandType</span><span class="p">.</span><span class="n">RIGHT</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetHand</span><span class="p">(</span><span class="n">HandType</span><span class="p">.</span><span class="n">LEFT</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 <p>When the device is connected, you need to update its settings via the API depending on whether you wear the band on your left or right hand.</p>
 <h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
@@ -896,11 +820,6 @@ Note that the MudraUnity Plugin currently supports only one device. This device 
 
 <span class="c1">//To check if the callback is set.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnPressureReadySet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="c1">//To enable pressure in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetPressureState</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-
-<span class="c1">//To disable pressure in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetPressureState</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -940,16 +859,6 @@ The returned pressure parameter indicates 1.0 for maximum pressure and 0.0 fir t
 <span class="c1">// by setting sending to Firmware Target GESTURE_TO_HID.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">// Enable sending through HID</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending through HID</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="c1">//To enable gesture in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetGestureState</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-
-<span class="c1">//To disable gesture in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetGestureState</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-
-<span class="c1">//Enable sending HID commands "Mouse Left Button Press" and "Mouse Left Button Release"</span>
-<span class="c1">// by setting sending to Firmware Target GESTURE_TO_HID.</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">GESTURE_TO_HID</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">// Enable sending through HID</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">GESTURE_TO_HID</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">// Disable sending through HID</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -1011,20 +920,6 @@ involve sustained interaction over a period of time, where the gesture is active
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_APP</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y to the app as a callback</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_APP</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y to the app as a callback</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="c1">//To enable navigation in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetNavigationState</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-
-<span class="c1">//To disable navigation in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetNavigationState</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-
-
-
-<span class="c1">// Developer can control where to send the navigation Delta_x and Delta_y:</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">NAVIGATION_TO_HID</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y through HID</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">NAVIGATION_TO_HID</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">// Disable sending Delta_x and Delta_y through HID</span>
-
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">NAVIGATION_TO_APP</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y to the app as a callback</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetFirmwareTarget</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">NAVIGATION_TO_APP</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">// Disable sending Delta_x and Delta_y to the app as a callback</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -1047,11 +942,6 @@ involve sustained interaction over a period of time, where the gesture is active
 
 <span class="c1">//To disable</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="c1">//To enable quaternion in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetQuaternionState</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-
-<span class="c1">//To disable quaternion in device number 0</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetQuaternionState</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -1073,11 +963,6 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">APPLE_TV</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">IPAD</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">ANDROID</span><span class="o">);</span>
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetDeviceMode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">IPHONE</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetDeviceMode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">MAC</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetDeviceMode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">APPLE_TV</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetDeviceMode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">IPAD</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="n">mudraManager</span><span class="p">.</span><span class="nf">SetDeviceMode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">ANDROID</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -1156,11 +1041,6 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <td>All</td>
 <td>Make sure that the electrodes are in contact with your skin. <br> <img src="images/TroubleHands-372b1a8b-372b1a8b.png" width="400"></td>
 </tr>
-<tr>
-<td>Missing dll error</td>
-<td>Unity</td>
-<td>Make sure installation created an environment variable path and unpacked the dlls inside. If not, try running Setup.msi as administrator</td>
-</tr>
 </tbody></table>
 
 <p>Please contact <a href="mailto:support@mudra-band.com">support@mudra-band.com</a> for any additional questions or suggestions.</p>
@@ -1169,7 +1049,6 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="java">Java</a>
-                <a href="#" data-language-name="csharp">Unity</a>
           </div>
       </div>
     </div>
