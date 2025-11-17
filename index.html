@@ -741,18 +741,31 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">LEFT</span><span class="o">);</span>
 </code></pre></div>
 <p>When the device is connected, you need to update its settings via the API depending on whether you wear the band on your left or right hand.</p>
-<h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
+<h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Enable registration for the SNC callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnSncReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">,</span> <span class="kt">int</span> <span class="n">frequency</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frequencyStd</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">rms</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 'data' contains 24 values total:</span>
+        <span class="c1">//   indices [0–7)   → SNC channel 1</span>
+        <span class="c1">//   indices [8–15)  → SNC channel 2</span>
+        <span class="c1">//   indices [16–23) → SNC channel 3</span>
 
+        <span class="c1">// 'frequency' is the number of SNC packets received per second.</span>
+
+        <span class="c1">// 'frequencyStd' is the standard deviation of the packet frequency.</span>
+
+        <span class="c1">// 'rms' contains the root-mean-square value for each SNC channel:</span>
+        <span class="c1">//   rms[0] → channel 1</span>
+        <span class="c1">//   rms[1] → channel 2</span>
+        <span class="c1">//   rms[2] → channel 3</span>
     <span class="o">}</span>
 <span class="o">});</span>
 
-<span class="c1">//To disable put null.</span>
+<span class="c1">// Disable registration by passing null.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnSncReady</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
 
-<span class="c1">//To check if the callback is set.</span>
+<span class="c1">// Check whether the callback is currently registered.</span>
+<span class="c1">// Returns true if a callback is set, false otherwise.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnSncCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
 </code></pre></div>
 <ul>
@@ -763,18 +776,26 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 </ul>
 
 <p>Functionality for exposing raw SNC (Surface Nerve Conductance) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='gyroscope'>Gyroscope</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
+<h2 id='gyroscope'>Gyroscope</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Enable registration for the IMU gyro callback.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuGyroReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuGyroReady</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">,</span> <span class="kt">int</span> <span class="n">frequency</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frequencyStd</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// 'data' contains 24 values arranged in interleaved groups:</span>
+            <span class="c1">//   indices [0, 3, 6, 9, 12, 15, 18, 21] → GYRO channel 1</span>
+            <span class="c1">//   indices [1, 4, 7, 10, 13, 16, 19, 22] → GYRO channel 2</span>
+            <span class="c1">//   indices [2, 5, 8, 11, 14, 17, 20, 23] → GYRO channel 3</span>
 
+            <span class="c1">// 'frequency' is the number of gyro packets received per second.</span>
+            <span class="c1">// 'frequencyStd' is the standard deviation of that frequency.</span>
         <span class="o">}</span>
 <span class="o">});</span>
 
-<span class="c1">//To disable put null.</span>
+<span class="c1">// Disable registration by passing null.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuGyroReady</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
 
-<span class="c1">//To check if the callback is set.</span>
+
+<span class="c1">// Check whether the callback is currently registered.</span>
+<span class="c1">// Returns true if a callback is set, false otherwise.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuGyroCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
 </code></pre></div>
 <ul>
@@ -785,19 +806,27 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 </ul>
 
 <p>Functionality for exposing raw GYRO (Gyroscope) sensor values. This function may incur an additional fee (We will send a license with instructions for those who are interested in this functionality).</p>
-<h2 id='accelerometer'>Accelerometer</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable register, for the callback.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccRawReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuGyroReady</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+<h2 id='accelerometer'>Accelerometer</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Enable registration for the raw accelerometer callback.</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccRawReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuAccRawReady</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">long</span> <span class="n">timestamp</span><span class="o">,</span> <span class="kt">float</span><span class="o">[]</span> <span class="n">data</span><span class="o">,</span> <span class="kt">int</span> <span class="n">frequency</span><span class="o">,</span> <span class="kt">float</span> <span class="n">frequencyStd</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 'data' contains 24 values arranged in an interleaved pattern:</span>
+        <span class="c1">//   indices [0, 3, 6, 9, 12, 15, 18, 21] → ACC channel 1</span>
+        <span class="c1">//   indices [1, 4, 7, 10, 13, 16, 19, 22] → ACC channel 2</span>
+        <span class="c1">//   indices [2, 5, 8, 11, 14, 17, 20, 23] → ACC channel 3</span>
 
-        <span class="o">}</span>
+        <span class="c1">// 'frequency' is the number of accelerometer packets received per second.</span>
+        <span class="c1">// 'frequencyStd' is the standard deviation of that packet frequency.</span>
+    <span class="o">}</span>
 <span class="o">});</span>
 
-<span class="c1">//To disable put null.</span>
+<span class="c1">// Disable registration by passing null.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuAccRawReady</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
 
-<span class="c1">//To check if the callback is set.</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuAccRawCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
+
+<span class="c1">// Check whether the callback is currently registered.</span>
+<span class="c1">// Returns true if a callback is set, false otherwise.</span>
+<span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuAccRawCallbackSet</span><span class="o">();</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
