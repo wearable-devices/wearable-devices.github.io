@@ -934,13 +934,7 @@ involve sustained interaction over a period of time, where the gesture is active
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="kt">int</span> <span class="n">delta_x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delta_y</span><span class="o">)</span> <span class="o">{</span>
             <span class="c1">// Callback executed when receiving Delta_x and Delta_y</span>
-        <span class="c1">// In case enabled: mudraDevice.setFirmwareTarget(FirmwareTarget.NAVIGATION_TO_APP, true);</span>
-        <span class="o">}</span>
-
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="nc">Direction</span> <span class="n">direction</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// Callback executed when receiving direction movement : UP, DOWN, RIGHT, LEFT</span>
-        <span class="c1">// In case enabled: mudraDevice.setFirmwareTarget(FirmwareTarget.NAVIGATION_TO_APP, true);</span>
+            <span class="c1">// In case enabled: mudraDevice.setFirmwareTarget(FirmwareTarget.NAVIGATION_TO_APP, true).</span>
         <span class="o">}</span>
 <span class="o">});</span>
 <span class="c1">// To disable navigation:</span>
@@ -961,6 +955,10 @@ involve sustained interaction over a period of time, where the gesture is active
 </ul>
 
 <p>Navigation feature provides either delta x and y or direction movements (UP, DOWN, RIGHT, LEFT), and allows developers to control where these inputs are sent (either to HID or directly to the application).</p>
+
+<aside style="background-color: rgba(255, 100, 0, 0.2); text">
+<center><strong>Delta_y is affected by the choice of hand</strong></center>
+</aside>
 <h2 id='hand-orientation'>Hand Orientation</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
