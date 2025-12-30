@@ -295,7 +295,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;java&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -306,6 +306,7 @@
       <img src="images/logo-c715d809.png" class="logo" style="margin: 20px;" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="java">Java</a>
+              <a href="#" data-language-name="python">Python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -329,6 +330,9 @@
                   <li>
                     <a href="#android" class="toc-h2 toc-link" data-title="Android">Android</a>
                   </li>
+                  <li>
+                    <a href="#python" class="toc-h2 toc-link" data-title="Python">Python</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -339,6 +343,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#android-2" class="toc-h2 toc-link" data-title="Android">Android</a>
+                  </li>
+                  <li>
+                    <a href="#python-2" class="toc-h2 toc-link" data-title="Python">Python</a>
                   </li>
               </ul>
           </li>
@@ -413,7 +420,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band™</strong> and Mudra API. Here we will explain how to use the band as well as interface with your device. Our API includes language bindings for <em>Java (Android)</em>. You can find links to a sample application for Android under the Sample Applications section.</p>
+<p>Welcome to Mudra SDK. This document enables creating your own unique experiences based on the <strong>Mudra Band™</strong> and Mudra API. Here we will explain how to use the band as well as interface with your device. Our API includes language bindings for <em>Java (Android)</em> and <em>Python</em>. You can find links to a sample application for Android under the Sample Applications section.</p>
 <h2 id='device-led-status'>Device Led Status</h2>
 <p><img src="images/adv-6736b273-6736b273.png" width="500">
 <img src="images/connected-af1c79a0-af1c79a0.png" width="500">
@@ -466,6 +473,12 @@
 <li>Implement the SDK to your project <strong>gradle.build</strong> file inside the dependencies:</li>
 <li>Add BLE permission to your project <strong>manifest.xml</strong> file:</li>
 </ul>
+<h2 id='python'>Python</h2>
+<ul>
+<li>Install the package using: <code>pip install mudra-sdk</code></li>
+</ul>
+
+<p>You can also visit the official Python package page for more details: <a href="https://pypi.org/project/mudra-sdk/">https://pypi.org/project/mudra-sdk/</a></p>
 <h1 id='licenses'>Licenses</h1><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//Replace your email.</span>
 <span class="nc">Mudra</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getLicenseForEmailFromCloud</span><span class="o">(</span><span class="s">"-----@------"</span><span class="o">,</span> <span class="o">(</span><span class="n">success</span><span class="o">,</span> <span class="n">errorResult</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
     <span class="k">if</span><span class="o">(</span> <span class="n">success</span> <span class="o">)</span> <span class="o">{</span>
@@ -474,6 +487,16 @@
         <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span> <span class="o">,</span> <span class="s">"failed to set licenses : "</span> <span class="o">+</span> <span class="n">errorResult</span> <span class="o">+</span><span class="s">"."</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># Replace your email.
+</span><span class="kn">from</span> <span class="nn">mudra_sdk</span> <span class="kn">import</span> <span class="n">Mudra</span>
+
+<span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="n">error_result</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"licenses set successfully."</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"failed to set licenses : </span><span class="si">{</span><span class="n">error_result</span><span class="si">}</span><span class="s">."</span><span class="p">)</span>
+
+<span class="n">Mudra</span><span class="p">().</span><span class="n">get_license_for_email_from_cloud</span><span class="p">(</span><span class="s">"-----@------"</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 </code></pre></div>
 <p>To utilize certain features of the SDK, a license is required.</p>
 
@@ -545,7 +568,7 @@
 </thead><tbody>
 <tr>
 <td>public void onDeviceDiscovered(MudraDevice mudraDevice)</td>
-<td>Called when a device is discoverd by the application.</td>
+<td>Called when a device is discovered by the application.</td>
 </tr>
 <tr>
 <td>public void onDeviceConnecting(MudraDevice mudraDevice)</td>
@@ -648,16 +671,115 @@
         <span class="o">}</span>
     <span class="o">});</span>
 <span class="o">}</span>
-</code></pre></div>
+</code></pre></div><h2 id='python-2'>Python</h2>
 <ul>
-<li>To listen to MudraDelegate callbacks you need to set the MudraDelegate by :
-Mudra.getInstance().setMudraDelegate(MudraDelegate mudraDelegate);</li>
+<li>The Python SDK allows you to handle device-related events by implementing a custom delegate class that inherits from <code>MudraDelegate</code>. This supports multiple devices; the <code>device</code> parameter in the callback methods refers to the specific device generating the event.</li>
+</ul>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">mudra_sdk</span> <span class="kn">import</span> <span class="n">Mudra</span><span class="p">,</span> <span class="n">MudraDevice</span>
+<span class="kn">from</span> <span class="nn">mudra_sdk.models.callbacks</span> <span class="kn">import</span> <span class="n">MudraDelegate</span>
+
+<span class="k">def</span> <span class="nf">set_mudra_delegate</span><span class="p">():</span>
+    <span class="c1"># Implement delegate to handle device events
+</span>    <span class="k">class</span> <span class="nc">MyMudraDelegate</span><span class="p">(</span><span class="n">MudraDelegate</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">on_device_discovered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">MudraDevice</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Discovered: </span><span class="si">{</span><span class="n">device</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">device</span><span class="p">.</span><span class="n">address</span><span class="si">}</span><span class="s">)"</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">on_mudra_device_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">MudraDevice</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Device connected: </span><span class="si">{</span><span class="n">device</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">on_mudra_device_disconnected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">MudraDevice</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Device disconnected: </span><span class="si">{</span><span class="n">device</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">on_mudra_device_connecting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">MudraDevice</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Device connecting: </span><span class="si">{</span><span class="n">device</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">..."</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">on_mudra_device_disconnecting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">MudraDevice</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Device disconnecting: </span><span class="si">{</span><span class="n">device</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">..."</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">on_mudra_device_connection_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">MudraDevice</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Connection failed: </span><span class="si">{</span><span class="n">device</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, Error: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">on_bluetooth_state_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Bluetooth state changed: </span><span class="si">{</span><span class="s">'On'</span> <span class="k">if</span> <span class="n">state</span> <span class="k">else</span> <span class="s">'Off'</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+    <span class="c1"># Set the delegate
+</span>    <span class="n">Mudra</span><span class="p">().</span><span class="n">set_delegate</span><span class="p">(</span><span class="n">MyMudraDelegate</span><span class="p">())</span>
+</code></pre></div>
+<p><br>
+<img src="images/PythonMudraDelegate-5e0d0114.png" width="500"></p>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>on_device_discovered(self, device)</td>
+<td>Called when a device is discovered by the application.</td>
+</tr>
+<tr>
+<td>on_mudra_device_connecting(self, device)</td>
+<td>Called when the device has started connecting.</td>
+</tr>
+<tr>
+<td>on_mudra_device_connected(self, device)</td>
+<td>Called when a device is connected to the application.</td>
+</tr>
+<tr>
+<td>on_mudra_device_disconnecting(self, device)</td>
+<td>Called when user initiates disconnection from the device.</td>
+</tr>
+<tr>
+<td>on_mudra_device_disconnected(self, device)</td>
+<td>Called when a device has been disconnected.</td>
+</tr>
+<tr>
+<td>on_mudra_device_connection_failed(self, device, error)</td>
+<td>Called when the device failed to connect.</td>
+</tr>
+<tr>
+<td>on_bluetooth_state_changed(self, state)</td>
+<td>Called when Bluetooth state is changed (state: True=On, False=Off).</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><p>Start by initializing Mudra environment and setting up the system inside the MainActivity:
+<ol> 
+<li> Mudra().get_license_for_email_from_cloud(&quot;-----@------&quot;, callback) </li>
+</ol></p></li>
+<li><p>In order to connect, disconnect, scan and stop scanning for a device to the application :</p></li>
 </ul>
 
-<aside>
-Note that all the above callbacks are called on the BLE thread and <strong>not on</strong> the main thread.
-So, for handling UI activity you need to run any UI code under ((Activity)(getContext())).runOnUiThread(()-> { ... });
-</aside>
+<table><thead>
+<tr>
+<th>Description</th>
+<th>Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>To connect a device call the connect function</td>
+<td>mudraDevice.connect()</td>
+</tr>
+<tr>
+<td>To disconnect a device call the disconnect function</td>
+<td>mudraDevice.disconnect()</td>
+</tr>
+<tr>
+<td>To scan for a Mudra device</td>
+<td>Mudra().scan()</td>
+</tr>
+<tr>
+<td>To stop scaning for a Mudra device</td>
+<td>Mudra().mudra.stop_scan();</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>To listen to MudraDelegate callbacks you need to set the MudraDelegate by :
+Mudra().set_delegate(MyMudraDelegate())</li>
+</ul>
 <h1 id='general'>General</h1><h2 id='mudradevice-properties'>MudraDevice properties</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">getBatteryLevel</span><span class="o">()</span> <span class="c1">// int, Returns the device's battery level.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getFirmwareVersion</span><span class="o">()</span> <span class="c1">// String, Returns the device's firmware version, returns **empty string** in case there is no firmware version.</span>
@@ -665,7 +787,14 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getSerialNumber</span><span class="o">()</span> <span class="c1">// long, Returns the device's the device's serial number, or **0** in case there is no serial number.</span>
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">getDeviceNumberByName</span><span class="o">()</span> <span class="c1">// String, Returns the device's band number, or **0** in case there is no band number.</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">mudraDevice</span><span class="p">.</span><span class="n">get_battery_level</span><span class="p">()</span> <span class="c1"># int, Returns the device's battery level.
+</span>
+<span class="n">mudraDevice</span><span class="p">.</span><span class="n">get_firmware_version</span><span class="p">()</span> <span class="c1"># str, Returns the device's firmware version, returns "" in case there is no firmware version.
+</span>
+<span class="n">mudraDevice</span><span class="p">.</span><span class="n">get_serial_number</span><span class="p">()</span> <span class="c1"># int, Returns the device's serial number, or 0 in case there is no serial number.
+</span>
+<span class="n">mudraDevice</span><span class="p">.</span><span class="n">get_device_number_by_name</span><span class="p">()</span> <span class="c1"># str, Returns the device's band number, or "0" in case there is no band number.
+</span></code></pre></div>
 <p>Once you have acquired the MudraDevice, you can request additional information from the device by accessing the following properties:</p>
 
 <ul>
@@ -717,6 +846,48 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
         <span class="c1">// Implement callback logic here</span>
     <span class="o">}</span>
 <span class="o">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># Check if navigation feature is enabled
+</span><span class="n">is_navigation_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_navigation_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if gesture feature is enabled
+</span><span class="n">is_gesture_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_gesture_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if pressure feature is enabled
+</span><span class="n">is_pressure_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_pressure_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if SNC (Surface Nerve Conductance) feature is enabled
+</span><span class="n">is_snc_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_snc_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if accelerometer feature is enabled
+</span><span class="n">is_acc_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_acc_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if gyroscope feature is enabled
+</span><span class="n">is_gyro_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_gyro_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if quaternion feature is enabled
+</span><span class="n">is_quaternion_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_quaternion_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if firmware sends navigation delta X and delta Y to the app on movement
+</span><span class="n">is_sends_to_app_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_sends_navigation_to_app_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if firmware sends navigation delta X and delta Y to the HID (Human Interface Device)
+</span><span class="n">is_sends_to_navigation_hid_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_sends_navigation_to_hid_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if firmware sends mouse click and release on gesture to the HID
+</span><span class="n">is_sends_to_gesture_hid_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_sends_gesture_to_hid_enabled</span><span class="p">()</span>
+
+<span class="c1"># Check if Air-Touch feature is enabled
+</span><span class="n">is_air_touch_enabled</span> <span class="o">=</span> <span class="n">mudra_device</span><span class="p">.</span><span class="n">firmware_status</span><span class="p">.</span><span class="n">is_air_touch_enabled</span><span class="p">()</span>
+
+<span class="c1"># Request the firmware to send its status
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">request_for_firmware_status</span><span class="p">()</span>
+
+<span class="c1"># Set a callback to be executed each time the firmware status changes
+</span><span class="k">def</span> <span class="nf">on_firmware_status_changed</span><span class="p">(</span><span class="n">updated</span><span class="p">):</span>
+    <span class="c1"># Implement callback logic here
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_firmware_status_changed</span><span class="p">(</span><span class="n">on_firmware_status_changed</span><span class="p">)</span>
 </code></pre></div>
 <p>The firmware status indicates the current status of the firmware.</p>
 <h2 id='general-events'>General Events</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnChargingStatusChange</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnChargingStatusChanged</span><span class="o">()</span> <span class="o">{</span>
@@ -732,6 +903,16 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 
     <span class="o">}</span>
 <span class="o">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">on_charging_status_changed</span><span class="p">(</span><span class="n">is_charging</span><span class="p">):</span>
+    <span class="c1"># Implement callback logic here
+</span>    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">on_battery_level_changed</span><span class="p">(</span><span class="n">battery_level</span><span class="p">):</span>
+    <span class="c1"># Implement callback logic here
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_charging_status_change</span><span class="p">(</span><span class="n">on_charging_status_changed</span><span class="p">)</span>
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_battery_level_changed</span><span class="p">(</span><span class="n">on_battery_level_changed</span><span class="p">)</span>
 </code></pre></div>
 <p>Once you have obtained the MudraDevice, you can register to receive notifications for various events that occur on the device:</p>
 
@@ -742,6 +923,9 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 <h2 id='set-hand'>Set Hand</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To set hand</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setHand</span><span class="o">(</span><span class="nc">HandType</span><span class="o">.</span><span class="na">LEFT</span><span class="o">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># To set hand
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_hand</span><span class="p">(</span><span class="n">HandType</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_hand</span><span class="p">(</span><span class="n">HandType</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
 </code></pre></div>
 <p>When the device is connected, you need to update its settings via the API depending on whether you wear the band on your left or right hand.</p>
 <h1 id='sensors'>Sensors</h1><h2 id='snc'>SNC</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Enable registration for the SNC callback.</span>
@@ -770,6 +954,31 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 <span class="c1">// Check whether the callback is currently registered.</span>
 <span class="c1">// Returns true if a callback is set, false otherwise.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnSncCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># Enable registration for the SNC callback.
+</span><span class="k">def</span> <span class="nf">on_snc_ready</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">frequency_std</span><span class="p">,</span> <span class="n">rms</span><span class="p">):</span>
+    <span class="c1"># 'data' contains 24 values total:
+</span>    <span class="c1">#   indices [0–7)   -&gt; SNC channel 1
+</span>    <span class="c1">#   indices [8–15)  -&gt; SNC channel 2
+</span>    <span class="c1">#   indices [16–23) -&gt; SNC channel 3
+</span>
+    <span class="c1"># 'frequency' is the number of SNC packets received per second.
+</span>
+    <span class="c1"># 'frequency_std' is the standard deviation of the packet frequency.
+</span>
+    <span class="c1"># 'rms' contains the root-mean-square value for each SNC channel:
+</span>    <span class="c1">#   rms[0] -&gt; channel 1
+</span>    <span class="c1">#   rms[1] -&gt; channel 2
+</span>    <span class="c1">#   rms[2] -&gt; channel 3
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_snc_ready</span><span class="p">(</span><span class="n">on_snc_ready</span><span class="p">)</span>
+
+<span class="c1"># Disable registration by passing None.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_snc_ready</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># Check whether the callback is currently registered.
+# Returns True if a callback is set, False otherwise.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">is_on_snc_callback_set</span><span class="p">()</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -800,6 +1009,25 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 <span class="c1">// Check whether the callback is currently registered.</span>
 <span class="c1">// Returns true if a callback is set, false otherwise.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuGyroCallbackSet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># Enable registration for the IMU gyro callback.
+</span><span class="k">def</span> <span class="nf">on_imu_gyro_ready</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">frequency_std</span><span class="p">):</span>
+    <span class="c1"># 'data' contains 24 values arranged in interleaved groups:
+</span>    <span class="c1">#   indices [0, 3, 6, 9, 12, 15, 18, 21] -&gt; GYRO channel 1
+</span>    <span class="c1">#   indices [1, 4, 7, 10, 13, 16, 19, 22] -&gt; GYRO channel 2
+</span>    <span class="c1">#   indices [2, 5, 8, 11, 14, 17, 20, 23] -&gt; GYRO channel 3
+</span>
+    <span class="c1"># 'frequency' is the number of gyro packets received per second.
+</span>    <span class="c1"># 'frequency_std' is the standard deviation of that frequency.
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_imu_gyro_ready</span><span class="p">(</span><span class="n">on_imu_gyro_ready</span><span class="p">)</span>
+
+<span class="c1"># Disable registration by passing None.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_imu_gyro_ready</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># Check whether the callback is currently registered.
+# Returns True if a callback is set, False otherwise.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">is_on_imu_gyro_callback_set</span><span class="p">()</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -830,6 +1058,25 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 <span class="c1">// Check whether the callback is currently registered.</span>
 <span class="c1">// Returns true if a callback is set, false otherwise.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnImuAccRawCallbackSet</span><span class="o">();</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># Enable registration for the raw accelerometer callback.
+</span><span class="k">def</span> <span class="nf">on_imu_acc_raw_ready</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">frequency_std</span><span class="p">):</span>
+    <span class="c1"># 'data' contains 24 values arranged in an interleaved pattern:
+</span>    <span class="c1">#   indices [0, 3, 6, 9, 12, 15, 18, 21] -&gt; ACC channel 1
+</span>    <span class="c1">#   indices [1, 4, 7, 10, 13, 16, 19, 22] -&gt; ACC channel 2
+</span>    <span class="c1">#   indices [2, 5, 8, 11, 14, 17, 20, 23] -&gt; ACC channel 3
+</span>
+    <span class="c1"># 'frequency' is the number of accelerometer packets received per second.
+</span>    <span class="c1"># 'frequency_std' is the standard deviation of that packet frequency.
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_imu_acc_raw_ready</span><span class="p">(</span><span class="n">on_imu_acc_raw_ready</span><span class="p">)</span>
+
+<span class="c1"># Disable registration by passing None.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_imu_acc_raw_ready</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># Check whether the callback is currently registered.
+# Returns True if a callback is set, False otherwise.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">is_on_imu_acc_raw_callback_set</span><span class="p">()</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -852,7 +1099,19 @@ So, for handling UI activity you need to run any UI code under ((Activity)(getCo
 
 <span class="c1">//To check if the callback is set.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">isOnPressureReadySet</span><span class="o">();</span> <span class="c1">// returns true in case the callback is set, false otherwise.</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># To enable/register for the callback.
+</span><span class="k">def</span> <span class="nf">on_pressure_ready</span><span class="p">(</span><span class="n">pressure</span><span class="p">):</span>
+    <span class="c1"># Use the pressure value (float between 0.0 and 1.0)
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_pressure_ready</span><span class="p">(</span><span class="n">on_pressure_ready</span><span class="p">)</span>
+
+<span class="c1"># To disable, pass None.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_pressure_ready</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># To check if the callback is set.
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">is_on_pressure_ready_set</span><span class="p">()</span>  <span class="c1"># returns True if set, False otherwise
+</span></code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
 <ol> 
@@ -891,7 +1150,31 @@ The returned pressure parameter indicates 1.0 for maximum pressure and 0.0 fir t
 <span class="c1">// by setting sending to Firmware Target GESTURE_TO_HID.</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">// Enable sending through HID</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">GESTURE_TO_HID</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending through HID</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># Enable discrete gestures
+</span><span class="k">def</span> <span class="nf">on_gesture_ready</span><span class="p">(</span><span class="n">gesture_type</span><span class="p">):</span>
+    <span class="c1"># Callback executed when a discrete gesture is detected (e.g., Tap, Double Tap, Twist, Double Twist)
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_gesture_ready</span><span class="p">(</span><span class="n">on_gesture_ready</span><span class="p">)</span>
+
+<span class="c1"># Disable discrete gestures
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_gesture_ready</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># Enable continuous gestures
+</span><span class="k">def</span> <span class="nf">on_button_changed</span><span class="p">(</span><span class="n">air_mouse_command</span><span class="p">):</span>
+    <span class="c1"># air_mouse_command == "Press" for press event
+</span>    <span class="c1"># air_mouse_command == "Release" for release event
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_button_changed</span><span class="p">(</span><span class="n">on_button_changed</span><span class="p">)</span>
+
+<span class="c1"># Disable continuous gestures
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_button_changed</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># Enable sending HID commands "Mouse Left Button Press" and "Mouse Left Button Release"
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">gesture_to_hid</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>  <span class="c1"># Enable
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">gesture_to_hid</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> <span class="c1"># Disable
+</span></code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
 <ol> 
@@ -946,7 +1229,23 @@ involve sustained interaction over a period of time, where the gesture is active
 
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_APP</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>  <span class="c1">// Enable sending Delta_x and Delta_y to the app as a callback</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setFirmwareTarget</span><span class="o">(</span><span class="nc">FirmwareTarget</span><span class="o">.</span><span class="na">NAVIGATION_TO_APP</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">// Disable sending Delta_x and Delta_y to the app as a callback</span>
-</code></pre></div>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># To enable navigation:
+</span><span class="k">def</span> <span class="nf">on_navigation_ready</span><span class="p">(</span><span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span><span class="p">):</span>
+    <span class="c1"># Callback executed when receiving Delta_x and Delta_y
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_navigation_ready</span><span class="p">(</span><span class="n">on_navigation_ready</span><span class="p">)</span>
+
+<span class="c1"># To disable navigation:
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_navigation_ready</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># Developer can control where to send the navigation Delta_x and Delta_y:
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_hid</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>   <span class="c1"># Enable sending through HID
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_hid</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>  <span class="c1"># Disable HID
+</span>
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_app</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>   <span class="c1"># Enable sending to app as callback
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_app</span> <span class="bp">False</span><span class="p">)</span>  <span class="c1"># Disable sending to app
+</span></code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
 <ol> 
@@ -972,6 +1271,18 @@ involve sustained interaction over a period of time, where the gesture is active
 
 <span class="c1">//To disable</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="c1"># To enable
+</span><span class="k">def</span> <span class="nf">on_imu_quaternion_ready</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">quaternion</span><span class="p">):</span>
+    <span class="c1"># quaternion[0] -&gt; W
+</span>    <span class="c1"># quaternion[1] -&gt; X
+</span>    <span class="c1"># quaternion[2] -&gt; Y
+</span>    <span class="c1"># quaternion[3] -&gt; Z
+</span>    <span class="k">pass</span>
+
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_imu_quaternion_ready</span><span class="p">(</span><span class="n">on_imu_quaternion_ready</span><span class="p">)</span>
+
+<span class="c1"># To disable
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_on_imu_quaternion_ready</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -993,6 +1304,15 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">APPLE_TV</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">IPAD</span><span class="o">);</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">ANDROID</span><span class="o">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_air_touch_active</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>   <span class="c1"># To activate Air-Touch
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_air_touch_active</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>  <span class="c1"># To deactivate Air-Touch
+</span>
+<span class="c1"># To change mode:
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">,</span><span class="n">iphone</span><span class="p">)</span>
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">mac</span><span class="p">)</span>
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">apple_tv</span><span class="p">)</span>
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">ipad</span><span class="p">)</span>
+<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">android</span><span class="p">)</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -1077,12 +1397,14 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <h1 id='example-app'>Example App</h1>
 <ul>
 <li>Android App: <a href="https://github.com/wearable-devices/AndroidAppExample">https://github.com/wearable-devices/AndroidAppExample</a></li>
+<li>Python App: <a href="https://github.com/wearable-devices/PythonAppExample">https://github.com/wearable-devices/PythonAppExample</a></li>
 </ul>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="java">Java</a>
+                <a href="#" data-language-name="python">Python</a>
           </div>
       </div>
     </div>
