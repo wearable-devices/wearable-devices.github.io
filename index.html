@@ -1120,7 +1120,7 @@ Mudra().set_delegate(MyMudraDelegate())</li>
 </ul>
 
 <p>To estimate the amount of the fingertip pressure, use the described API.<br>
-The returned pressure parameter indicates 1.0 for maximum pressure and 0.0 fir the minimum pressure.</p>
+The returned pressure parameter indicates 1.0 for maximum pressure and 0.0 for the minimum pressure.</p>
 <h2 id='gesture-recognition'>Gesture Recognition</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">// Enable discrete gestures</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnGestureReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnGestureReady</span><span class="o">()</span> <span class="o">{</span>
     <span class="nd">@Override</span>
@@ -1244,7 +1244,7 @@ involve sustained interaction over a period of time, where the gesture is active
 </span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_hid</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>  <span class="c1"># Disable HID
 </span>
 <span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_app</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>   <span class="c1"># Enable sending to app as callback
-</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_app</span> <span class="bp">False</span><span class="p">)</span>  <span class="c1"># Disable sending to app
+</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_firmware_target</span><span class="p">(</span><span class="n">FirmwareTarget</span><span class="p">.</span><span class="n">navigation_to_app</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>  <span class="c1"># Disable sending to app
 </span></code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -1257,6 +1257,10 @@ involve sustained interaction over a period of time, where the gesture is active
 
 <aside style="background-color: rgba(255, 100, 0, 0.2); text">
 <center><strong>Delta_y is affected by the choice of hand</strong></center>
+</aside>
+
+<aside style="background-color: rgba(255, 0, 0, 0.2); text">
+<center><strong>Navigation and IMU (gyro, accelerometer, quaternion) cannot be used together at the same time.</strong></center>
 </aside>
 <h2 id='hand-orientation'>Hand Orientation</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="c1">//To enable</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setOnImuQuaternionReady</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnImuQuaternionReady</span><span class="o">()</span> <span class="o">{</span>
@@ -1296,23 +1300,9 @@ Quaternions are a mathematical representation that describes the orientation of 
 Each quaternion is represented by four components: qw,qx,qy,qz. These components collectively describe the rotation of the wristband relative to a reference orientation.</p>
 <h1 id='experiences'>Experiences</h1><h2 id='air-touch'>Air-Touch</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirTouchActive</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="c1">// To activate Air-Touch</span>
 <span class="n">mudraDevice</span><span class="o">.</span><span class="na">setAirTouchActive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// To deactivate Air-Touch</span>
-
-
-<span class="c1">//In order to change mode</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">IPHONE</span><span class="o">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">MAC</span><span class="o">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">APPLE_TV</span><span class="o">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">IPAD</span><span class="o">);</span>
-<span class="n">mudraDevice</span><span class="o">.</span><span class="na">setDeviceMode</span><span class="o">(</span><span class="nc">DeviceMode</span><span class="o">.</span><span class="na">ANDROID</span><span class="o">);</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_air_touch_active</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>   <span class="c1"># To activate Air-Touch
 </span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_air_touch_active</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>  <span class="c1"># To deactivate Air-Touch
 </span>
-<span class="c1"># To change mode:
-</span><span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">,</span><span class="n">iphone</span><span class="p">)</span>
-<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">mac</span><span class="p">)</span>
-<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">apple_tv</span><span class="p">)</span>
-<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">ipad</span><span class="p">)</span>
-<span class="n">mudra_device</span><span class="p">.</span><span class="n">set_device_mode</span><span class="p">(</span><span class="n">DeviceMode</span><span class="p">.</span><span class="n">android</span><span class="p">)</span>
 </code></pre></div>
 <ul>
 <li><strong>Requirements :</strong>
@@ -1320,54 +1310,6 @@ Each quaternion is represented by four components: qw,qx,qy,qz. These components
 <li> <a href="https://wearable-devices.github.io/#licenses">License</a> - Main</li> 
 </ol></li>
 </ul>
-
-<p>When the Air-Touch is enabled, the device starts to simulate mouse/keyboard/media actions like clicks or movements. The device then sends the clicks and movement to any operating system using the HID (Human Interface Device) protocol.</p>
-
-<table><thead>
-<tr>
-<th>Air-Touch Mode</th>
-<th>Navigation</th>
-<th>Gesture</th>
-<th>HID Command</th>
-<th>HID Profile</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>iPhone(iOS)</td>
-<td>Pointer</td>
-<td>Press <br><br> Release <br><br> Twist</td>
-<td>Left Button Press <br><br>Left Button Release <br><br>Home</td>
-<td>Mouse <br><br> Mouse <br><br>  Keyboard</td>
-</tr>
-<tr>
-<td>MAC(macOS)</td>
-<td>Pointer</td>
-<td>Press <br><br> Release <br><br> Twist</td>
-<td>Left Button Press <br><br>Left Button Release <br><br>App Manager</td>
-<td>Mouse <br><br> Mouse <br><br>  Keyboard</td>
-</tr>
-<tr>
-<td>AppleTV(tvOS)</td>
-<td>DPad</td>
-<td>Double Tap <br><br> Twist <br><br> Double Twist</td>
-<td>Select<br><br>Back<br><br>App Manager</td>
-<td>Media <br><br>Keyboard <br><br>  Keyboard</td>
-</tr>
-<tr>
-<td>iPad(iPadOS)</td>
-<td>Pointer</td>
-<td>Press <br><br> Release <br><br> Twist</td>
-<td>Left Button Press <br><br>Left Button Release <br><br>Home</td>
-<td>Mouse <br><br> Mouse <br><br>  Keyboard</td>
-</tr>
-<tr>
-<td>Android</td>
-<td>Pointer</td>
-<td>Press <br><br> Release <br><br> Twist <br><br> Double Twist</td>
-<td>Left Button Press <br><br>Left Button Release <br><br>Home <br><br>App Manager</td>
-<td>Mouse <br><br> Mouse <br><br>  Keyboard <br><br>  Keyboard</td>
-</tr>
-</tbody></table>
 <h1 id='troubleshooting'>Troubleshooting</h1>
 <table><thead>
 <tr>
